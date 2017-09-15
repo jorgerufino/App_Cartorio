@@ -358,6 +358,10 @@ public class ProtocoloFrame extends javax.swing.JFrame {
 
                 //Fecha o frame ProtocoloFrame
                 ProtocoloFrame.this.dispose();
+                System.exit(0);
+                
+                TelaInicialFrame obj2 = new TelaInicialFrame();
+                obj2.setVisible(true);
             }
             
         }

@@ -135,8 +135,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel3.setText("End. Outorgante:");
 
-        jTextFieldEndOutorgante.setText("Av. João Fanjas");
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel5.setText("Tipo de Procuração:");
 
@@ -165,7 +163,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel8.setText("CARTÓRIO DO ÚNICO OFÍCIO DE BENEVIDES");
 
-        jTextFieldOutorgante.setText("Jorge de Rufino");
         jTextFieldOutorgante.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextFieldOutorgante.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -184,39 +181,23 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel9.setText("Nº");
 
-        jTextFieldNumOutorgante.setText("134");
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel10.setText("Bairro:");
-
-        jTextFieldBairroOutorgante.setText("Centro");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel11.setText("Cidade:");
 
-        jTextFieldCidadeOutorgante.setText("Benevides");
-
-        jTextFieldNumOutorgado.setText("100");
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel12.setText("Bairro:");
 
-        jTextFieldBairroOutorgado.setText("Liberdade");
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel13.setText("Cidade:");
-
-        jTextFieldCidadeOutorgado.setText("Belem/PA");
-
-        jTextFieldOutorgado.setText("Angela Maria");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel14.setText("Outorgado:");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel15.setText("End. Outorgado:");
-
-        jTextFieldEndOutorgado.setText("rua 3 de Agosto");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel16.setText("Nº");
@@ -239,7 +220,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel22.setText("RG:");
 
-        jTextFieldRGOutorgante.setText("123456 - PC/PA");
         jTextFieldRGOutorgante.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldRGOutorganteFocusGained(evt);
@@ -263,8 +243,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel24.setText("Profissão:");
 
-        jTextFieldProfOutorgante.setText("Programador");
-
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel25.setText("Est. Civil:");
 
@@ -272,8 +250,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel26.setText("RG:");
-
-        jTextFieldRGOutorgado.setText("789456");
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel27.setText("CPF:");
@@ -286,8 +262,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel28.setText("Profissão:");
-
-        jTextFieldProfOutorgado.setText("do lar");
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel29.setText("Est. Civil:");
@@ -415,7 +389,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel29)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jComboBoxEstCivilOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 16, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -483,7 +457,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                         .addComponent(jLabel18)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(132, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -592,7 +566,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGerar)
                     .addComponent(jButtonCancelar))
@@ -603,7 +577,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -726,7 +700,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         GeradorProcuracoesFrame.this.dispose(); // Referência this do formulário
-        System.exit(0);
+        TelaInicialFrame obj = new TelaInicialFrame();
+        
+        obj.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOutorganteActionPerformed

@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -129,7 +129,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -208,7 +208,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="132" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -345,7 +345,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxEscrevente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="92" max="32767" attributes="0"/>
+                  <EmptySpace pref="88" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonGerar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -373,9 +373,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldEndOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Av. Jo&#xe3;o Fanjas"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -431,7 +428,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldOutorgante">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Jorge de Rufino"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor de Texto"/>
             </Property>
@@ -458,9 +454,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldNumOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="134"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -471,9 +464,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldBairroOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Centro"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -484,14 +474,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldCidadeOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Benevides"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldNumOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="100"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -502,9 +486,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldBairroOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Liberdade"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -515,14 +496,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldCidadeOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Belem/PA"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Angela Maria"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
@@ -541,9 +516,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldEndOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="rua 3 de Agosto"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
@@ -612,9 +584,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldRGOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="123456 - PC/PA"/>
-          </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldRGOutorganteFocusGained"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldRGOutorganteActionPerformed"/>
@@ -644,9 +613,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldProfOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Programador"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel25">
           <Properties>
@@ -680,9 +646,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldRGOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="789456"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel27">
           <Properties>
@@ -708,9 +671,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldProfOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="do lar"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel29">
           <Properties>

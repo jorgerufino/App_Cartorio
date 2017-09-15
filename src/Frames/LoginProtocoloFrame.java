@@ -60,6 +60,8 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Senha:");
 
+        jTextFieldLogin.setText("jorge");
+
         jLabelBrasao.setIcon(new javax.swing.ImageIcon("C:\\Arquivos Gerador PDF Java\\Brasao.png")); // NOI18N
 
         jButtonConfirmar.setText("Confirmar");
@@ -143,7 +145,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         if(login.equals("jorge") && senha.equals("admin"))
         {
             //cria um objeto ProtocoloFrame para chamar a janela de Cadastro de Protocolo
-            ProtocoloFrame obj = new ProtocoloFrame();
+            TelaInicialFrame obj = new TelaInicialFrame();
             
             //Deixa visivel a janela
             obj.setVisible(true);
