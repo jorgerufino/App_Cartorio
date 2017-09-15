@@ -453,6 +453,7 @@ public class GeraProcuracoes
             fs = new POIFSFileSystem(new FileInputStream(filePath));            
             HWPFDocument doc = new HWPFDocument(fs);
             
+            //substitui os campos com # com os valores recebidos
             doc = replaceText(doc, "#DATA_EXTENSO", dataTodaPorExtenso(data));
             doc = replaceText(doc, "#OUTORGANTE", outorgante);
             doc = replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante);           
