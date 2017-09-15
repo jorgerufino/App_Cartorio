@@ -131,7 +131,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Gerador de Procuração", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel1.setText("Outorgante:");
+        jLabel1.setText("Outorgante*:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel3.setText("End. Outorgante:");
@@ -305,7 +305,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonTeste.setText("Tipo de Procuração");
+        jButtonTeste.setText("Tipo de Procuração*");
         jButtonTeste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTesteActionPerformed(evt);

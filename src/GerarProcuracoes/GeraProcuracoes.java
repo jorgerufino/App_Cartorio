@@ -383,44 +383,10 @@ public class GeraProcuracoes
         
         return dataPorExtenso;
     }
+    
     //metodo que gera as procuraçoes baseado nos modelos utilizados no cartorio
     public void setGeraProcuracoes()
     {
-        
-//        if(tipoProcuracao == 0 && existeRogo == true)
-//        {
-//            //caminho do arquivo usado como modelo 
-//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV A ROGO.doc";
-//
-//            modeloProc="PREVIDENCIARIA A ROGO";
-//        }
-//        else if(tipoProcuracao == 0 && existeRogo == false)
-//        {
-//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV.doc";
-//            modeloProc="PREVIDENCIARIA";
-//        }
-//        else if(tipoProcuracao == 1 && existeRogo == true)
-//        {
-//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO GENERICA A ROGO.doc";
-//            modeloProc="GENERICA A ROGO";
-//        }
-//        else if(tipoProcuracao == 1 && existeRogo == false)
-//        {
-//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV.doc";
-//            modeloProc="GENERICA";
-//        }
-//        else if(tipoProcuracao == 2 && existeRogo == true)
-//        {
-//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO JUR FINANC A ROGO.doc";
-//            modeloProc="JUR FINANC A ROGO";
-//        }
-//        else if(tipoProcuracao == 2 && existeRogo == false)
-//        {
-//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO JUR FINANC.doc";
-//            modeloProc="JUR FINANC";
-//        }
-        //define o estado do Civil do Outorgante
-        
         switch (civOutorgante) 
         {
             case 0:
@@ -455,7 +421,7 @@ public class GeraProcuracoes
             default:
                 break;
         }     
-        
+        //verifica quem é o Escrevente/Tabelião
         switch (indiceEscrevente) 
         {
             case 0:
@@ -482,7 +448,6 @@ public class GeraProcuracoes
                 break;
         }
         //filePath = "C:\\Arquivos Gerador PDF Java\\MODELO GERAL.doc";
-        filePath2 = "C:\\Arquivos Gerador PDF Java\\" + outorgante + " para " + outorgado + "."+modeloProc+".doc";
         POIFSFileSystem fs = null;        
         try {               
             fs = new POIFSFileSystem(new FileInputStream(filePath));            
@@ -537,7 +502,11 @@ public class GeraProcuracoes
             doc = replaceText(doc, "#SELO", selo);
             doc = replaceText(doc, "#outorgante", iniciaisMaisculas(outorgante.toLowerCase()));
             doc = replaceText(doc, "#DATA", dataPorExtenso(data));
+            
+            //pega o arquivo modificado e cria um novo arquivo
+            filePath2 = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROCURAÇOES GERADAS NO DIA\\" + outorgante + " para " + outorgado + "."+modeloProc+".doc";
             saveWord(filePath2, doc);
+            //abre o novo arquivo gerado anteriormente
             Desktop.getDesktop().open(new File(filePath2));
         }
         catch(FileNotFoundException e){
