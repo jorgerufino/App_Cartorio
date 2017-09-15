@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
@@ -62,8 +63,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldEndOutorgante = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBoxTipoProcuracao = new javax.swing.JComboBox<>();
         jButtonGerar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -124,6 +123,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jFormattedTextData = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxEscrevente = new javax.swing.JComboBox<>();
+        jButtonTeste = new javax.swing.JButton();
+        jTextFieldCaminhoModeloProc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,17 +135,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel3.setText("End. Outorgante:");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel5.setText("Tipo de Procuração:");
-
-        jComboBoxTipoProcuracao.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jComboBoxTipoProcuracao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PROCURAÇÃO PREVIDENCIÁRIA", "PROCURAÇÃO GENÉRICA", "PROCURAÇÃO JURÍDICA COM CONTEUDO FINANCEIRO" }));
-        jComboBoxTipoProcuracao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTipoProcuracaoActionPerformed(evt);
-            }
-        });
 
         jButtonGerar.setText("Gerar Procuração");
         jButtonGerar.addActionListener(new java.awt.event.ActionListener() {
@@ -295,7 +285,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel7.setText("Previsão de Entrega:");
+        jLabel7.setText("Data da Procuração:");
 
         try {
             jFormattedTextData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -315,6 +305,19 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonTeste.setText("Tipo de Procuração");
+        jButtonTeste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTesteActionPerformed(evt);
+            }
+        });
+
+        jTextFieldCaminhoModeloProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCaminhoModeloProcActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -323,6 +326,19 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(144, 144, 144))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jButtonGerar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancelar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonTeste)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,14 +412,14 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxTipoProcuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -458,19 +474,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(jButtonGerar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonCancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,15 +561,15 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel)
                     .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBoxTipoProcuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonTeste)
+                    .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGerar)
                     .addComponent(jButtonCancelar))
@@ -588,43 +591,70 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void jComboBoxTipoProcuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoProcuracaoActionPerformed
+
+    private void jComboBoxEscreventeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscreventeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTipoProcuracaoActionPerformed
+    }//GEN-LAST:event_jComboBoxEscreventeActionPerformed
+
+    private void jTextFieldRGOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRGOutorganteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldRGOutorganteActionPerformed
+
+    private void jTextFieldRGOutorganteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldRGOutorganteFocusGained
+        // TODO add your handling code here:
+        this.jTextFieldRGOutorgante.selectAll();
+    }//GEN-LAST:event_jTextFieldRGOutorganteFocusGained
+
+    private void jTextFieldOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOutorganteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldOutorganteActionPerformed
+
+    private void jTextFieldOutorganteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldOutorganteFocusGained
+        // TODO add your handling code here:
+        this.jTextFieldOutorgante.selectAll();
+    }//GEN-LAST:event_jTextFieldOutorganteFocusGained
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        GeradorProcuracoesFrame.this.dispose(); // Referência this do formulário
+        TelaInicialFrame obj = new TelaInicialFrame();
+
+        obj.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarActionPerformed
-        //pega os valores dos campos do formFrame e chama o metodo para GerarPDF    
+        //pega os valores dos campos do formFrame e chama o metodo para GerarPDF
         GeraProcuracoes obj = new GeraProcuracoes();
-        
+
         obj.setOutorgante(jTextFieldOutorgante.getText());
         obj.setCivOutorgante(jComboBoxEstCivilOutorgante.getSelectedIndex());
         obj.setRgOutorgante(jTextFieldRGOutorgante.getText());
         obj.setCpfOutorgante(jFormattedTextCPFOutorgante.getText());
         obj.setProfOutorgante(jTextFieldProfOutorgante.getText());
-        
+
         String endOutorgante = jTextFieldEndOutorgante.getText();
         String bairroOutorgante = jTextFieldBairroOutorgante.getText();
         String numOutorgante = jTextFieldNumOutorgante.getText();
         String cidadeOutorgante = jTextFieldCidadeOutorgante.getText();
-        
+
         obj.setOutorgado(jTextFieldOutorgado.getText());
         obj.setCivOutorgado(jComboBoxEstCivilOutorgado.getSelectedIndex());
         obj.setRgOutorgado(jTextFieldRGOutorgado.getText());
         obj.setCpfOutorgado(jFormattedTextCPFOutorgado.getText());
         obj.setProfOutorgado(jTextFieldProfOutorgado.getText());
-        
+
         String endOutorgado = jTextFieldEndOutorgado.getText();
         String bairroOutorgado = jTextFieldBairroOutorgado.getText();
         String numOutorgado = jTextFieldNumOutorgado.getText();
         String cidOutorgado = jTextFieldCidadeOutorgado.getText();
-        
-        obj.setTipoProcuracao(jComboBoxTipoProcuracao.getSelectedIndex());
+
         obj.setSelo(jFormattedTextSelo.getText());
         obj.setData(jFormattedTextData.getText());
+        obj.setFilePath(jTextFieldCaminhoModeloProc.getText());
         obj.setIndiceEscrevente(jComboBoxEscrevente.getSelectedIndex());
-        
-        //JOptionPane.showMessageDialog(null, jTextFieldBairroOutorgante.getText().trim().isEmpty());
+
+        //JOptionPane.showMessageDialog(null, jTextFieldCaminhoModeloProc.getText());
         //verifica se os campos estão preenchidos, caso estejam passa o valor para a String correspondente
         if(jTextFieldNumOutorgante.getText().trim().isEmpty() == false)
         {
@@ -640,7 +670,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
         //passa endereço do Outorgante
         obj.setEndOutorgante(endOutorgante+numOutorgante+bairroOutorgante+cidadeOutorgante);
-        
+
         if(jTextFieldNumOutorgado.getText().trim().isEmpty() == false)
         {
             numOutorgado = ", nº "+numOutorgado;
@@ -655,16 +685,16 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
         //passa endereço do Outorgado
         obj.setEndOutorgado(endOutorgado+numOutorgado+bairroOutorgado+cidOutorgado);
-        
+
         //se todos os campos de A Rogo estiverem em branco, não existe a Rogo
         if ((jTextFieldRogo.getText() == null || jTextFieldRogo.getText().trim().isEmpty())&&(jTextFieldEndRogo.getText() == null || jTextFieldEndRogo.getText().trim().isEmpty()) && (jTextFieldNumRogo.getText() == null || jTextFieldNumRogo.getText().trim().isEmpty())
-                && (jTextFieldBairroRogo.getText() == null || jTextFieldBairroRogo.getText().trim().isEmpty()) && (jTextFieldCidadeRogo.getText() == null || jTextFieldCidadeRogo.getText().trim().isEmpty()))
+            && (jTextFieldBairroRogo.getText() == null || jTextFieldBairroRogo.getText().trim().isEmpty()) && (jTextFieldCidadeRogo.getText() == null || jTextFieldCidadeRogo.getText().trim().isEmpty()))
         {
-            existeRogo = false;            
+            existeRogo = false;
         }
-        else 
+        else
         {
-            obj.setaRogo(jTextFieldRogo.getText());        
+            obj.setaRogo(jTextFieldRogo.getText());
             obj.setCivRogo(jComboBoxEstCivilRogo.getSelectedIndex());
             obj.setRgRogo(jTextFieldRGRogo.getText());
             obj.setCpfRogo(jFormattedTextCPFRogo.getText());
@@ -674,7 +704,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             String numRogo = jTextFieldNumRogo.getText();
             String bairroRogo = jTextFieldBairroRogo.getText();
             String cidadeRogo = jTextFieldCidadeRogo.getText();
-            
+
             if(jTextFieldNumRogo.getText().trim().isEmpty() == false)
             {
                 numRogo = ", nº "+numRogo;
@@ -690,44 +720,35 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             //passa endereço do Outorgado
             obj.setEndRogo(endRogo+numRogo+bairroRogo+cidadeRogo);
         }
-        
+
         obj.setExisteRogo(existeRogo);
-        obj.setGeraProcuracoes();
-        
-        System.exit(0);
+        if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");            
+        }
+        else if ((jTextFieldCaminhoModeloProc.getText() == null || jTextFieldCaminhoModeloProc.getText().trim().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(null, "Escolha o modelo de procuração que será usado!");            
+        }
+        else
+        {
+            obj.setGeraProcuracoes();
+            System.exit(0);
+        }
     }//GEN-LAST:event_jButtonGerarActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTesteActionPerformed
         // TODO add your handling code here:
-        GeradorProcuracoesFrame.this.dispose(); // Referência this do formulário
-        TelaInicialFrame obj = new TelaInicialFrame();
-        
-        obj.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+        JFileChooser abrir = new JFileChooser("C:\\Arquivos Gerador PDF Java");  
+        int retorno = abrir.showOpenDialog(null);  
+        if (retorno==JFileChooser.APPROVE_OPTION)  
+        jTextFieldCaminhoModeloProc.setText(abrir.getSelectedFile().getAbsolutePath()); 
+    }//GEN-LAST:event_jButtonTesteActionPerformed
 
-    private void jTextFieldOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOutorganteActionPerformed
+    private void jTextFieldCaminhoModeloProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCaminhoModeloProcActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldOutorganteActionPerformed
-
-    private void jTextFieldRGOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRGOutorganteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldRGOutorganteActionPerformed
-
-    private void jTextFieldRGOutorganteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldRGOutorganteFocusGained
-        // TODO add your handling code here:
-        this.jTextFieldRGOutorgante.selectAll();
-    }//GEN-LAST:event_jTextFieldRGOutorganteFocusGained
-
-    private void jTextFieldOutorganteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldOutorganteFocusGained
-        // TODO add your handling code here:
-        this.jTextFieldOutorgante.selectAll();
-    }//GEN-LAST:event_jTextFieldOutorganteFocusGained
-
-    private void jComboBoxEscreventeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscreventeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxEscreventeActionPerformed
-
+    }//GEN-LAST:event_jTextFieldCaminhoModeloProcActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -767,11 +788,11 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGerar;
+    private javax.swing.JButton jButtonTeste;
     private javax.swing.JComboBox<String> jComboBoxEscrevente;
     private javax.swing.JComboBox<String> jComboBoxEstCivilOutorgado;
     private javax.swing.JComboBox<String> jComboBoxEstCivilOutorgante;
     private javax.swing.JComboBox<String> jComboBoxEstCivilRogo;
-    private javax.swing.JComboBox<String> jComboBoxTipoProcuracao;
     private javax.swing.JFormattedTextField jFormattedTextCPFOutorgado;
     private javax.swing.JFormattedTextField jFormattedTextCPFOutorgante;
     private javax.swing.JFormattedTextField jFormattedTextCPFRogo;
@@ -804,7 +825,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -813,6 +833,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBairroOutorgado;
     private javax.swing.JTextField jTextFieldBairroOutorgante;
     private javax.swing.JTextField jTextFieldBairroRogo;
+    private javax.swing.JTextField jTextFieldCaminhoModeloProc;
     private javax.swing.JTextField jTextFieldCidadeOutorgado;
     private javax.swing.JTextField jTextFieldCidadeOutorgante;
     private javax.swing.JTextField jTextFieldCidadeRogo;

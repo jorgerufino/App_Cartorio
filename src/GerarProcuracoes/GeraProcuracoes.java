@@ -29,7 +29,7 @@ public class GeraProcuracoes
 {
     String outorgante, endOutorgante, outorgado, endOutorgado, aRogo, endRogo, selo,filePath, filePath2, modeloProc,rgOutorgante, rgOutorgado,rgRogo,
     cpfOutorgante, cpfOutorgado, cpfRogo, profOutorgante, profOutorgado, profRogo,estCivilOutorgante,estCivilOutorgado,estCivilRogo,data,escrevente, cargo;
-    int tipoProcuracao, civOutorgante,civOutorgado,civRogo, indiceEscrevente;
+    int civOutorgante,civOutorgado,civRogo, indiceEscrevente;
     boolean existeRogo;
 
     public int getIndiceEscrevente() {
@@ -196,14 +196,6 @@ public class GeraProcuracoes
 
     public void setSelo(String selo) {
         this.selo = selo;
-    }
-
-    public int getTipoProcuracao() {
-        return tipoProcuracao;
-    }
-
-    public void setTipoProcuracao(int tipoProcuracao) {
-        this.tipoProcuracao = tipoProcuracao;
     }
 
     public boolean isExisteRogo() {
@@ -395,39 +387,40 @@ public class GeraProcuracoes
     public void setGeraProcuracoes()
     {
         
-        if(tipoProcuracao == 0 && existeRogo == true)
-        {
-            //caminho do arquivo usado como modelo 
-            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV A ROGO.doc";
-            
-            modeloProc="PREVIDENCIARIA A ROGO";
-        }
-        else if(tipoProcuracao == 0 && existeRogo == false)
-        {
-            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV.doc";
-            modeloProc="PREVIDENCIARIA";
-        }
-        else if(tipoProcuracao == 1 && existeRogo == true)
-        {
-            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO GENERICA A ROGO.doc";
-            modeloProc="GENERICA A ROGO";
-        }
-        else if(tipoProcuracao == 1 && existeRogo == false)
-        {
-            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV.doc";
-            modeloProc="GENERICA";
-        }
-        else if(tipoProcuracao == 2 && existeRogo == true)
-        {
-            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO JUR FINANC A ROGO.doc";
-            modeloProc="JUR FINANC A ROGO";
-        }
-        else if(tipoProcuracao == 2 && existeRogo == false)
-        {
-            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO JUR FINANC.doc";
-            modeloProc="JUR FINANC";
-        }
+//        if(tipoProcuracao == 0 && existeRogo == true)
+//        {
+//            //caminho do arquivo usado como modelo 
+//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV A ROGO.doc";
+//
+//            modeloProc="PREVIDENCIARIA A ROGO";
+//        }
+//        else if(tipoProcuracao == 0 && existeRogo == false)
+//        {
+//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV.doc";
+//            modeloProc="PREVIDENCIARIA";
+//        }
+//        else if(tipoProcuracao == 1 && existeRogo == true)
+//        {
+//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO GENERICA A ROGO.doc";
+//            modeloProc="GENERICA A ROGO";
+//        }
+//        else if(tipoProcuracao == 1 && existeRogo == false)
+//        {
+//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO PREV.doc";
+//            modeloProc="GENERICA";
+//        }
+//        else if(tipoProcuracao == 2 && existeRogo == true)
+//        {
+//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO JUR FINANC A ROGO.doc";
+//            modeloProc="JUR FINANC A ROGO";
+//        }
+//        else if(tipoProcuracao == 2 && existeRogo == false)
+//        {
+//            filePath = "C:\\Arquivos Gerador PDF Java\\MODELO JUR FINANC.doc";
+//            modeloProc="JUR FINANC";
+//        }
         //define o estado do Civil do Outorgante
+        
         switch (civOutorgante) 
         {
             case 0:
