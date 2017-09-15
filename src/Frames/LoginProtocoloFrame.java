@@ -142,7 +142,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         senha = jPasswordFieldSenha.getText();        
         
         //se informar o login e senha corretos 
-        if(login.equals("jorge") && senha.equals("admin"))
+        if((login.equals("jorge") && senha.equals("admin")) || (login.equals("outros") && senha.equals("outros")))
         {
             //cria um objeto ProtocoloFrame para chamar a janela de Cadastro de Protocolo
             TelaInicialFrame obj = new TelaInicialFrame();
