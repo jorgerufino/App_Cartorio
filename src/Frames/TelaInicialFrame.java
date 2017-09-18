@@ -38,7 +38,7 @@ public class TelaInicialFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButtonGerarProcuracao = new javax.swing.JButton();
         jButtonCadastrarProcolo = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -59,10 +59,10 @@ public class TelaInicialFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonSairActionPerformed(evt);
             }
         });
 
@@ -76,8 +76,8 @@ public class TelaInicialFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonGerarProcuracao)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCancelar)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addComponent(jButtonSair)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +86,7 @@ public class TelaInicialFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGerarProcuracao)
                     .addComponent(jButtonCadastrarProcolo)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonSair))
                 .addGap(25, 25, 25))
         );
 
@@ -104,10 +104,10 @@ public class TelaInicialFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCadastrarProcoloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarProcoloActionPerformed
         // TODO add your handling code here:
@@ -163,8 +163,8 @@ public class TelaInicialFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrarProcolo;
-    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGerarProcuracao;
+    private javax.swing.JButton jButtonSair;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

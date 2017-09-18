@@ -722,6 +722,11 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
 
         obj.setExisteRogo(existeRogo);
+        
+        //Como o separado que estou querendo usar é o "." (ponto), é necessário coloca-lo entre Colchetes para não dar erro.
+        //Lembrando que os Colchetes significam grupo de separadores, ou seja, podereia colocar outrso separados juntos com o ponto, como a virgula, travessao, etc.
+        String valorSelo[] = jFormattedTextSelo.getText().split("[.]");
+        
         if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
         {
             JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");            
@@ -729,6 +734,11 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         else if ((jTextFieldCaminhoModeloProc.getText() == null || jTextFieldCaminhoModeloProc.getText().trim().isEmpty()))
         {
             JOptionPane.showMessageDialog(null, "Escolha o modelo de procuração que será usado!");            
+        }
+        //como o campo selo tem uma mascara de 3 digitos, caso nao seja digitado nada, o metodo passa 3 espaços vazios, por isso esta condiçao
+        else if (valorSelo[0].equals("   ") || valorSelo[1].equals("   ") || valorSelo[2].equals("   "))
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Selo!");            
         }
         else
         {
@@ -739,7 +749,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     private void jButtonTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTesteActionPerformed
         // TODO add your handling code here:
-        JFileChooser abrir = new JFileChooser("C:\\Arquivos Gerador PDF Java");  
+        JFileChooser abrir = new JFileChooser("C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes");  
         int retorno = abrir.showOpenDialog(null);  
         if (retorno==JFileChooser.APPROVE_OPTION)  
         jTextFieldCaminhoModeloProc.setText(abrir.getSelectedFile().getAbsolutePath()); 
