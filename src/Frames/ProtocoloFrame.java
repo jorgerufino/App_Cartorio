@@ -358,9 +358,9 @@ public class ProtocoloFrame extends javax.swing.JFrame {
 
                 //Fecha o frame ProtocoloFrame
                 ProtocoloFrame.this.dispose();
-                System.exit(0);
                 
-                TelaInicialFrame obj2 = new TelaInicialFrame();
+                //Cria um obj para chamar o Frame/Janela Inicial
+                CadastrarNovoProcoloFrame obj2 = new CadastrarNovoProcoloFrame();
                 obj2.setVisible(true);
             }
             
@@ -370,8 +370,11 @@ public class ProtocoloFrame extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-        ProtocoloFrame.this.dispose(); // Referência this do formulário
-        System.exit(0);
+        ProtocoloFrame.this.dispose(); // Referência this do formulário        
+        TelaInicialFrame obj = new TelaInicialFrame();
+
+        obj.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jTextFieldAutenticacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAutenticacoesActionPerformed
