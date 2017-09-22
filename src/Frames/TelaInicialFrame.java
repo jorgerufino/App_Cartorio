@@ -39,6 +39,7 @@ public class TelaInicialFrame extends javax.swing.JFrame {
         jButtonGerarProcuracao = new javax.swing.JButton();
         jButtonCadastrarProcolo = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
+        jLabelBrasao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -51,11 +52,26 @@ public class TelaInicialFrame extends javax.swing.JFrame {
                 jButtonGerarProcuracaoActionPerformed(evt);
             }
         });
+        jButtonGerarProcuracao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonGerarProcuracaoKeyPressed(evt);
+            }
+        });
 
         jButtonCadastrarProcolo.setText("Cadastrar Protocolo");
+        jButtonCadastrarProcolo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jButtonCadastrarProcoloFocusGained(evt);
+            }
+        });
         jButtonCadastrarProcolo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarProcoloActionPerformed(evt);
+            }
+        });
+        jButtonCadastrarProcolo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonCadastrarProcoloKeyPressed(evt);
             }
         });
 
@@ -65,24 +81,37 @@ public class TelaInicialFrame extends javax.swing.JFrame {
                 jButtonSairActionPerformed(evt);
             }
         });
+        jButtonSair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonSairKeyPressed(evt);
+            }
+        });
+
+        jLabelBrasao.setIcon(new javax.swing.ImageIcon("C:\\Arquivos Gerador PDF Java\\Brasao.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jButtonCadastrarProcolo)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonGerarProcuracao)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSair)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jButtonCadastrarProcolo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonGerarProcuracao)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSair))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(jLabelBrasao)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
+                .addComponent(jLabelBrasao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGerarProcuracao)
                     .addComponent(jButtonCadastrarProcolo)
@@ -126,6 +155,27 @@ public class TelaInicialFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonGerarProcuracaoActionPerformed
 
+    private void jButtonCadastrarProcoloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButtonCadastrarProcoloFocusGained
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonCadastrarProcoloFocusGained
+    
+    // Se o foco estiver no botao Cadastrar e for apertado Enter, ele chama a tela correspondente
+    private void jButtonCadastrarProcoloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCadastrarProcoloKeyPressed
+        // TODO add your handling code here:
+        getRootPane().setDefaultButton(jButtonCadastrarProcolo);
+    }//GEN-LAST:event_jButtonCadastrarProcoloKeyPressed
+
+    private void jButtonGerarProcuracaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonGerarProcuracaoKeyPressed
+        // TODO add your handling code here:
+        getRootPane().setDefaultButton(jButtonGerarProcuracao);
+    }//GEN-LAST:event_jButtonGerarProcuracaoKeyPressed
+
+    private void jButtonSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonSairKeyPressed
+        // TODO add your handling code here:
+        getRootPane().setDefaultButton(jButtonSair);
+    }//GEN-LAST:event_jButtonSairKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -165,6 +215,7 @@ public class TelaInicialFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCadastrarProcolo;
     private javax.swing.JButton jButtonGerarProcuracao;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JLabel jLabelBrasao;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -299,7 +299,11 @@ public class GeneratorPDF
             
             JOptionPane.showMessageDialog(null, "Protocolo Cadastrado com sucesso!");
             
-            Desktop.getDesktop().open(new File(endereco_PDF));
+            //codigo abaixo serve para abrir o pdf criado
+            //Desktop.getDesktop().open(new File(endereco_PDF));
+            
+            //imprime diretamente o Protocolo criado sem ter que visualiza-lo
+            Desktop.getDesktop().print(new File(endereco_PDF));
         }
         catch(DocumentException de) {
             System.err.println(de.getMessage());

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GerarProcuracoes;
 
 import Classes.Metodos_Auxiliares;
@@ -10,28 +5,31 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.usermodel.CharacterRun;
-import org.apache.poi.hwpf.usermodel.Paragraph;
-import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.poi.hwpf.usermodel.Section;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 public class GeraProcuracoes 
 {
     String outorgante, endOutorgante, outorgado, endOutorgado, aRogo, endRogo, selo,filePath, filePath2, modeloProc,rgOutorgante, rgOutorgado,rgRogo,
     cpfOutorgante, cpfOutorgado, cpfRogo, profOutorgante, profOutorgado, profRogo,estCivilOutorgante,estCivilOutorgado,estCivilRogo,data,escrevente, cargo;
-    int civOutorgante,civOutorgado,civRogo, indiceEscrevente;
+    int civOutorgante,civOutorgado,civRogo, indiceEscrevente, sexoOutorgante, sexoOutorgado, sexoRogo;
     boolean existeRogo;
     Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
+
+    public void setSexoOutorgante(int sexoOutorgante) {
+        this.sexoOutorgante = sexoOutorgante;
+    }
+
+    public void setSexoOutorgado(int sexoOutorgado) {
+        this.sexoOutorgado = sexoOutorgado;
+    }
+
+    public void setSexoRogo(int sexoRogo) {
+        this.sexoRogo = sexoRogo;
+    }
+    
     
     public int getIndiceEscrevente() {
         return indiceEscrevente;
@@ -328,6 +326,7 @@ public class GeraProcuracoes
             default:
                 break;
         }
+        
         //filePath = "C:\\Arquivos Gerador PDF Java\\MODELO GERAL.doc";
         POIFSFileSystem fs = null;        
         try {               
@@ -342,6 +341,26 @@ public class GeraProcuracoes
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGANTE", rgOutorgante);            
             doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGANTE", cpfOutorgante);            
             doc = obj_auxiliar.replaceText(doc, "#END_OUTORGANTE", endOutorgante);  
+            
+            if(sexoOutorgante == 0)
+            {
+                doc = obj_auxiliar.replaceText(doc, "#nac_outorgante", "brasileiro");  
+                doc = obj_auxiliar.replaceText(doc, "#port_outorgante", "portador");  
+                doc = obj_auxiliar.replaceText(doc, "#insc_outorgante", "inscrito");  
+                doc = obj_auxiliar.replaceText(doc, "#domic_outorgante", "domiciliado"); 
+                doc = obj_auxiliar.replaceText(doc, "#reconhecido", "reconhecido como o próprio"); 
+                doc = obj_auxiliar.replaceText(doc, "#o", "o"); 
+            }
+            else
+            {
+                doc = obj_auxiliar.replaceText(doc, "#nac_outorgante", "brasileira");  
+                doc = obj_auxiliar.replaceText(doc, "#port_outorgante", "portadora");  
+                doc = obj_auxiliar.replaceText(doc, "#insc_outorgante", "inscrita");  
+                doc = obj_auxiliar.replaceText(doc, "#domic_outorgante", "domiciliada"); 
+                doc = obj_auxiliar.replaceText(doc, "#reconhecido", "reconhecida como a própria"); 
+                doc = obj_auxiliar.replaceText(doc, "#o", "a");
+            }
+             
             
             doc = obj_auxiliar.replaceText(doc, "#OUTORGADO", outorgado);
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGADO", profOutorgado);
