@@ -58,6 +58,9 @@ public class ProtocoloFrame extends javax.swing.JFrame {
         //ao teclar Enter chama o botão de Confirmar
         getRootPane().setDefaultButton(jButtonCadastrar);
         
+        //Chama o foco para o campo Requerente
+        jTextFieldRequerente.requestFocusInWindow();
+        
     }
 
     /**
@@ -175,6 +178,11 @@ public class ProtocoloFrame extends javax.swing.JFrame {
         jFormattedTextDataEntrega.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jTextFieldRequerente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldRequerente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRequerenteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -301,7 +309,7 @@ public class ProtocoloFrame extends javax.swing.JFrame {
         {
             
             String protocolo = jTextFieldProtocolo.getText();
-            String requerente = jTextFieldRequerente.getText();
+            String requerente = jTextFieldRequerente.getText().toUpperCase();
             String telefone = jTextFieldTelefone.getText();
             int autenticacoes = Integer.parseInt(jTextFieldAutenticacoes.getText());
             int tipoProcuracao = jComboBoxTipoProcuracao.getSelectedIndex();
@@ -385,6 +393,10 @@ public class ProtocoloFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.jTextFieldAutenticacoes.selectAll();
     }//GEN-LAST:event_jTextFieldAutenticacoesFocusGained
+
+    private void jTextFieldRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRequerenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldRequerenteActionPerformed
 
     /**
      * @param args the command line arguments
