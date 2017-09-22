@@ -5,7 +5,7 @@
  */
 package GerarProcuracoes;
 
-import Testes.EscreverPorExtensoNumero;
+import Testes.Metodos_Auxiliares;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,7 +31,8 @@ public class GeraProcuracoes
     cpfOutorgante, cpfOutorgado, cpfRogo, profOutorgante, profOutorgado, profRogo,estCivilOutorgante,estCivilOutorgado,estCivilRogo,data,escrevente, cargo;
     int civOutorgante,civOutorgado,civRogo, indiceEscrevente;
     boolean existeRogo;
-
+    Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
+    
     public int getIndiceEscrevente() {
         return indiceEscrevente;
     }
@@ -264,126 +265,6 @@ public class GeraProcuracoes
     
     public GeraProcuracoes(){}
     
-    public String dataTodaPorExtenso(String data)
-    {
-         //cria um array onde cada posiçao vai receber o valor do Separador (/), no caso XX/YYYY/
-        String dataExtenso[] = data.split("/");  
-        
-        //posiçao 0 do array é o dia
-        String dia = dataExtenso[0];        
-        
-        //posiçao 1 do array é o mês (transformar em inteiro para poder jogar no Switch/Case para definir o mês
-        int numeroDoMes = Integer.parseInt(dataExtenso[1]);
-        
-        //posicao 2 do array é o ano
-        String ano = dataExtenso[2];
-        String mes="";
-        
-        //define qual o mês
-        switch (numeroDoMes) 
-        {
-            case 1:
-                mes = "Janeiro";
-                break;
-            case 2:
-                mes = "Fevereiro";
-                break;
-            case 3:
-                mes = "Março";                    
-                break;
-            case 4:
-                mes = "Abril";                    
-                break;
-            case 5:
-                mes = "Maio";                    
-                break;
-            case 6:
-                mes = "Junho";                    
-                break;
-            case 7:
-                mes = "Julho";                    
-                break;
-            case 8:
-                mes = "Agosto";                    
-                break;
-            case 9:
-                mes = "Setembro";                    
-                break;
-            case 10:
-                mes = "Outubro";                    
-                break;
-            case 11:
-                mes = "Novembro";                    
-                break;
-            case 12:
-                mes = "Dezembro";                    
-                break;
-            default:
-                break;
-        }
-        //Cria um obj da classe EscreverPorExtensoNumero para escrever os dias e o ano por extenso
-        EscreverPorExtensoNumero objExtenso = new EscreverPorExtensoNumero();
-        
-        String dataPorExtenso = objExtenso.write(new BigDecimal(dia)).toLowerCase()+"("+dia+") "+"dias do mês de "+mes.toLowerCase()
-        +" do ano de "+objExtenso.write(new BigDecimal(ano)).toLowerCase()+"("+ano+")";
-        
-        return dataPorExtenso;
-    }
-    public String dataPorExtenso(String data)
-    {
-         //cria um array onde cada posiçao vai receber o valor do Separador (/), no caso XX/YYYY/
-        String dataExtenso[] = data.split("/");  
-        String dia = dataExtenso[0];
-        String mes="";
-        int numeroDoMes = Integer.parseInt(dataExtenso[1]);
-        String ano = dataExtenso[2];
-        
-        switch (numeroDoMes) 
-        {
-            case 1:
-                mes = "Janeiro";
-                break;
-            case 2:
-                mes = "Fevereiro";
-                break;
-            case 3:
-                mes = "Março";                    
-                break;
-            case 4:
-                mes = "Abril";                    
-                break;
-            case 5:
-                mes = "Maio";                    
-                break;
-            case 6:
-                mes = "Junho";                    
-                break;
-            case 7:
-                mes = "Julho";                    
-                break;
-            case 8:
-                mes = "Agosto";                    
-                break;
-            case 9:
-                mes = "Setembro";                    
-                break;
-            case 10:
-                mes = "Outubro";                    
-                break;
-            case 11:
-                mes = "Novembro";                    
-                break;
-            case 12:
-                mes = "Dezembro";                    
-                break;
-            default:
-                break;
-        }
-        String dataPorExtenso = dia +" de "+ mes +" de " + ano;
-        
-        return dataPorExtenso;
-    }
-    
     //metodo que gera as procuraçoes baseado nos modelos utilizados no cartorio
     public void setGeraProcuracoes()
     {
@@ -454,22 +335,22 @@ public class GeraProcuracoes
             HWPFDocument doc = new HWPFDocument(fs);
             
             //substitui os campos com # com os valores recebidos
-            doc = replaceText(doc, "#DATA_EXTENSO", dataTodaPorExtenso(data));
-            doc = replaceText(doc, "#OUTORGANTE", outorgante);
-            doc = replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante);           
-            doc = replaceText(doc, "#PROF_OUTORGANTE", profOutorgante);           
-            doc = replaceText(doc, "#RG_OUTORGANTE", rgOutorgante);            
-            doc = replaceText(doc, "#CPF_OUTORGANTE", cpfOutorgante);            
-            doc = replaceText(doc, "#END_OUTORGANTE", endOutorgante);  
+            doc = obj_auxiliar.replaceText(doc, "#DATA_EXTENSO", obj_auxiliar.dataTodaPorExtenso(data));
+            doc = obj_auxiliar.replaceText(doc, "#OUTORGANTE", outorgante);
+            doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante);           
+            doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGANTE", profOutorgante);           
+            doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGANTE", rgOutorgante);            
+            doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGANTE", cpfOutorgante);            
+            doc = obj_auxiliar.replaceText(doc, "#END_OUTORGANTE", endOutorgante);  
             
-            doc = replaceText(doc, "#OUTORGADO", outorgado);
-            doc = replaceText(doc, "#PROF_OUTORGADO", profOutorgado);
-            doc = replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado);
-            doc = replaceText(doc, "#RG_OUTORGADO", rgOutorgado);
-            doc = replaceText(doc, "#CPF_OUTORGADO", cpfOutorgado);
-            doc = replaceText(doc, "#END_OUTORGADO", endOutorgado);
-            doc = replaceText(doc, "#ESCREVENTE", escrevente);
-            doc = replaceText(doc, "#CARGO", cargo);
+            doc = obj_auxiliar.replaceText(doc, "#OUTORGADO", outorgado);
+            doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGADO", profOutorgado);
+            doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado);
+            doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGADO", rgOutorgado);
+            doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGADO", cpfOutorgado);
+            doc = obj_auxiliar.replaceText(doc, "#END_OUTORGADO", endOutorgado);
+            doc = obj_auxiliar.replaceText(doc, "#ESCREVENTE", escrevente);
+            doc = obj_auxiliar.replaceText(doc, "#CARGO", cargo);
             
             //se algum dos campos de A Rogo estivem preenchidos executa este "if"
             if (existeRogo)
@@ -492,21 +373,21 @@ public class GeraProcuracoes
                     default:
                         break;
                 }
-                doc = replaceText(doc, "#A_ROGO", iniciaisMaisculas(aRogo.toLowerCase()));
-                doc = replaceText(doc, "#PROF_ROGO", profRogo);
-                doc = replaceText(doc, "#CIVIL_ROGO", estCivilRogo);
-                doc = replaceText(doc, "#RG_ROGO", rgRogo);
-                doc = replaceText(doc, "#CPF_ROGO", cpfRogo);
-                doc = replaceText(doc, "#END_ROGO", endRogo);                
-                doc = replaceText(doc, "#a_rogo", iniciaisMaisculas(aRogo.toLowerCase()));
+                doc = obj_auxiliar.replaceText(doc, "#A_ROGO", obj_auxiliar.iniciaisMaisculas(aRogo.toLowerCase()));
+                doc = obj_auxiliar.replaceText(doc, "#PROF_ROGO", profRogo);
+                doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo);
+                doc = obj_auxiliar.replaceText(doc, "#RG_ROGO", rgRogo);
+                doc = obj_auxiliar.replaceText(doc, "#CPF_ROGO", cpfRogo);
+                doc = obj_auxiliar.replaceText(doc, "#END_ROGO", endRogo);                
+                doc = obj_auxiliar.replaceText(doc, "#a_rogo", obj_auxiliar.iniciaisMaisculas(aRogo.toLowerCase()));
             }
-            doc = replaceText(doc, "#SELO", selo);
-            doc = replaceText(doc, "#outorgante", iniciaisMaisculas(outorgante.toLowerCase()));
-            doc = replaceText(doc, "#DATA", dataPorExtenso(data));
+            doc = obj_auxiliar.replaceText(doc, "#SELO", selo);
+            doc = obj_auxiliar.replaceText(doc, "#outorgante", obj_auxiliar.iniciaisMaisculas(outorgante.toLowerCase()));
+            doc = obj_auxiliar.replaceText(doc, "#DATA", obj_auxiliar.dataPorExtenso(data));
             
             //pega o arquivo modificado e cria um novo arquivo
             filePath2 = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROCURAÇOES GERADAS NO DIA\\" + outorgante + " para " + outorgado + "."+modeloProc+".doc";
-            saveWord(filePath2, doc);
+            obj_auxiliar.saveWord(filePath2, doc);
             //abre o novo arquivo gerado anteriormente
             Desktop.getDesktop().open(new File(filePath2));
         }
@@ -516,56 +397,5 @@ public class GeraProcuracoes
         catch(IOException e){
             e.printStackTrace();
         }
-    }
-
-    private static HWPFDocument replaceText(HWPFDocument doc, String findText, String replaceText){
-        Range r1 = doc.getRange(); 
-
-        for (int i = 0; i < r1.numSections(); ++i ) { 
-            Section s = r1.getSection(i); 
-            for (int x = 0; x < s.numParagraphs(); x++) { 
-                Paragraph p = s.getParagraph(x); 
-                for (int z = 0; z < p.numCharacterRuns(); z++) { 
-                    CharacterRun run = p.getCharacterRun(z); 
-                    String text = run.text();
-                    if(text.contains(findText)) {
-                        run.replaceText(findText, replaceText);
-                    } 
-                }
-            }
-        } 
-        return doc;
-    }
-
-    private static void saveWord(String filePath, HWPFDocument doc) throws FileNotFoundException, IOException{
-        FileOutputStream out = null;
-        try{
-            out = new FileOutputStream(filePath);
-            doc.write(out);
-        }
-        finally{
-            out.close();
-        }
-    }
-    //Transforma as iniciais em maisculas
-    public String iniciaisMaisculas(String frase)
-    {
-       String posicao="";
-       String mais="";
-       String tudo="";
-       String maiuscula2="";  
-       
-        posicao=""+frase.charAt(0);//pega a primeira letra que sera maiuscula
-        String pos=posicao.toUpperCase();    //transforma em maiuscula
-        
-        for(int i=1;i<frase.length();i++){  //coloca o for de acordo com o tamanho
-            mais=mais+frase.charAt(i); //acrescenta as letras
-       if( frase.charAt(i) == ' '){  //se houver um espaço a próxima vai ser transformada em maisucula.
-           String maiuscula=""+frase.charAt(i+1);//pega a próxima apos o espaço  
-           maiuscula2=maiuscula.toUpperCase();       //transforma em maiuscula.
-           mais=mais+maiuscula2;//acrescenta a maiuscula a palavra completa, que se chama mais
-           i=i+1; //soma um, pois uma letra minuscula foi substituida e ja foi acrescentada                                 
-       } } tudo=pos+mais;        
-      return tudo; 
     }
 }
