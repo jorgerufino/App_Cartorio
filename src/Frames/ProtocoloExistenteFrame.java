@@ -5,7 +5,7 @@
  */
 package Frames;
 
-import Testes.GeneratorPDF;
+import Classes.GeneratorPDF;
 
 /**
  *

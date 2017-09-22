@@ -6,7 +6,6 @@
 package Frames;
 
 import GerarProcuracoes.GeraProcuracoes;
-import Testes.*;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -23,6 +23,9 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         
         //ao teclar Enter chama o botão de Confirmar
         getRootPane().setDefaultButton(jButtonConfirmar);
+        
+        //Chama o foco para o campo Requerente
+        jPasswordFieldSenha.requestFocusInWindow();
     }
 
     /**
@@ -61,6 +64,17 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         jLabel2.setText("Senha:");
 
         jTextFieldLogin.setText("jorge");
+        jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldLoginFocusGained(evt);
+            }
+        });
+
+        jPasswordFieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordFieldSenhaFocusGained(evt);
+            }
+        });
 
         jLabelBrasao.setIcon(new javax.swing.ImageIcon("C:\\Arquivos Gerador PDF Java\\Brasao.png")); // NOI18N
 
@@ -164,6 +178,16 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginProtocoloFrame.this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLoginFocusGained
+        // TODO add your handling code here:
+        this.jTextFieldLogin.selectAll();
+    }//GEN-LAST:event_jTextFieldLoginFocusGained
+
+    private void jPasswordFieldSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaFocusGained
+        // TODO add your handling code here:
+        this.jPasswordFieldSenha.selectAll();
+    }//GEN-LAST:event_jPasswordFieldSenhaFocusGained
 
     /**
      * @param args the command line arguments

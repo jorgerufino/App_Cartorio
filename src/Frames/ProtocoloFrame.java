@@ -5,7 +5,7 @@
  */
 package Frames;
 
-import Testes.GeneratorPDF;
+import Classes.GeneratorPDF;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

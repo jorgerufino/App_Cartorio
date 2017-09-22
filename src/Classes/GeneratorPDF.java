@@ -1,5 +1,5 @@
 
-package Testes;
+package Classes;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

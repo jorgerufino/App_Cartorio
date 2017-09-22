@@ -5,7 +5,7 @@
  */
 package GerarProcuracoes;
 
-import Testes.Metodos_Auxiliares;
+import Classes.Metodos_Auxiliares;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;

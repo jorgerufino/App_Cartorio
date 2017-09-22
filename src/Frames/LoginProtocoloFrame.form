@@ -118,8 +118,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jorge"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldLoginFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordFieldSenha">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPasswordFieldSenhaFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelBrasao">
       <Properties>
