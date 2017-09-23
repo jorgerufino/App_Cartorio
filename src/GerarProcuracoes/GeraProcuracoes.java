@@ -304,11 +304,11 @@ public class GeraProcuracoes
         switch (indiceEscrevente) 
         {
             case 0:
-                escrevente = "Jorge Augusto Rufino Ferreira";
+                escrevente = "Andreya Glaucya Guimarães de Sousa";
                 cargo = "Escrevente";
                 break;
-            case 1:
-               escrevente = "Andreya Glaucya Guimarães de Sousa";
+            case 1:               
+               escrevente = "Jorge Augusto Rufino Ferreira";
                cargo = "Escrevente";
                 break;
             case 2:
