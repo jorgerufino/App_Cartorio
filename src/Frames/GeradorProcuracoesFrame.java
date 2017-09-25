@@ -317,6 +317,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
         jComboBoxEscrevente.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jComboBoxEscrevente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ANDREYA GLAUCYA GUIMARAES DE SOUSA", "JORGE AUGUSTO RUFINO FERREIRA", "ALESSANDRA ALVARES FIGUEIREDO", "RENATO DA SILVA GUIMARAES", "MAXWELL RAMOS FIGUEIREDO - TABELIÃO" }));
+        jComboBoxEscrevente.setSelectedIndex(1);
         jComboBoxEscrevente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEscreventeActionPerformed(evt);

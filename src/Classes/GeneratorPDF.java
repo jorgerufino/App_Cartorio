@@ -304,6 +304,7 @@ public class GeneratorPDF
             
             //imprime diretamente o Protocolo criado sem ter que visualiza-lo
             Desktop.getDesktop().print(new File(endereco_PDF));
+            Desktop.getDesktop().print(new File(endereco_PDF));
         }
         catch(DocumentException de) {
             System.err.println(de.getMessage());

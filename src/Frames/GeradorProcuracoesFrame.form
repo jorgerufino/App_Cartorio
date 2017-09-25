@@ -797,6 +797,7 @@
                 <StringItem index="4" value="MAXWELL RAMOS FIGUEIREDO - TABELI&#xc3;O"/>
               </StringArray>
             </Property>
+            <Property name="selectedIndex" type="int" value="1"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxEscreventeActionPerformed"/>

@@ -266,36 +266,38 @@ public class GeraProcuracoes
     //metodo que gera as procuraçoes baseado nos modelos utilizados no cartorio
     public void setGeraProcuracoes()
     {
+        //vogal "A" ou "O" será adicionada posteriormente após verificar o sexo do outorgante
         switch (civOutorgante) 
         {
             case 0:
-                estCivilOutorgante = "solteiro";
+                estCivilOutorgante = "solteir";
                 break;
             case 1:
-                estCivilOutorgante = "casado";
+                estCivilOutorgante = "casad";
                 break;
             case 2:
-                estCivilOutorgante = "divorciado";                    
+                estCivilOutorgante = "divorciad";                    
                 break;
             case 3:
-                estCivilOutorgante = "viúvo";                    
+                estCivilOutorgante = "viúv";                    
                 break;
             default:
                 break;
         }
+        //vogal "A" ou "O" será adicionada posteriormente após verificar o sexo do outorgado
         switch (civOutorgado) 
         {
             case 0:
-                estCivilOutorgado = "solteiro";
+                estCivilOutorgado = "solteir";
                 break;
             case 1:
-                estCivilOutorgado = "casado";
+                estCivilOutorgado = "casad";
                 break;
             case 2:
-                estCivilOutorgado = "divorciado";                    
+                estCivilOutorgado = "divorciad";                    
                 break;
             case 3:
-                estCivilOutorgado = "viúvo";                    
+                estCivilOutorgado = "viúv";                    
                 break;
             default:
                 break;
@@ -313,7 +315,7 @@ public class GeraProcuracoes
                 break;
             case 2:
                 escrevente = "Alessandra Alvares Figueiredo";
-                cargo = "Escrevente";
+                cargo = "Tabeliã substituta";
                 break;
             case 3:
                 escrevente = "Renato da Silva Guimarães";    
@@ -336,40 +338,51 @@ public class GeraProcuracoes
             //substitui os campos com # com os valores recebidos
             doc = obj_auxiliar.replaceText(doc, "#DATA_EXTENSO", obj_auxiliar.dataTodaPorExtenso(data));
             doc = obj_auxiliar.replaceText(doc, "#OUTORGANTE", outorgante);
-            doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante);           
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGANTE", profOutorgante);           
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGANTE", rgOutorgante);            
             doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGANTE", cpfOutorgante);            
             doc = obj_auxiliar.replaceText(doc, "#END_OUTORGANTE", endOutorgante);  
             
+            //Sexo = 0 é masculino, senao....
             if(sexoOutorgante == 0)
             {
-                doc = obj_auxiliar.replaceText(doc, "#nac_outorgante", "brasileiro");  
-                doc = obj_auxiliar.replaceText(doc, "#port_outorgante", "portador");  
-                doc = obj_auxiliar.replaceText(doc, "#insc_outorgante", "inscrito");  
-                doc = obj_auxiliar.replaceText(doc, "#domic_outorgante", "domiciliado"); 
-                doc = obj_auxiliar.replaceText(doc, "#reconhecido", "reconhecido como o próprio"); 
-                doc = obj_auxiliar.replaceText(doc, "#o", "o"); 
+                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante+"o");           
+                doc = obj_auxiliar.replaceText(doc, "#a_o1", "o");  
+                doc = obj_auxiliar.replaceText(doc, "#portador1", "portador");  
+                doc = obj_auxiliar.replaceText(doc, "#ao", "ao");  
             }
             else
             {
-                doc = obj_auxiliar.replaceText(doc, "#nac_outorgante", "brasileira");  
-                doc = obj_auxiliar.replaceText(doc, "#port_outorgante", "portadora");  
-                doc = obj_auxiliar.replaceText(doc, "#insc_outorgante", "inscrita");  
-                doc = obj_auxiliar.replaceText(doc, "#domic_outorgante", "domiciliada"); 
-                doc = obj_auxiliar.replaceText(doc, "#reconhecido", "reconhecida como a própria"); 
-                doc = obj_auxiliar.replaceText(doc, "#o", "a");
+                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante+"a");            
+                doc = obj_auxiliar.replaceText(doc, "#a_o1", "a");  
+                doc = obj_auxiliar.replaceText(doc, "#portador1", "portadora");  
+                doc = obj_auxiliar.replaceText(doc, "#ao", "a");
             }
              
-            
             doc = obj_auxiliar.replaceText(doc, "#OUTORGADO", outorgado);
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGADO", profOutorgado);
-            doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGADO", rgOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGADO", cpfOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#END_OUTORGADO", endOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#ESCREVENTE", escrevente);
             doc = obj_auxiliar.replaceText(doc, "#CARGO", cargo);
+            
+            if(sexoOutorgado == 0)
+            {
+                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado+"o");   
+                doc = obj_auxiliar.replaceText(doc, "#OUT_MANDATARIO", "OUTORGADO MANDATÁRIO");
+                doc = obj_auxiliar.replaceText(doc, "#a_o2", "o");  
+                doc = obj_auxiliar.replaceText(doc, "#portador2", "portador");  
+                doc = obj_auxiliar.replaceText(doc, "#seu", "seu");  
+            }
+            else
+            {
+                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado+"a");            
+                doc = obj_auxiliar.replaceText(doc, "#OUT_MANDATARIO", "OUTORGADA MANDATÁRIA");            
+                doc = obj_auxiliar.replaceText(doc, "#a_o2", "a");  
+                doc = obj_auxiliar.replaceText(doc, "#portador2", "portadora"); 
+                doc = obj_auxiliar.replaceText(doc, "#seu", "sua");  
+            }
             
             //se algum dos campos de A Rogo estivem preenchidos executa este "if"
             if (existeRogo)
