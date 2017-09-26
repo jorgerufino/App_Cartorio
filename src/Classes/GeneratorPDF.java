@@ -35,7 +35,7 @@ public class GeneratorPDF
     public GeneratorPDF(String protocolo, String requerente, String telefone, int autenticacoes, int tipoProcuracao, double diligencia, String entrega)
     {
         num_protocolo = protocolo;
-        nome_requerente = requerente;
+        nome_requerente = requerente.toUpperCase();
         this.telefone = telefone;
         qteAutenticacao = autenticacoes;
         num_servico = tipoProcuracao;
@@ -302,7 +302,7 @@ public class GeneratorPDF
             //codigo abaixo serve para abrir o pdf criado
             //Desktop.getDesktop().open(new File(endereco_PDF));
             
-            //imprime diretamente o Protocolo criado sem ter que visualiza-lo
+            //imprime 2x diretamente o Protocolo criado sem ter que visualiza-lo
             Desktop.getDesktop().print(new File(endereco_PDF));
             Desktop.getDesktop().print(new File(endereco_PDF));
         }

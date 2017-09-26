@@ -14,10 +14,30 @@ public class GeraProcuracoes
 {
     String outorgante, endOutorgante, outorgado, endOutorgado, aRogo, endRogo, selo,filePath, filePath2, modeloProc,rgOutorgante, rgOutorgado,rgRogo,
     cpfOutorgante, cpfOutorgado, cpfRogo, profOutorgante, profOutorgado, profRogo,estCivilOutorgante,estCivilOutorgado,estCivilRogo,data,escrevente, cargo;
+    String nome_PJ, cnpj, nire, sede_PJ;
     int civOutorgante,civOutorgado,civRogo, indiceEscrevente, sexoOutorgante, sexoOutorgado, sexoRogo;
-    boolean existeRogo;
+    boolean existeRogo, existePJ;
     Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
 
+    public void setNome_PJ(String nome_PJ) {
+        this.nome_PJ = nome_PJ.toUpperCase();
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public void setNire(String nire) {
+        this.nire = nire;
+    }
+
+    public void setSede_PJ(String sede_PJ) {
+        this.sede_PJ = sede_PJ;
+    }
+
+    public void setExistePJ(boolean existePJ) {
+        this.existePJ = existePJ;
+    }
     public void setSexoOutorgante(int sexoOutorgante) {
         this.sexoOutorgante = sexoOutorgante;
     }
@@ -329,7 +349,6 @@ public class GeraProcuracoes
                 break;
         }
         
-        //filePath = "C:\\Arquivos Gerador PDF Java\\MODELO GERAL.doc";
         POIFSFileSystem fs = null;        
         try {               
             fs = new POIFSFileSystem(new FileInputStream(filePath));            
@@ -341,7 +360,7 @@ public class GeraProcuracoes
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGANTE", profOutorgante);           
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGANTE", rgOutorgante);            
             doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGANTE", cpfOutorgante);            
-            doc = obj_auxiliar.replaceText(doc, "#END_OUTORGANTE", endOutorgante);  
+            doc = obj_auxiliar.replaceText(doc, "#END_OUTORGANTE", obj_auxiliar.iniciaisMaisculas(endOutorgante));  
             
             //Sexo = 0 é masculino, senao....
             if(sexoOutorgante == 0)
@@ -359,6 +378,7 @@ public class GeraProcuracoes
                 doc = obj_auxiliar.replaceText(doc, "#ao", "a");
             }
              
+            //substitue os campos do Outorgado
             doc = obj_auxiliar.replaceText(doc, "#OUTORGADO", outorgado);
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGADO", profOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGADO", rgOutorgado);
@@ -387,20 +407,19 @@ public class GeraProcuracoes
             //se algum dos campos de A Rogo estivem preenchidos executa este "if"
             if (existeRogo)
             {
-                //JOptionPane.showMessageDialog(null, "TESTESTES");
                 switch (civRogo) 
                 {
                     case 0:
-                        estCivilRogo = "solteiro";
+                        estCivilRogo = "solteir";
                         break;
                     case 1:
-                        estCivilRogo = "casado";
+                        estCivilRogo = "casad";
                         break;
                     case 2:
-                        estCivilRogo = "divorciado";                    
+                        estCivilRogo = "divorciad";                    
                         break;
                     case 3:
-                        estCivilRogo = "viúvo";                    
+                        estCivilRogo = "viúv";                    
                         break;
                     default:
                         break;
@@ -412,6 +431,27 @@ public class GeraProcuracoes
                 doc = obj_auxiliar.replaceText(doc, "#CPF_ROGO", cpfRogo);
                 doc = obj_auxiliar.replaceText(doc, "#END_ROGO", endRogo);                
                 doc = obj_auxiliar.replaceText(doc, "#a_rogo", obj_auxiliar.iniciaisMaisculas(aRogo.toLowerCase()));
+                
+                if(sexoRogo == 0)
+                {
+                    doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo+"o");                       
+                    doc = obj_auxiliar.replaceText(doc, "#a_o3", "o");  
+                    doc = obj_auxiliar.replaceText(doc, "#portador3", "portador");  
+                }
+                else
+                {
+                    doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo+"a");            
+                    doc = obj_auxiliar.replaceText(doc, "#a_o3", "a");  
+                    doc = obj_auxiliar.replaceText(doc, "#portador3", "portadora"); 
+                }
+            }
+            
+            if(existePJ)
+            {
+                doc = obj_auxiliar.replaceText(doc, "#NOME_PJ", obj_auxiliar.iniciaisMaisculas(nome_PJ.toLowerCase()));
+                doc = obj_auxiliar.replaceText(doc, "#CNPJ", cnpj);
+                doc = obj_auxiliar.replaceText(doc, "#NIRE", nire);
+                doc = obj_auxiliar.replaceText(doc, "#END_PJ", sede_PJ);
             }
             doc = obj_auxiliar.replaceText(doc, "#SELO", selo);
             doc = obj_auxiliar.replaceText(doc, "#outorgante", obj_auxiliar.iniciaisMaisculas(outorgante.toLowerCase()));
