@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     boolean existeRogo = true, existePJ = true;
-    boolean aux_PJ = true, aux_Rogo = true;
+    boolean campos_PJ_Ativo = false, campos_Rogo_Ativo = false;
     
     public GeradorProcuracoesFrame() {
         initComponents();
@@ -42,7 +42,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         //centraliza o janela no meio da tela
         this.setLocationRelativeTo(null);  
         
-        //ao teclar Enter chama o botão de Confirmar
+        //ao teclar Enter chama o botão de Gerar
         getRootPane().setDefaultButton(jButtonGerar);
         
         //deixa os campos abaixo desabilitados
@@ -158,6 +158,12 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jtfNIRE = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtfSedePJ = new javax.swing.JTextField();
+        jlNPJ = new javax.swing.JLabel();
+        jtfNumPJ = new javax.swing.JTextField();
+        jlBPJ = new javax.swing.JLabel();
+        jtfBairroPJ = new javax.swing.JTextField();
+        jlCPJ = new javax.swing.JLabel();
+        jtfCidadePJ = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -336,8 +342,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel6.setText("Escrevente");
 
         jComboBoxEscrevente.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jComboBoxEscrevente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ANDREYA GLAUCYA GUIMARAES DE SOUSA", "JORGE AUGUSTO RUFINO FERREIRA", "ALESSANDRA ALVARES FIGUEIREDO", "RENATO DA SILVA GUIMARAES", "MAXWELL RAMOS FIGUEIREDO - TABELIÃO" }));
-        jComboBoxEscrevente.setSelectedIndex(1);
+        jComboBoxEscrevente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ANDREYA GLAUCYA GUIMARAES DE SOUSA", "JORGE AUGUSTO RUFINO FERREIRA", "ALESSANDRA ALVARES FIGUEIREDO - SUBSTITUTA", "RENATO DA SILVA GUIMARAES", "MAXWELL RAMOS FIGUEIREDO - TABELIÃO" }));
         jComboBoxEscrevente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEscreventeActionPerformed(evt);
@@ -447,6 +452,15 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
+        jlNPJ.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jlNPJ.setText("Nº");
+
+        jlBPJ.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jlBPJ.setText("Bairro:");
+
+        jlCPJ.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jlCPJ.setText("Cidade:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -474,7 +488,19 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfSedePJ, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfSedePJ, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jlNPJ)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfNumPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlBPJ)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfBairroPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlCPJ)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCidadePJ, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,122 +663,136 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jButtonHabJuridica)
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNomePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jtfNIRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jftfCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jftfCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfNomePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jtfNIRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfSedePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelOutorgante)
-                    .addComponent(jTextFieldOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22)
-                    .addComponent(jTextFieldRGOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23)
-                    .addComponent(jFormattedTextCPFOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24)
-                    .addComponent(jTextFieldProfOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25)
-                    .addComponent(jComboBoxEstCivilOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextFieldEndOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)
-                        .addComponent(jTextFieldNumOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)
-                        .addComponent(jTextFieldBairroOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel34)
-                        .addComponent(jComboBoxSexoOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(jTextFieldCidadeOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel26)
-                        .addComponent(jTextFieldRGOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel27)
-                        .addComponent(jFormattedTextCPFOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel28)
-                        .addComponent(jTextFieldProfOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel29)
-                        .addComponent(jComboBoxEstCivilOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14)
-                        .addComponent(jTextFieldOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(jTextFieldCidadeOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel37)
-                        .addComponent(jComboBoxSexoOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15)
-                        .addComponent(jTextFieldEndOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel16)
-                        .addComponent(jTextFieldNumOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12)
-                        .addComponent(jTextFieldBairroOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jButtonTeste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel30)
-                        .addComponent(jTextFieldRGRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel31)
-                        .addComponent(jFormattedTextCPFRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel32)
-                        .addComponent(jTextFieldProfRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel33)
-                        .addComponent(jComboBoxEstCivilRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel19)
-                        .addComponent(jTextFieldRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel38)
-                        .addComponent(jComboBoxSexoRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel18)
-                        .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel20)
-                        .addComponent(jTextFieldEndRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel21)
-                        .addComponent(jTextFieldNumRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel17)
-                        .addComponent(jTextFieldBairroRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel)
-                    .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonTipoProcuracao)
-                    .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGerar)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jButton1))
+                            .addComponent(jtfSedePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelOutorgante)
+                            .addComponent(jTextFieldOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22)
+                            .addComponent(jTextFieldRGOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23)
+                            .addComponent(jFormattedTextCPFOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24)
+                            .addComponent(jTextFieldProfOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25)
+                            .addComponent(jComboBoxEstCivilOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jTextFieldEndOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9)
+                                .addComponent(jTextFieldNumOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)
+                                .addComponent(jTextFieldBairroOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel34)
+                                .addComponent(jComboBoxSexoOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11)
+                                .addComponent(jTextFieldCidadeOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel26)
+                                .addComponent(jTextFieldRGOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel27)
+                                .addComponent(jFormattedTextCPFOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel28)
+                                .addComponent(jTextFieldProfOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel29)
+                                .addComponent(jComboBoxEstCivilOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel14)
+                                .addComponent(jTextFieldOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13)
+                                .addComponent(jTextFieldCidadeOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel37)
+                                .addComponent(jComboBoxSexoOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel15)
+                                .addComponent(jTextFieldEndOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel16)
+                                .addComponent(jTextFieldNumOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12)
+                                .addComponent(jTextFieldBairroOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jButtonTeste)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel30)
+                                .addComponent(jTextFieldRGRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel31)
+                                .addComponent(jFormattedTextCPFRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel32)
+                                .addComponent(jTextFieldProfRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel33)
+                                .addComponent(jComboBoxEstCivilRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel19)
+                                .addComponent(jTextFieldRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel38)
+                                .addComponent(jComboBoxSexoRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel18)
+                                .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel20)
+                                .addComponent(jTextFieldEndRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel21)
+                                .addComponent(jTextFieldNumRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17)
+                                .addComponent(jTextFieldBairroRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel)
+                            .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonTipoProcuracao)
+                            .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonGerar)
+                            .addComponent(jButtonCancelar)
+                            .addComponent(jButton1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jlNPJ)
+                                .addComponent(jtfNumPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jlBPJ)
+                                .addComponent(jtfBairroPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jlCPJ)
+                                .addComponent(jtfCidadePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -806,7 +846,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private void jButtonGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarActionPerformed
         //pega os valores dos campos do formFrame e chama o metodo para GerarPDF
         GeraProcuracoes obj = new GeraProcuracoes();
-
+        
         obj.setOutorgante(jTextFieldOutorgante.getText());
         obj.setCivOutorgante(jComboBoxEstCivilOutorgante.getSelectedIndex());
         obj.setRgOutorgante(jTextFieldRGOutorgante.getText());
@@ -828,7 +868,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         String bairroOutorgado = jTextFieldBairroOutorgado.getText();
         String numOutorgado = jTextFieldNumOutorgado.getText();
         String cidOutorgado = jTextFieldCidadeOutorgado.getText();
-
+        
         obj.setSelo(jFormattedTextSelo.getText());
         obj.setData(jFormattedTextData.getText());
         obj.setFilePath(jTextFieldCaminhoModeloProc.getText());
@@ -838,7 +878,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         obj.setSexoOutorgado(jComboBoxSexoOutorgado.getSelectedIndex());
         obj.setSexoRogo(jComboBoxSexoRogo.getSelectedIndex());
 
-        //JOptionPane.showMessageDialog(null, sexoOutorgante);
         //verifica se os campos estão preenchidos, caso estejam passa o valor para a String correspondente
         if(jTextFieldNumOutorgante.getText().trim().isEmpty() == false)
         {
@@ -870,13 +909,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         //passa endereço do Outorgado
         obj.setEndOutorgado(endOutorgado+numOutorgado+bairroOutorgado+cidOutorgado);
 
-        //se todos os campos de A Rogo estiverem em branco, não existe a Rogo
-        if ((jTextFieldRogo.getText() == null || jTextFieldRogo.getText().trim().isEmpty())&&(jTextFieldEndRogo.getText() == null || jTextFieldEndRogo.getText().trim().isEmpty()) && (jTextFieldNumRogo.getText() == null || jTextFieldNumRogo.getText().trim().isEmpty())
-            && (jTextFieldBairroRogo.getText() == null || jTextFieldBairroRogo.getText().trim().isEmpty()) && (jTextFieldCidadeRogo.getText() == null || jTextFieldCidadeRogo.getText().trim().isEmpty()))
-        {
-            existeRogo = false;
-        }
-        else
+        //Se os campos to A rogo estiverem ativos...
+        if(campos_Rogo_Ativo)
         {
             obj.setaRogo(jTextFieldRogo.getText());
             obj.setCivRogo(jComboBoxEstCivilRogo.getSelectedIndex());
@@ -905,42 +939,106 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             obj.setEndRogo(endRogo+numRogo+bairroRogo+cidadeRogo);
         }
 
-        obj.setExisteRogo(existeRogo);
-        
-        if ((jtfNomePJ.getText() == null || jtfNomePJ.getText().trim().isEmpty())&& (jtfNIRE.getText() == null || jtfNIRE.getText().trim().isEmpty()) 
-            && (jtfSedePJ.getText() == null || jtfSedePJ.getText().trim().isEmpty()))
+        //Verifica se os campos de Pessoa Juridica estao preenchidos
+        if(campos_PJ_Ativo)
         {
-            existePJ = false;
-        }
-        else
-        {
+            existePJ = true;
+            
             obj.setNome_PJ(jtfNomePJ.getText());
             obj.setCnpj(jftfCNPJ.getText());
             obj.setNire(jtfNIRE.getText());
-            obj.setSede_PJ(jtfSedePJ.getText());
+            
+            String endPJ = jtfSedePJ.getText();
+            String bairroPJ = jtfBairroPJ.getText();
+            String numPJ = jtfNumPJ.getText();
+            String cidPJ = jtfCidadePJ.getText();
+            
+            if(jtfNumPJ.getText().trim().isEmpty() == false)
+            {
+                numPJ = ", nº "+numPJ;
+            }
+            if(jtfBairroPJ.getText().trim().isEmpty() == false)
+            {
+                bairroPJ = ", Bairro: "+bairroPJ;
+            }
+            if(jtfCidadePJ.getText().trim().isEmpty() == false)
+            {
+                cidPJ = ", Município de "+cidPJ;
+            }
+            
+            obj.setSede_PJ(endPJ+numPJ+bairroPJ+cidPJ);
         }
-        
-        obj.setExistePJ(existePJ);
         
         //Como o separador que estou querendo usar é o "." (ponto), é necessário coloca-lo entre Colchetes para não dar erro.
         //Lembrando que os Colchetes significam grupo de separadores, ou seja, podereia colocar outrso separados juntos com o ponto, como a virgula, travessao, etc.
         String valorSelo[] = jFormattedTextSelo.getText().split("[.]");
         
-        if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
+        //Verifica se os principais campos estão preenchidos
+        if ((jtfNomePJ.getText() == null || jtfNomePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");            
+            JOptionPane.showMessageDialog(null, "Pheencha o nome da Pessoa Jurídica!");            
+            jtfNomePJ.requestFocusInWindow();
+        }
+        else if ((jftfCNPJ.getText().equals("  .   .   /    -  ")) && campos_PJ_Ativo)
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha o CNPJ!");  
+            jftfCNPJ.requestFocusInWindow();
+        }
+        else if ((jtfNIRE.getText() == null || jtfNIRE.getText().trim().isEmpty()) && campos_PJ_Ativo)
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha o NIRE!");            
+            jtfNIRE.requestFocusInWindow();
+        }
+        else if ((jtfSedePJ.getText() == null || jtfSedePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha a sede da Pessoa Jurídica!");            
+            jtfSedePJ.requestFocusInWindow();
+        }
+        else if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");     
+            jTextFieldOutorgante.requestFocusInWindow();
+        }
+        else if ((jTextFieldEndOutorgante.getText() == null || jTextFieldEndOutorgante.getText().trim().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgante!");  
+            jTextFieldEndOutorgante.requestFocusInWindow();
+        }
+        else if ((jTextFieldOutorgado.getText() == null || jTextFieldOutorgado.getText().trim().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Outorgado!"); 
+            jTextFieldOutorgado.requestFocusInWindow();
+        }
+        else if ((jTextFieldEndOutorgado.getText() == null || jTextFieldEndOutorgado.getText().trim().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgado!");            
+            jTextFieldEndOutorgado.requestFocusInWindow();
+        }
+        else if ((jTextFieldRogo.getText() == null || jTextFieldRogo.getText().trim().isEmpty()) && campos_Rogo_Ativo)
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha o nome do a Rogo!");            
+            jTextFieldRogo.requestFocusInWindow();
+        }
+        else if ((jTextFieldEndRogo.getText() == null || jTextFieldEndRogo.getText().trim().isEmpty())&& campos_Rogo_Ativo)
+        {
+            JOptionPane.showMessageDialog(null, "Pheencha o endereço do a Rogo!");            
+            jTextFieldRogo.requestFocusInWindow();
         }
         else if ((jTextFieldCaminhoModeloProc.getText() == null || jTextFieldCaminhoModeloProc.getText().trim().isEmpty()))
         {
             JOptionPane.showMessageDialog(null, "Escolha o modelo de procuração que será usado!");            
+            jTextFieldCaminhoModeloProc.requestFocusInWindow();
         }
         //como o campo selo tem uma mascara de 3 digitos, caso nao seja digitado nada, o metodo passa 3 espaços vazios, por isso esta condiçao
         else if (valorSelo[0].equals("   ") || valorSelo[1].equals("   ") || valorSelo[2].equals("   "))
         {
             JOptionPane.showMessageDialog(null, "Preencha o campo Selo!");            
+            jFormattedTextSelo.requestFocusInWindow();
         }
         else
         {
+            obj.setExistePJ(campos_PJ_Ativo);
+            obj.setExisteRogo(campos_Rogo_Ativo);
             obj.setGeraProcuracoes();
             System.exit(0);
         }
@@ -960,7 +1058,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     private void jButtonTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTesteActionPerformed
         //verifica se o valor da variavel auxiliar para habilitar ou desabilitar os campos
-        if(aux_Rogo)
+        if(campos_Rogo_Ativo == false)
         {
             jTextFieldRogo.requestFocusInWindow();
             jTextFieldRogo.setEnabled(true);
@@ -973,7 +1071,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             jTextFieldProfRogo.setEnabled(true);
             jComboBoxEstCivilRogo.setEnabled(true);
             jComboBoxSexoRogo.setEnabled(true); 
-            aux_Rogo = false;
+            campos_Rogo_Ativo = true;
         }
         else
         {
@@ -988,7 +1086,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             jTextFieldProfRogo.setEnabled(false);
             jComboBoxEstCivilRogo.setEnabled(false);
             jComboBoxSexoRogo.setEnabled(false); 
-            aux_Rogo = true; 
+            campos_Rogo_Ativo = false; 
         }
         
     }//GEN-LAST:event_jButtonTesteActionPerformed
@@ -1004,7 +1102,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     private void jButtonHabJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHabJuridicaActionPerformed
         //verifica se o valor da variavel auxiliar para habilitar ou desabilitar os campos
-        if (aux_PJ)
+        if (campos_PJ_Ativo == false)
         {
             //chama o foco para campo Emp. Outorngate
             jtfNomePJ.requestFocusInWindow();
@@ -1018,7 +1116,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             jLabel2.setEnabled(true);
             jLabel4.setEnabled(true);
             jLabel5.setEnabled(true);
-            aux_PJ = false;
+            campos_PJ_Ativo = true;
         }
         else
         {
@@ -1034,7 +1132,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
            jLabel2.setEnabled(false);
            jLabel4.setEnabled(false);
            jLabel5.setEnabled(false);
-           aux_PJ = true;
+           campos_PJ_Ativo = false;
         }
        
     }//GEN-LAST:event_jButtonHabJuridicaActionPerformed
@@ -1180,8 +1278,14 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldRGRogo;
     private javax.swing.JTextField jTextFieldRogo;
     private javax.swing.JFormattedTextField jftfCNPJ;
+    private javax.swing.JLabel jlBPJ;
+    private javax.swing.JLabel jlCPJ;
+    private javax.swing.JLabel jlNPJ;
+    private javax.swing.JTextField jtfBairroPJ;
+    private javax.swing.JTextField jtfCidadePJ;
     private javax.swing.JTextField jtfNIRE;
     private javax.swing.JTextField jtfNomePJ;
+    private javax.swing.JTextField jtfNumPJ;
     private javax.swing.JTextField jtfSedePJ;
     // End of variables declaration//GEN-END:variables
 }

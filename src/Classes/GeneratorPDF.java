@@ -133,7 +133,7 @@ public class GeneratorPDF
             Paragraph p1 = new Paragraph("REPÚBLICA FEDERATIVA DO BRASIL\n\nCartório do Único Ofício de Benevides", com_negrito08);            
             Paragraph p2 = new Paragraph("Av. Joaquim Pereira de Queiroz, nº 1065 - Centro - Benevides - Pará - Tel: (091) 3724 – 4711.", sem_negrito08);
             Paragraph p3 = new Paragraph("Maxwell Ramos Figueiredo - Oficial Titular", com_negrito08);
-            Paragraph p4 = new Paragraph("Alessandra Alvares Figueiredo – Substituta\nAndreya Glaucya Guimarães de Sousa - Escrevente\nJorge Augusto Rufino Ferreira - Escrevente", sem_negrito08);
+            Paragraph p4 = new Paragraph("Alessandra Alvares Figueiredo – Substituta\nAndreya Glaucya Guimarães de Sousa - Escrevente\nJorge Augusto Rufino Ferreira - Escrevente\nRenato da Silva Guimarães - Escrevente", sem_negrito08);
             
             Paragraph pLinha1     = new Paragraph("____________________________________________________________________________________", sem_negrito08);            
             Paragraph pProtocolo  = new Paragraph("PROTOCOLO: "+num_protocolo, sem_negrito12);            

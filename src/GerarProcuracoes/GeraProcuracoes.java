@@ -426,7 +426,6 @@ public class GeraProcuracoes
                 }
                 doc = obj_auxiliar.replaceText(doc, "#A_ROGO", obj_auxiliar.iniciaisMaisculas(aRogo.toLowerCase()));
                 doc = obj_auxiliar.replaceText(doc, "#PROF_ROGO", profRogo);
-                doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo);
                 doc = obj_auxiliar.replaceText(doc, "#RG_ROGO", rgRogo);
                 doc = obj_auxiliar.replaceText(doc, "#CPF_ROGO", cpfRogo);
                 doc = obj_auxiliar.replaceText(doc, "#END_ROGO", endRogo);                
@@ -448,7 +447,7 @@ public class GeraProcuracoes
             
             if(existePJ)
             {
-                doc = obj_auxiliar.replaceText(doc, "#NOME_PJ", obj_auxiliar.iniciaisMaisculas(nome_PJ.toLowerCase()));
+                doc = obj_auxiliar.replaceText(doc, "#NOME_PJ", nome_PJ);
                 doc = obj_auxiliar.replaceText(doc, "#CNPJ", cnpj);
                 doc = obj_auxiliar.replaceText(doc, "#NIRE", nire);
                 doc = obj_auxiliar.replaceText(doc, "#END_PJ", sede_PJ);
