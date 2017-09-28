@@ -18,7 +18,7 @@ public class GeraProcuracoes
     int civOutorgante,civOutorgado,civRogo, indiceEscrevente, sexoOutorgante, sexoOutorgado, sexoRogo;
     boolean existeRogo, existePJ;
     Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
-
+    
     public void setNome_PJ(String nome_PJ) {
         this.nome_PJ = nome_PJ.toUpperCase();
     }
@@ -455,6 +455,7 @@ public class GeraProcuracoes
             doc = obj_auxiliar.replaceText(doc, "#SELO", selo);
             doc = obj_auxiliar.replaceText(doc, "#outorgante", obj_auxiliar.iniciaisMaisculas(outorgante.toLowerCase()));
             doc = obj_auxiliar.replaceText(doc, "#DATA", obj_auxiliar.dataPorExtenso(data));
+            doc = obj_auxiliar.replaceText(doc, "#_data", data);
             
             //pega o arquivo modificado e cria um novo arquivo
             filePath2 = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROCURAÇOES GERADAS NO DIA\\" + outorgante + " para " + outorgado + "."+modeloProc+".doc";

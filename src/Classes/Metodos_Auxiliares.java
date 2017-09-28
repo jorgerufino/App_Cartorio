@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.CharacterRun;
 import org.apache.poi.hwpf.usermodel.Paragraph;
@@ -79,6 +80,11 @@ public class Metodos_Auxiliares {
         return dataPorExtenso;
     }   
     
+    public void debug(String s)
+    {
+        JOptionPane.showMessageDialog(null, s);
+        System.exit(0);
+    }
     //Escreve data por extenso. EX: 19 de Maio de 1986
     public String dataPorExtenso(String data)
     {

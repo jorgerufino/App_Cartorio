@@ -266,7 +266,7 @@ public class GeneratorPDF
                
             //Adiciona um retangulo(borda) ao documento
             //                            (esq,baixo,dir,cima)
-            Rectangle rect = new Rectangle(15,  15,  580, 827);
+            Rectangle rect = new Rectangle(15,  15,  580, 820);
             rect.setBorder(Rectangle.BOX);
             rect.setBorderWidth(1);            
             
@@ -300,7 +300,7 @@ public class GeneratorPDF
             JOptionPane.showMessageDialog(null, "Protocolo Cadastrado com sucesso!");
             
             //codigo abaixo serve para abrir o pdf criado
-            //Desktop.getDesktop().open(new File(endereco_PDF));
+//            Desktop.getDesktop().open(new File(endereco_PDF));
             
             //imprime 2x diretamente o Protocolo criado sem ter que visualiza-lo
             Desktop.getDesktop().print(new File(endereco_PDF));

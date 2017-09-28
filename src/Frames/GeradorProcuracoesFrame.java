@@ -337,12 +337,18 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jFormattedTextData.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jFormattedTextData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextDataActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel6.setText("Escrevente");
 
         jComboBoxEscrevente.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jComboBoxEscrevente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ANDREYA GLAUCYA GUIMARAES DE SOUSA", "JORGE AUGUSTO RUFINO FERREIRA", "ALESSANDRA ALVARES FIGUEIREDO - SUBSTITUTA", "RENATO DA SILVA GUIMARAES", "MAXWELL RAMOS FIGUEIREDO - TABELIÃO" }));
+        jComboBoxEscrevente.setSelectedIndex(1);
         jComboBoxEscrevente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEscreventeActionPerformed(evt);
@@ -1160,6 +1166,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private void jtfSedePJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSedePJActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfSedePJActionPerformed
+
+    private void jFormattedTextDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextDataActionPerformed
     
     /**
      * @param args the command line arguments
