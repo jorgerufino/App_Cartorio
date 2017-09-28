@@ -16,11 +16,11 @@ public class ProtocoloExistenteFrame extends javax.swing.JFrame {
     /**
      * Creates new form ProtocoloExistenteFrame
      */
-    String protocolo, requerente, telefone, entrega;
+    String protocolo, requerente, telefone, entrega, escrevente;
     int autenticacoes, tipoProcuracao;
     double diligencia;
     
-    public ProtocoloExistenteFrame(String protocolo, String requerente, String telefone, int autenticacoes, int tipoProcuracao, double diligencia, String entrega) {
+    public ProtocoloExistenteFrame(String protocolo, String requerente, String telefone, int autenticacoes, int tipoProcuracao, double diligencia, String entrega, String escrevente) {
         initComponents();
         this.protocolo = protocolo;
         this.requerente = requerente;
@@ -29,6 +29,7 @@ public class ProtocoloExistenteFrame extends javax.swing.JFrame {
         this.autenticacoes = autenticacoes;
         this.tipoProcuracao = tipoProcuracao;
         this.diligencia = diligencia;
+        this.escrevente = escrevente;
         
         //centraliza o janela no meio da tela
         this.setLocationRelativeTo(null);
@@ -129,7 +130,7 @@ public class ProtocoloExistenteFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          //Chama o construtor e passa todos os parametros
-        GeneratorPDF obj = new GeneratorPDF(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, diligencia, entrega);
+        GeneratorPDF obj = new GeneratorPDF(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, diligencia, entrega, escrevente);
 
         //chama o metodo para gerar o PDF
         obj.setGerarPdf();  

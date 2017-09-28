@@ -27,12 +27,12 @@ import javax.swing.JOptionPane;
 public class GeneratorPDF 
 {
     
-    String num_protocolo,nome_requerente,telefone, servico,servicoTabela, data_entrega, data_atual, ano_atual;
+    String num_protocolo,nome_requerente,telefone, servico,servicoTabela, data_entrega, data_atual, ano_atual, nome_escrevente;
     String diligencia, campoDiligencia, valorDiligencia2, qteDiligencia;
     double valorProcuracao, valorServico, valorAutenticacoes, valorDiligencia;
     int num_servico, qteAutenticacao;
     
-    public GeneratorPDF(String protocolo, String requerente, String telefone, int autenticacoes, int tipoProcuracao, double diligencia, String entrega)
+    public GeneratorPDF(String protocolo, String requerente, String telefone, int autenticacoes, int tipoProcuracao, double diligencia, String entrega, String escrevente)
     {
         num_protocolo = protocolo;
         nome_requerente = requerente.toUpperCase();
@@ -41,6 +41,7 @@ public class GeneratorPDF
         num_servico = tipoProcuracao;
         valorDiligencia = diligencia; 
         data_entrega = entrega;
+        nome_escrevente = escrevente;
     }
 
     public void setGerarPdf() 
@@ -152,7 +153,7 @@ public class GeneratorPDF
             Paragraph pLocalData  = new Paragraph("Benevides/PA, "+data_atual, sem_negrito10);
             Paragraph pLinha3     = new Paragraph("____________________________________________________________", sem_negrito08);
             
-            Paragraph pJorge     = new Paragraph("Jorge Augusto Rufino Ferreira", com_negrito_italico08);
+            Paragraph pJorge     = new Paragraph(nome_escrevente, com_negrito_italico08);
             Paragraph pProtesto  = new Paragraph("Setor de Notas e Protesto", sem_negrito08);
             Paragraph pRodaPe    = new Paragraph("Avenida Joaquim Pereira de Queiroz, nº 1.065, Bairro: Centro, Benevides - Pará, CEP: 68795-000."
                     + "\nFone: (0**91)3724-4711. E-mail: cartoriodebenevides@gmail.com", sem_negrito08);

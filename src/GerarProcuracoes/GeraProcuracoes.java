@@ -404,7 +404,6 @@ public class GeraProcuracoes
                 doc = obj_auxiliar.replaceText(doc, "#seu", "sua");  
             }
             
-            //se algum dos campos de A Rogo estivem preenchidos executa este "if"
             if (existeRogo)
             {
                 switch (civRogo) 

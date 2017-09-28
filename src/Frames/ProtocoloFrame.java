@@ -96,6 +96,8 @@ public class ProtocoloFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jFormattedTextDataEntrega = new javax.swing.JFormattedTextField();
         jTextFieldRequerente = new javax.swing.JTextField();
+        jComboBoxEscrevente = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,6 +185,17 @@ public class ProtocoloFrame extends javax.swing.JFrame {
 
         jTextFieldRequerente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jComboBoxEscrevente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxEscrevente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jorge Augusto Rufino Ferreira", "Andreya Glaucya Guimarães de Sousa", "Renato da Silva Guimarães", "Alessandra Alvares Figueiredo", "Maxwell Ramos Figueiredo" }));
+        jComboBoxEscrevente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEscreventeActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Atendente:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -235,9 +248,13 @@ public class ProtocoloFrame extends javax.swing.JFrame {
                                         .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel6)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFormattedTextDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel9))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jFormattedTextDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(94, 94, 94))
         );
@@ -271,11 +288,19 @@ public class ProtocoloFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldDiligencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jFormattedTextDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
                     .addComponent(jButtonCancelar))
@@ -320,6 +345,7 @@ public class ProtocoloFrame extends javax.swing.JFrame {
             int tipoProcuracao = jComboBoxTipoProcuracao.getSelectedIndex();
             String diligencia = jTextFieldDiligencia.getText();              
             String dataEntrega = jFormattedTextDataEntrega.getText();
+            String escrevente = jComboBoxEscrevente.getSelectedItem().toString();
             
             double valorDiligencia = 0;
             
@@ -358,13 +384,13 @@ public class ProtocoloFrame extends javax.swing.JFrame {
             
             if (protocoloExistente)
             {  
-               ProtocoloExistenteFrame obj = new ProtocoloExistenteFrame(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, valorDiligencia, dataEntrega);
+               ProtocoloExistenteFrame obj = new ProtocoloExistenteFrame(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, valorDiligencia, dataEntrega, escrevente);
                obj.setVisible(true); 
             }
             else
             {
                 //Chama o construtor e passa todos os parametros
-                GeneratorPDF obj = new GeneratorPDF(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, valorDiligencia, dataEntrega);
+                GeneratorPDF obj = new GeneratorPDF(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, valorDiligencia, dataEntrega, escrevente);
 
                 //chama o metodo para gerar o PDF
                 obj.setGerarPdf();    
@@ -402,6 +428,10 @@ public class ProtocoloFrame extends javax.swing.JFrame {
     private void jButtonCancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonCancelarKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarKeyPressed
+
+    private void jComboBoxEscreventeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscreventeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEscreventeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,6 +471,7 @@ public class ProtocoloFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JComboBox<String> jComboBoxEscrevente;
     private javax.swing.JComboBox<String> jComboBoxTipoProcuracao;
     private javax.swing.JFormattedTextField jFormattedTextDataEntrega;
     private javax.swing.JLabel jLabel1;
@@ -451,6 +482,7 @@ public class ProtocoloFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBrasao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldAutenticacoes;
