@@ -94,7 +94,7 @@ public class GeneratorPDF
                     break;
                 case 2:
                     servico = "PROCURAÇÃO JURÍDICA COM CONTEÚDO FINANCEIRO";
-                    servicoTabela = "Procuração Jur. c/ Cont. Financeiro";
+                    servicoTabela = "Procuração Jur. Financeira";
                     valorProcuracao = 199.85;
                     valorAutenticacoes = qteAutenticacao * 5.85;
                     valorServico = valorAutenticacoes +  valorProcuracao + valorDiligencia;
@@ -301,11 +301,11 @@ public class GeneratorPDF
             JOptionPane.showMessageDialog(null, "Protocolo Cadastrado com sucesso!");
             
             //codigo abaixo serve para abrir o pdf criado
-//            Desktop.getDesktop().open(new File(endereco_PDF));
+            Desktop.getDesktop().open(new File(endereco_PDF));
             
             //imprime 2x diretamente o Protocolo criado sem ter que visualiza-lo
-            Desktop.getDesktop().print(new File(endereco_PDF));
-            Desktop.getDesktop().print(new File(endereco_PDF));
+//            Desktop.getDesktop().print(new File(endereco_PDF));
+//            Desktop.getDesktop().print(new File(endereco_PDF));
         }
         catch(DocumentException de) {
             System.err.println(de.getMessage());

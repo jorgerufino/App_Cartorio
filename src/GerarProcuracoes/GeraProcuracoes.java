@@ -15,7 +15,7 @@ public class GeraProcuracoes
     String outorgante, endOutorgante, outorgado, endOutorgado, aRogo, endRogo, selo,filePath, filePath2, modeloProc,rgOutorgante, rgOutorgado,rgRogo,
     cpfOutorgante, cpfOutorgado, cpfRogo, profOutorgante, profOutorgado, profRogo,estCivilOutorgante,estCivilOutorgado,estCivilRogo,data,escrevente, cargo;
     String nome_PJ, cnpj, nire, sede_PJ;
-    int civOutorgante,civOutorgado,civRogo, indiceEscrevente, sexoOutorgante, sexoOutorgado, sexoRogo;
+    int indiceEscrevente, sexoOutorgante, sexoOutorgado, sexoRogo;
     boolean existeRogo, existePJ;
     Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
     
@@ -121,28 +121,12 @@ public class GeraProcuracoes
         this.profRogo = profRogo;
     }
     
-    public int getCivOutorgado() {
-        return civOutorgado;
-    }
-
-    public void setCivOutorgado(int civOutorgado) {
-        this.civOutorgado = civOutorgado;
-    }
-
-    public int getCivRogo() {
-        return civRogo;
-    }
-
-    public void setCivRogo(int civRogo) {
-        this.civRogo = civRogo;
-    }
-
     public String getEstCivilOutorgante() {
         return estCivilOutorgante;
     }
 
     public void setEstCivilOutorgante(String estCivilOutorgante) {
-        this.estCivilOutorgante = estCivilOutorgante;
+        this.estCivilOutorgante = estCivilOutorgante.toLowerCase();
     }
 
     public String getEstCivilOutorgado() {
@@ -150,7 +134,7 @@ public class GeraProcuracoes
     }
 
     public void setEstCivilOutorgado(String estCivilOutorgado) {
-        this.estCivilOutorgado = estCivilOutorgado;
+        this.estCivilOutorgado = estCivilOutorgado.toLowerCase();
     }
 
     public String getEstCivilRogo() {
@@ -158,7 +142,7 @@ public class GeraProcuracoes
     }
 
     public void setEstCivilRogo(String estCivilRogo) {
-        this.estCivilRogo = estCivilRogo;
+        this.estCivilRogo = estCivilRogo.toLowerCase();
     }
     
     public String getOutorgante() {
@@ -273,55 +257,12 @@ public class GeraProcuracoes
         this.profOutorgante = profOutorgante;
     }
 
-    public int getCivOutorgante() {
-        return civOutorgante;
-    }
-
-    public void setCivOutorgante(int estCivilOutorgante) {
-        this.civOutorgante = estCivilOutorgante;
-    }
-    
     public GeraProcuracoes(){}
     
     //metodo que gera as procuraçoes baseado nos modelos utilizados no cartorio
     public void setGeraProcuracoes()
-    {
-        //vogal "A" ou "O" será adicionada posteriormente após verificar o sexo do outorgante
-        switch (civOutorgante) 
-        {
-            case 0:
-                estCivilOutorgante = "solteir";
-                break;
-            case 1:
-                estCivilOutorgante = "casad";
-                break;
-            case 2:
-                estCivilOutorgante = "divorciad";                    
-                break;
-            case 3:
-                estCivilOutorgante = "viúv";                    
-                break;
-            default:
-                break;
-        }
-        //vogal "A" ou "O" será adicionada posteriormente após verificar o sexo do outorgado
-        switch (civOutorgado) 
-        {
-            case 0:
-                estCivilOutorgado = "solteir";
-                break;
-            case 1:
-                estCivilOutorgado = "casad";
-                break;
-            case 2:
-                estCivilOutorgado = "divorciad";                    
-                break;
-            case 3:
-                estCivilOutorgado = "viúv";                    
-                break;
-            default:
-                break;
-        }     
+    {    
+        //obj_auxiliar.debug(modeloProc);
         //verifica quem é o Escrevente/Tabelião
         switch (indiceEscrevente) 
         {
@@ -357,6 +298,7 @@ public class GeraProcuracoes
             //substitui os campos com # com os valores recebidos
             doc = obj_auxiliar.replaceText(doc, "#DATA_EXTENSO", obj_auxiliar.dataTodaPorExtenso(data));
             doc = obj_auxiliar.replaceText(doc, "#OUTORGANTE", outorgante);
+            doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante);
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGANTE", profOutorgante);           
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGANTE", rgOutorgante);            
             doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGANTE", cpfOutorgante);            
@@ -365,14 +307,12 @@ public class GeraProcuracoes
             //Sexo = 0 é masculino, senao....
             if(sexoOutorgante == 0)
             {
-                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante+"o");           
                 doc = obj_auxiliar.replaceText(doc, "#a_o1", "o");  
                 doc = obj_auxiliar.replaceText(doc, "#portador1", "portador");  
                 doc = obj_auxiliar.replaceText(doc, "#ao", "ao");  
             }
             else
             {
-                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGANTE", estCivilOutorgante+"a");            
                 doc = obj_auxiliar.replaceText(doc, "#a_o1", "a");  
                 doc = obj_auxiliar.replaceText(doc, "#portador1", "portadora");  
                 doc = obj_auxiliar.replaceText(doc, "#ao", "a");
@@ -380,6 +320,7 @@ public class GeraProcuracoes
              
             //substitue os campos do Outorgado
             doc = obj_auxiliar.replaceText(doc, "#OUTORGADO", outorgado);
+            doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado); 
             doc = obj_auxiliar.replaceText(doc, "#PROF_OUTORGADO", profOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#RG_OUTORGADO", rgOutorgado);
             doc = obj_auxiliar.replaceText(doc, "#CPF_OUTORGADO", cpfOutorgado);
@@ -388,8 +329,7 @@ public class GeraProcuracoes
             doc = obj_auxiliar.replaceText(doc, "#CARGO", cargo);
             
             if(sexoOutorgado == 0)
-            {
-                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado+"o");   
+            {  
                 doc = obj_auxiliar.replaceText(doc, "#OUT_MANDATARIO", "OUTORGADO MANDATÁRIO");
                 doc = obj_auxiliar.replaceText(doc, "#a_o2", "o");  
                 doc = obj_auxiliar.replaceText(doc, "#portador2", "portador");  
@@ -397,7 +337,6 @@ public class GeraProcuracoes
             }
             else
             {
-                doc = obj_auxiliar.replaceText(doc, "#CIVIL_OUTORGADO", estCivilOutorgado+"a");            
                 doc = obj_auxiliar.replaceText(doc, "#OUT_MANDATARIO", "OUTORGADA MANDATÁRIA");            
                 doc = obj_auxiliar.replaceText(doc, "#a_o2", "a");  
                 doc = obj_auxiliar.replaceText(doc, "#portador2", "portadora"); 
@@ -406,24 +345,8 @@ public class GeraProcuracoes
             
             if (existeRogo)
             {
-                switch (civRogo) 
-                {
-                    case 0:
-                        estCivilRogo = "solteir";
-                        break;
-                    case 1:
-                        estCivilRogo = "casad";
-                        break;
-                    case 2:
-                        estCivilRogo = "divorciad";                    
-                        break;
-                    case 3:
-                        estCivilRogo = "viúv";                    
-                        break;
-                    default:
-                        break;
-                }
                 doc = obj_auxiliar.replaceText(doc, "#A_ROGO", obj_auxiliar.iniciaisMaisculas(aRogo.toLowerCase()));
+                doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo);  
                 doc = obj_auxiliar.replaceText(doc, "#PROF_ROGO", profRogo);
                 doc = obj_auxiliar.replaceText(doc, "#RG_ROGO", rgRogo);
                 doc = obj_auxiliar.replaceText(doc, "#CPF_ROGO", cpfRogo);
@@ -431,14 +354,12 @@ public class GeraProcuracoes
                 doc = obj_auxiliar.replaceText(doc, "#a_rogo", obj_auxiliar.iniciaisMaisculas(aRogo.toLowerCase()));
                 
                 if(sexoRogo == 0)
-                {
-                    doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo+"o");                       
+                {                        
                     doc = obj_auxiliar.replaceText(doc, "#a_o3", "o");  
                     doc = obj_auxiliar.replaceText(doc, "#portador3", "portador");  
                 }
                 else
                 {
-                    doc = obj_auxiliar.replaceText(doc, "#CIVIL_ROGO", estCivilRogo+"a");            
                     doc = obj_auxiliar.replaceText(doc, "#a_o3", "a");  
                     doc = obj_auxiliar.replaceText(doc, "#portador3", "portadora"); 
                 }
@@ -456,8 +377,25 @@ public class GeraProcuracoes
             doc = obj_auxiliar.replaceText(doc, "#DATA", obj_auxiliar.dataPorExtenso(data));
             doc = obj_auxiliar.replaceText(doc, "#_data", data);
             
-            //pega o arquivo modificado e cria um novo arquivo
-            filePath2 = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROCURAÇOES GERADAS NO DIA\\" + outorgante + " para " + outorgado + "."+modeloProc+".doc";
+            //pega as 3 primeiras letras do modelo do arquivo para saber em qual pasta salvar a procuraçao
+            String codProc = modeloProc.substring(0,3);
+            //pasta default
+            String pastaProc = "PROCURAÇOES GERADAS NO DIA";
+            //verifica qual o código (as 3 primeiras letras) e muda a pasta default
+            if(codProc.equals("PRV"))
+            {
+                pastaProc = "PROCURACAO PARA FINS PREVIDENCIARIOS";
+            }
+            if(codProc.equals("GEN"))
+            {
+                pastaProc = "PROCURACAO GENERICA";
+            }
+            if(codProc.equals("JUR"))
+            {
+                pastaProc = "PROCURACAO JURIDICA COM CONTEUDO FINANCEIRO";
+            }
+            
+            filePath2 = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\"+ pastaProc +"\\" + outorgante + " para " + outorgado + "."+modeloProc;
             obj_auxiliar.saveWord(filePath2, doc);
             //abre o novo arquivo gerado anteriormente
             Desktop.getDesktop().open(new File(filePath2));

@@ -5,6 +5,7 @@
  */
 package Frames;
 
+import Classes.Metodos_Auxiliares;
 import GerarProcuracoes.GeraProcuracoes;
 import java.io.File;
 import java.text.DateFormat;
@@ -23,6 +24,9 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     boolean existeRogo = true, existePJ = true;
     boolean campos_PJ_Ativo = false, campos_Rogo_Ativo = false;
+    String urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes";
+    GeraProcuracoes obj = new GeraProcuracoes();
+    Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
     
     public GeradorProcuracoesFrame() {
         initComponents();
@@ -61,10 +65,16 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jftfCNPJ.setEnabled(false);
         jtfNIRE.setEnabled(false);
         jtfSedePJ.setEnabled(false);
+        jtfNumPJ.setEnabled(false);
+        jtfBairroPJ.setEnabled(false);
+        jtfCidadePJ.setEnabled(false);
         jLabel1.setEnabled(false);
         jLabel2.setEnabled(false);
         jLabel4.setEnabled(false);
         jLabel5.setEnabled(false);
+        jlNPJ.setEnabled(false);
+        jlBPJ.setEnabled(false);
+        jlCPJ.setEnabled(false);
         
         //ao Iniciar a janela, chama o foco para o campo Outorgante
         jTextFieldOutorgante.requestFocusInWindow();
@@ -379,16 +389,31 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel34.setText("Sexo:");
 
         jComboBoxSexoOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSexoOutorgante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSexoOutorganteActionPerformed(evt);
+            }
+        });
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel37.setText("Sexo:");
 
         jComboBoxSexoOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSexoOutorgado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSexoOutorgadoActionPerformed(evt);
+            }
+        });
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel38.setText("Sexo:");
 
         jComboBoxSexoRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSexoRogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSexoRogoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -850,11 +875,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarActionPerformed
-        //pega os valores dos campos do formFrame e chama o metodo para GerarPDF
-        GeraProcuracoes obj = new GeraProcuracoes();
+        //pega os valores dos campos do formFrame e chama o metodo para GerarPDF        
         
         obj.setOutorgante(jTextFieldOutorgante.getText());
-        obj.setCivOutorgante(jComboBoxEstCivilOutorgante.getSelectedIndex());
+        obj.setEstCivilOutorgante(jComboBoxEstCivilOutorgante.getSelectedItem().toString());
         obj.setRgOutorgante(jTextFieldRGOutorgante.getText());
         obj.setCpfOutorgante(jFormattedTextCPFOutorgante.getText());
         obj.setProfOutorgante(jTextFieldProfOutorgante.getText());
@@ -865,7 +889,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         String cidadeOutorgante = jTextFieldCidadeOutorgante.getText();
 
         obj.setOutorgado(jTextFieldOutorgado.getText());
-        obj.setCivOutorgado(jComboBoxEstCivilOutorgado.getSelectedIndex());
+        obj.setEstCivilOutorgado(jComboBoxEstCivilOutorgado.getSelectedItem().toString());
         obj.setRgOutorgado(jTextFieldRGOutorgado.getText());
         obj.setCpfOutorgado(jFormattedTextCPFOutorgado.getText());
         obj.setProfOutorgado(jTextFieldProfOutorgado.getText());
@@ -919,7 +943,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         if(campos_Rogo_Ativo)
         {
             obj.setaRogo(jTextFieldRogo.getText());
-            obj.setCivRogo(jComboBoxEstCivilRogo.getSelectedIndex());
+            obj.setEstCivilRogo(jComboBoxEstCivilRogo.getSelectedItem().toString());
             obj.setRgRogo(jTextFieldRGRogo.getText());
             obj.setCpfRogo(jFormattedTextCPFRogo.getText());
             obj.setProfRogo(jTextFieldProfRogo.getText());
@@ -1005,6 +1029,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");     
             jTextFieldOutorgante.requestFocusInWindow();
         }
+        else if (obj_auxiliar.isCPF(jFormattedTextCPFOutorgante.getText()) == false)
+        {
+            JOptionPane.showMessageDialog(null, "CPF do Outorgante inválido!");
+        }
         else if ((jTextFieldEndOutorgante.getText() == null || jTextFieldEndOutorgante.getText().trim().isEmpty()))
         {
             JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgante!");  
@@ -1015,6 +1043,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha o campo Outorgado!"); 
             jTextFieldOutorgado.requestFocusInWindow();
         }
+        else if (obj_auxiliar.isCPF(jFormattedTextCPFOutorgado.getText()) == false)
+        {
+            JOptionPane.showMessageDialog(null, "CPF do Outorgado inválido!");
+        }
         else if ((jTextFieldEndOutorgado.getText() == null || jTextFieldEndOutorgado.getText().trim().isEmpty()))
         {
             JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgado!");            
@@ -1024,6 +1056,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Pheencha o nome do a Rogo!");            
             jTextFieldRogo.requestFocusInWindow();
+        }
+        else if ((obj_auxiliar.isCPF(jFormattedTextCPFRogo.getText()) == false) && campos_Rogo_Ativo )
+        {
+            JOptionPane.showMessageDialog(null, "CPF do a Rogo inválido!");
         }
         else if ((jTextFieldEndRogo.getText() == null || jTextFieldEndRogo.getText().trim().isEmpty())&& campos_Rogo_Ativo)
         {
@@ -1051,11 +1087,19 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGerarActionPerformed
 
     private void jButtonTipoProcuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoProcuracaoActionPerformed
-        // TODO add your handling code here:
-        JFileChooser abrir = new JFileChooser("C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes");  
+        //se a procuracao for de Pessoa Juridica, ele muda o caminho/pasta dos modelos de procuracao
+        if (campos_PJ_Ativo){
+            urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes\\MODELOS PJ";
+        }   
+        //se a procuracao tiver a Rogo, ele muda o caminho/pasta dos modelos de procuracao
+        if (campos_Rogo_Ativo){
+            urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes\\MODELOS A ROGO";
+        }   
+        JFileChooser abrir = new JFileChooser(urlModProcuracoes);  
         int retorno = abrir.showOpenDialog(null);  
         if (retorno==JFileChooser.APPROVE_OPTION)  
         jTextFieldCaminhoModeloProc.setText(abrir.getSelectedFile().getAbsolutePath()); 
+        obj.setModeloProc(abrir.getSelectedFile().getName());
     }//GEN-LAST:event_jButtonTipoProcuracaoActionPerformed
 
     private void jTextFieldCaminhoModeloProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCaminhoModeloProcActionPerformed
@@ -1118,10 +1162,16 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             jftfCNPJ.setEnabled(true);
             jtfNIRE.setEnabled(true);
             jtfSedePJ.setEnabled(true);
+            jtfNumPJ.setEnabled(true);
+            jtfBairroPJ.setEnabled(true);
+            jtfCidadePJ.setEnabled(true);
             jLabel1.setEnabled(true);
             jLabel2.setEnabled(true);
             jLabel4.setEnabled(true);
             jLabel5.setEnabled(true);
+            jlNPJ.setEnabled(true);
+            jlBPJ.setEnabled(true);
+            jlCPJ.setEnabled(true);
             campos_PJ_Ativo = true;
         }
         else
@@ -1133,11 +1183,17 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
            jtfNomePJ.setEnabled(false);
            jftfCNPJ.setEnabled(false);
            jtfNIRE.setEnabled(false);
-           jtfSedePJ.setEnabled(false); 
+           jtfSedePJ.setEnabled(false);
+           jtfNumPJ.setEnabled(false);
+           jtfBairroPJ.setEnabled(false);
+           jtfCidadePJ.setEnabled(false);
            jLabel1.setEnabled(false);
            jLabel2.setEnabled(false);
            jLabel4.setEnabled(false);
            jLabel5.setEnabled(false);
+           jlNPJ.setEnabled(false);
+           jlBPJ.setEnabled(false);
+           jlCPJ.setEnabled(false);
            campos_PJ_Ativo = false;
         }
        
@@ -1170,6 +1226,63 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private void jFormattedTextDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextDataActionPerformed
+    //vai verificar qual o sexo escolhido e mudar automaticamente o gênero do estado civil do outorgante
+    private void jComboBoxSexoOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoOutorganteActionPerformed
+        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
+        int sexoOut = jComboBoxSexoOutorgante.getSelectedIndex();
+        int indiceComboBoxEstCivil = jComboBoxEstCivilOutorgante.getSelectedIndex();
+        //se sexo feminino
+        if(sexoOut == 1)
+        {
+            //cria um novo combobox com os valores no feminino
+            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteira", "Casada", "Divorciada", "Viúva" }));
+            //mantem o item selecionado
+            jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+        if(sexoOut == 0)
+        {
+            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+            jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+    }//GEN-LAST:event_jComboBoxSexoOutorganteActionPerformed
+
+    private void jComboBoxSexoOutorgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoOutorgadoActionPerformed
+        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
+        int sexo = jComboBoxSexoOutorgado.getSelectedIndex();
+        int indiceComboBoxEstCivil = jComboBoxEstCivilOutorgado.getSelectedIndex();
+        //se sexo feminino
+        if(sexo == 1)
+        {
+            //cria um novo combobox com os valores no feminino
+            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteira", "Casada", "Divorciada", "Viúva" }));
+            //mantem o item selecionado
+            jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+        if(sexo == 0)
+        {
+            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+            jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+    }//GEN-LAST:event_jComboBoxSexoOutorgadoActionPerformed
+
+    private void jComboBoxSexoRogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoRogoActionPerformed
+        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
+        int sexo = jComboBoxSexoRogo.getSelectedIndex();
+        int indiceComboBoxEstCivil = jComboBoxEstCivilRogo.getSelectedIndex();
+        //se sexo feminino
+        if(sexo == 1)
+        {
+            //cria um novo combobox com os valores no feminino
+            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteira", "Casada", "Divorciada", "Viúva" }));
+            //mantem o item selecionado
+            jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+        if(sexo == 0)
+        {
+            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+            jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+    }//GEN-LAST:event_jComboBoxSexoRogoActionPerformed
     
     /**
      * @param args the command line arguments
