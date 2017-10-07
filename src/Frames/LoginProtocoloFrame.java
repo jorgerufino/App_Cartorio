@@ -1,21 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frames;
 
+import DAL.ModuloConexao;
 import javax.swing.JOptionPane;
+import java.sql.*;
 
-/**
- *
- * @author Michele Andrade
- */
 public class LoginProtocoloFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form LoginProtocoloFrame
-     */
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    public void logar ()
+    {
+        String sql = "select * from tbusuarios where login=? and senha=?";
+        
+        try {
+            //as linas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            //pega os valores dos campos de texto e substitue nas interrogaçoes 
+            pst.setString(1, jTextFieldLogin.getText());
+            pst.setString(2, jPasswordFieldSenha.getText());
+            //executa a query
+            rs = pst.executeQuery();
+            //se existir usuario e senha correspondentes
+            if (rs.next())
+            {
+                TelaInicialFrame principal = new TelaInicialFrame();
+                principal.setVisible(true);
+                //fecha a Tela de Login
+                this.dispose();
+                //fecha conexao com o banco
+                conexao.close();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválido!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     public LoginProtocoloFrame() {
         initComponents();
         //centraliza a janela no meio da tela
@@ -26,6 +50,16 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         
         //Chama o foco para o campo Requerente
         jPasswordFieldSenha.requestFocusInWindow();
+        
+        conexao = ModuloConexao.conector();
+        if (conexao != null)
+        {
+            jlStatus.setText("Conectado!");
+        }
+        else
+        {
+            jlStatus.setText("Não conectado!");
+        }
     }
 
     /**
@@ -46,6 +80,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         jLabelBrasao = new javax.swing.JLabel();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jlStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Protocolo: Login");
@@ -92,6 +127,8 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
             }
         });
 
+        jlStatus.setText("Status");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +138,9 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(108, 108, 108))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jlStatus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -137,11 +176,16 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonCancelar))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonConfirmar)
+                            .addComponent(jButtonCancelar))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jlStatus)
+                        .addGap(25, 25, 25))))
         );
 
         pack();
@@ -149,29 +193,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-        String login, senha;
-        
-        //pegando os valores dos campos Login e Senha
-        login = jTextFieldLogin.getText();
-        senha = jPasswordFieldSenha.getText();        
-        
-        //se informar o login e senha corretos 
-        if((login.equals("jorge") && senha.equals("admin")) || (login.equals("outros") && senha.equals("outros")))
-        {
-            //cria um objeto ProtocoloFrame para chamar a janela de Cadastro de Protocolo
-            TelaInicialFrame obj = new TelaInicialFrame();
-            
-            //Deixa visivel a janela
-            obj.setVisible(true);
-            
-            //Fecha a janela de login
-            LoginProtocoloFrame.this.dispose();            
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Senha ou login incorretos!");
-        }        
-        
+        logar();
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -234,5 +256,6 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBrasao;
     private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JTextField jTextFieldLogin;
+    private javax.swing.JLabel jlStatus;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Frames;
 
 import Classes.GeneratorPDF;
@@ -13,16 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Michele Andrade
- */
 public class ProtocoloFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ProtocoloFrame
-     */
-    
     //Lista todos os documentos da pasta protocolo e pega os 3 primeiros Strings(no caso são o numero do protocolo
     String pastaProtocolo ="D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROTOCOLO";
     File file = new File(pastaProtocolo);
@@ -235,7 +221,7 @@ public class ProtocoloFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jTextFieldDiligencia, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jComboBoxTipoProcuracao, 0, 491, Short.MAX_VALUE)))
+                                    .addComponent(jComboBoxTipoProcuracao, 0, 506, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -255,8 +241,8 @@ public class ProtocoloFrame extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jFormattedTextDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(94, 94, 94))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(79, 79, 79))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,8 +370,22 @@ public class ProtocoloFrame extends javax.swing.JFrame {
             
             if (protocoloExistente)
             {  
-               ProtocoloExistenteFrame obj = new ProtocoloExistenteFrame(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, valorDiligencia, dataEntrega, escrevente);
-               obj.setVisible(true); 
+                int sair = JOptionPane.showConfirmDialog(null, "Protocolo já existe!\nDeseja cadastrar assim mesmo", "Atenção!", JOptionPane.YES_NO_OPTION);
+                if (sair == JOptionPane.YES_OPTION)
+                {
+                //Chama o construtor e passa todos os parametros
+                GeneratorPDF obj = new GeneratorPDF(protocolo, requerente, telefone, autenticacoes, tipoProcuracao, valorDiligencia, dataEntrega, escrevente);
+
+                //chama o metodo para gerar o PDF
+                obj.setGerarPdf();    
+
+                //Fecha o frame ProtocoloFrame
+                ProtocoloFrame.this.dispose();
+                
+                //Cria um obj para chamar o Frame/Janela Inicial
+                CadastrarNovoProcoloFrame obj2 = new CadastrarNovoProcoloFrame();
+                obj2.setVisible(true);            
+                }
             }
             else
             {
@@ -402,7 +402,6 @@ public class ProtocoloFrame extends javax.swing.JFrame {
                 CadastrarNovoProcoloFrame obj2 = new CadastrarNovoProcoloFrame();
                 obj2.setVisible(true);
             }
-            
         }
         
     }//GEN-LAST:event_jButtonCadastrarActionPerformed

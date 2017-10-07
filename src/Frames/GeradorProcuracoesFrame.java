@@ -6,6 +6,7 @@
 package Frames;
 
 import Classes.Metodos_Auxiliares;
+import DAL.ModuloConexao;
 import GerarProcuracoes.GeraProcuracoes;
 import java.io.File;
 import java.text.DateFormat;
@@ -15,13 +16,18 @@ import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 
 /**
  *
  * @author Michele Andrade
  */
 public class GeradorProcuracoesFrame extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
     boolean existeRogo = true, existePJ = true;
     boolean campos_PJ_Ativo = false, campos_Rogo_Ativo = false;
     String urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes";
@@ -30,7 +36,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     
     public GeradorProcuracoesFrame() {
         initComponents();
-        
+        //cria conexao com o banco de dados
+        conexao = ModuloConexao.conector();
         //insere título na Janela do aplicativo
         super.setTitle("Gerar Procuração - Cartório do Único Ofício de Benevides");
         //pega a data atual e inseri no campo Previsão de Entrega        
@@ -78,9 +85,169 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         
         //ao Iniciar a janela, chama o foco para o campo Outorgante
         jTextFieldOutorgante.requestFocusInWindow();
-        
     }
 
+    public void cadastrarOutorgante()
+    {
+        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo,tipopessoacli) "
+        + "values (?,?,?,?,?,?,?,?,?,?,'1');";
+        
+        try {
+            if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
+            {
+                JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");     
+                jTextFieldOutorgante.requestFocusInWindow();
+            }
+            else if (obj_auxiliar.isCPF(jFormattedTextCPFOutorgante.getText()) == false)
+            {
+                JOptionPane.showMessageDialog(null, "CPF do Outorgante inválido!");
+            }
+            else if ((jTextFieldEndOutorgante.getText() == null || jTextFieldEndOutorgante.getText().trim().isEmpty()))
+            {
+                JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgante!");  
+                jTextFieldEndOutorgante.requestFocusInWindow();
+            }
+            else
+            {
+                String cpf = jFormattedTextCPFOutorgante.getText();
+                //removendo os pontos e o traço do cpf
+                cpf = cpf.replaceAll("-", "");
+                //somente no caso do ponto é obrigatorio usar os colchetes
+                cpf = cpf.replaceAll("[.]", "");
+
+                //as linas abaixo preparam a consulta ao banco de dados
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, jTextFieldOutorgante.getText().toUpperCase());
+                pst.setString(2, jTextFieldRGOutorgante.getText().toUpperCase());
+                pst.setString(3, cpf);
+                pst.setString(4, jTextFieldProfOutorgante.getText().toLowerCase());
+                pst.setString(5, jComboBoxEstCivilOutorgante.getSelectedItem().toString());
+                pst.setString(6, jTextFieldEndOutorgante.getText());
+                pst.setString(7, jTextFieldNumOutorgante.getText());
+                pst.setString(8, jTextFieldBairroOutorgante.getText());
+                pst.setString(9, jTextFieldCidadeOutorgante.getText());
+                pst.setString(10, jComboBoxSexoOutorgante.getSelectedItem().toString());
+                //executa a query
+
+                int adicionado = pst.executeUpdate();
+                if (adicionado >0 ){
+                    JOptionPane.showMessageDialog(null, "Outorgante cadastrado com sucesso!");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void cadastrarOutorgado()
+    {
+        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo,tipopessoacli) "
+        + "values (?,?,?,?,?,?,?,?,?,?,'2');";
+        
+        try {
+            if ((jTextFieldOutorgado.getText() == null || jTextFieldOutorgado.getText().trim().isEmpty()))
+            {
+                JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgado!");     
+                jTextFieldOutorgado.requestFocusInWindow();
+            }
+            else if (obj_auxiliar.isCPF(jFormattedTextCPFOutorgado.getText()) == false)
+            {
+                JOptionPane.showMessageDialog(null, "CPF do Outorgado inválido!");
+            }
+            else if ((jTextFieldEndOutorgado.getText() == null || jTextFieldEndOutorgado.getText().trim().isEmpty()))
+            {
+                JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgado!");  
+                jTextFieldEndOutorgado.requestFocusInWindow();
+            }
+            else
+            {
+                String cpf = jFormattedTextCPFOutorgado.getText();
+                //removendo os pontos e o traço do cpf
+                cpf = cpf.replaceAll("-", "");
+                //somente no caso do ponto é obrigatorio usar os colchetes
+                cpf = cpf.replaceAll("[.]", "");
+
+                //as linas abaixo preparam a consulta ao banco de dados
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, jTextFieldOutorgado.getText().toUpperCase());
+                pst.setString(2, jTextFieldRGOutorgado.getText().toUpperCase());
+                pst.setString(3, cpf);
+                pst.setString(4, jTextFieldProfOutorgado.getText().toLowerCase());
+                pst.setString(5, jComboBoxEstCivilOutorgado.getSelectedItem().toString());
+                pst.setString(6, jTextFieldEndOutorgado.getText());
+                pst.setString(7, jTextFieldNumOutorgado.getText());
+                pst.setString(8, jTextFieldBairroOutorgado.getText());
+                pst.setString(9, jTextFieldCidadeOutorgado.getText());
+                pst.setString(10, jComboBoxSexoOutorgado.getSelectedItem().toString());
+                //executa a query
+
+                int adicionado = pst.executeUpdate();
+                if (adicionado >0 ){
+                    JOptionPane.showMessageDialog(null, "Outorgado cadastrado com sucesso!");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void cadastrarPJ()
+    {
+        String sql = "insert into tbclientes(nomecli,cpfcnpjcli,logradourocli, numerocli,bairrocli,cidadecli,tipopessoacli,nire) "
+                                    + "values (?,?,?,?,?,?,'3',?);";
+        
+        try {
+            if ((jtfNomePJ.getText() == null || jtfNomePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
+            {
+                JOptionPane.showMessageDialog(null, "Pheencha o nome da Pessoa Jurídica!");            
+                jtfNomePJ.requestFocusInWindow();
+            }
+            else if ((jftfCNPJ.getText().equals("  .   .   /    -  ")) && campos_PJ_Ativo)
+            {
+                JOptionPane.showMessageDialog(null, "Pheencha o CNPJ!");  
+                jftfCNPJ.requestFocusInWindow();
+            }
+            else if ((jtfNIRE.getText() == null || jtfNIRE.getText().trim().isEmpty()) && campos_PJ_Ativo)
+            {
+                JOptionPane.showMessageDialog(null, "Pheencha o NIRE!");            
+                jtfNIRE.requestFocusInWindow();
+            }
+            else if ((jtfSedePJ.getText() == null || jtfSedePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
+            {
+                JOptionPane.showMessageDialog(null, "Pheencha a sede da Pessoa Jurídica!");            
+                jtfSedePJ.requestFocusInWindow();
+            }
+            else
+            {
+                String cnpj = jftfCNPJ.getText();
+                //removendo a barra do cnpj
+                cnpj = cnpj.replaceAll("/", "");
+                cnpj = cnpj.replaceAll("-", "");
+                //somente no caso do ponto é obrigatorio usar os colchetes
+                cnpj = cnpj.replaceAll("[.]", "");
+
+                //as linas abaixo preparam a consulta ao banco de dados
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, jtfNomePJ.getText().toUpperCase());
+                pst.setString(2, cnpj);
+                pst.setString(3, jtfSedePJ.getText());
+                pst.setString(4, jtfNumPJ.getText());
+                pst.setString(5, jtfBairroPJ.getText());
+                pst.setString(6, jtfCidadePJ.getText());
+                pst.setString(7, jtfNIRE.getText());
+                
+                //executa a query
+
+                int adicionado = pst.executeUpdate();
+                if (adicionado >0 ){
+                    JOptionPane.showMessageDialog(null, "Pessoa Jurídica cadastrada com sucesso!");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,6 +341,10 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jtfBairroPJ = new javax.swing.JTextField();
         jlCPJ = new javax.swing.JLabel();
         jtfCidadePJ = new javax.swing.JTextField();
+        jButtonSelCliente = new javax.swing.JButton();
+        jButtonCadOutorgante = new javax.swing.JButton();
+        jButtonCadOutorgado = new javax.swing.JButton();
+        jButtonCadPJ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -232,6 +403,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel13.setText("Cidade:");
 
+        jTextFieldOutorgado.setText("mesmo endereço do outorgante");
+
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel14.setText("Outorgado:");
 
@@ -285,7 +458,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel25.setText("Est. Civil:");
 
-        jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+        jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
         jComboBoxEstCivilOutorgante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxEstCivilOutorganteActionPerformed(evt);
@@ -310,7 +483,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel29.setText("Est. Civil:");
 
-        jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+        jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel30.setText("RG:");
@@ -330,7 +503,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel33.setText("Est. Civil:");
 
-        jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+        jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
 
         try {
             jFormattedTextSelo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###")));
@@ -378,7 +551,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonTeste.setText("A Rogo");
+        jButtonTeste.setText("HabilidatarA Rogo");
         jButtonTeste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTesteActionPerformed(evt);
@@ -388,7 +561,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel34.setText("Sexo:");
 
-        jComboBoxSexoOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSexoOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "masculino", "feminino" }));
         jComboBoxSexoOutorgante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSexoOutorganteActionPerformed(evt);
@@ -398,7 +571,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel37.setText("Sexo:");
 
-        jComboBoxSexoOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSexoOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "masculino", "feminino" }));
         jComboBoxSexoOutorgado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSexoOutorgadoActionPerformed(evt);
@@ -408,7 +581,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel38.setText("Sexo:");
 
-        jComboBoxSexoRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSexoRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "masculino", "feminino" }));
         jComboBoxSexoRogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSexoRogoActionPerformed(evt);
@@ -422,7 +595,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonHabJuridica.setText("Pessoa Juridica");
+        jButtonHabJuridica.setText("Habilitar PJ");
         jButtonHabJuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonHabJuridicaActionPerformed(evt);
@@ -492,6 +665,35 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jlCPJ.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jlCPJ.setText("Cidade:");
 
+        jButtonSelCliente.setText("Selecionar Cliente Cadastrado");
+        jButtonSelCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelClienteActionPerformed(evt);
+            }
+        });
+
+        jButtonCadOutorgante.setText("Cadastrar Outorgante");
+        jButtonCadOutorgante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadOutorganteActionPerformed(evt);
+            }
+        });
+
+        jButtonCadOutorgado.setText("Cadastrar Outorgado");
+        jButtonCadOutorgado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadOutorgadoActionPerformed(evt);
+            }
+        });
+
+        jButtonCadPJ.setText("Cadastrar PJ");
+        jButtonCadPJ.setEnabled(false);
+        jButtonCadPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadPJActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -507,8 +709,16 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                         .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonHabJuridica)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonHabJuridica)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButtonSelCliente)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonCadOutorgante)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCadOutorgado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCadPJ)))
+                .addContainerGap(148, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel8)
@@ -692,7 +902,12 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel8)
                 .addGap(29, 29, 29)
-                .addComponent(jButtonHabJuridica)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonHabJuridica)
+                    .addComponent(jButtonSelCliente)
+                    .addComponent(jButtonCadOutorgante)
+                    .addComponent(jButtonCadOutorgado)
+                    .addComponent(jButtonCadPJ))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1173,6 +1388,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             jlBPJ.setEnabled(true);
             jlCPJ.setEnabled(true);
             campos_PJ_Ativo = true;
+            jButtonCadPJ.setEnabled(true);
         }
         else
         {
@@ -1195,6 +1411,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
            jlBPJ.setEnabled(false);
            jlCPJ.setEnabled(false);
            campos_PJ_Ativo = false;
+           jButtonCadPJ.setEnabled(false);
         }
        
     }//GEN-LAST:event_jButtonHabJuridicaActionPerformed
@@ -1235,13 +1452,13 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         if(sexoOut == 1)
         {
             //cria um novo combobox com os valores no feminino
-            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteira", "Casada", "Divorciada", "Viúva" }));
+            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
             //mantem o item selecionado
             jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
         }
         if(sexoOut == 0)
         {
-            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
             jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
         }
     }//GEN-LAST:event_jComboBoxSexoOutorganteActionPerformed
@@ -1254,13 +1471,13 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         if(sexo == 1)
         {
             //cria um novo combobox com os valores no feminino
-            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteira", "Casada", "Divorciada", "Viúva" }));
+            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
             //mantem o item selecionado
             jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
         }
         if(sexo == 0)
         {
-            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
             jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
         }
     }//GEN-LAST:event_jComboBoxSexoOutorgadoActionPerformed
@@ -1273,16 +1490,37 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         if(sexo == 1)
         {
             //cria um novo combobox com os valores no feminino
-            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteira", "Casada", "Divorciada", "Viúva" }));
+            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
             //mantem o item selecionado
             jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
         }
         if(sexo == 0)
         {
-            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo" }));
+            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
             jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
         }
     }//GEN-LAST:event_jComboBoxSexoRogoActionPerformed
+
+    private void jButtonSelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelClienteActionPerformed
+        // TODO add your handling code here:
+        ConsultarClienteFrame frameCliente = new ConsultarClienteFrame();
+        frameCliente.setVisible(true);
+    }//GEN-LAST:event_jButtonSelClienteActionPerformed
+
+    private void jButtonCadOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadOutorganteActionPerformed
+        // TODO add your handling code here:
+        cadastrarOutorgante();
+    }//GEN-LAST:event_jButtonCadOutorganteActionPerformed
+
+    private void jButtonCadOutorgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadOutorgadoActionPerformed
+        // TODO add your handling code here:
+        cadastrarOutorgado();
+    }//GEN-LAST:event_jButtonCadOutorgadoActionPerformed
+
+    private void jButtonCadPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadPJActionPerformed
+        // TODO add your handling code here:
+        cadastrarPJ();
+    }//GEN-LAST:event_jButtonCadPJActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1322,20 +1560,24 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCadOutorgado;
+    private javax.swing.JButton jButtonCadOutorgante;
+    private javax.swing.JButton jButtonCadPJ;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGerar;
     private javax.swing.JButton jButtonHabJuridica;
+    private javax.swing.JButton jButtonSelCliente;
     private javax.swing.JButton jButtonTeste;
     private javax.swing.JButton jButtonTipoProcuracao;
     private javax.swing.JComboBox<String> jComboBoxEscrevente;
-    private javax.swing.JComboBox<String> jComboBoxEstCivilOutorgado;
-    private javax.swing.JComboBox<String> jComboBoxEstCivilOutorgante;
+    public static javax.swing.JComboBox<String> jComboBoxEstCivilOutorgado;
+    public static javax.swing.JComboBox<String> jComboBoxEstCivilOutorgante;
     private javax.swing.JComboBox<String> jComboBoxEstCivilRogo;
-    private javax.swing.JComboBox<String> jComboBoxSexoOutorgado;
-    private javax.swing.JComboBox<String> jComboBoxSexoOutorgante;
+    public static javax.swing.JComboBox<String> jComboBoxSexoOutorgado;
+    public static javax.swing.JComboBox<String> jComboBoxSexoOutorgante;
     private javax.swing.JComboBox<String> jComboBoxSexoRogo;
-    private javax.swing.JFormattedTextField jFormattedTextCPFOutorgado;
-    private javax.swing.JFormattedTextField jFormattedTextCPFOutorgante;
+    public static javax.swing.JFormattedTextField jFormattedTextCPFOutorgado;
+    public static javax.swing.JFormattedTextField jFormattedTextCPFOutorgante;
     private javax.swing.JFormattedTextField jFormattedTextCPFRogo;
     private javax.swing.JFormattedTextField jFormattedTextData;
     private javax.swing.JFormattedTextField jFormattedTextSelo;
@@ -1378,37 +1620,37 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelOutorgante;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldBairroOutorgado;
-    private javax.swing.JTextField jTextFieldBairroOutorgante;
+    public static javax.swing.JTextField jTextFieldBairroOutorgado;
+    public static javax.swing.JTextField jTextFieldBairroOutorgante;
     private javax.swing.JTextField jTextFieldBairroRogo;
     private javax.swing.JTextField jTextFieldCaminhoModeloProc;
-    private javax.swing.JTextField jTextFieldCidadeOutorgado;
-    private javax.swing.JTextField jTextFieldCidadeOutorgante;
+    public static javax.swing.JTextField jTextFieldCidadeOutorgado;
+    public static javax.swing.JTextField jTextFieldCidadeOutorgante;
     private javax.swing.JTextField jTextFieldCidadeRogo;
-    private javax.swing.JTextField jTextFieldEndOutorgado;
-    private javax.swing.JTextField jTextFieldEndOutorgante;
+    public static javax.swing.JTextField jTextFieldEndOutorgado;
+    public static javax.swing.JTextField jTextFieldEndOutorgante;
     private javax.swing.JTextField jTextFieldEndRogo;
-    private javax.swing.JTextField jTextFieldNumOutorgado;
-    private javax.swing.JTextField jTextFieldNumOutorgante;
+    public static javax.swing.JTextField jTextFieldNumOutorgado;
+    public static javax.swing.JTextField jTextFieldNumOutorgante;
     private javax.swing.JTextField jTextFieldNumRogo;
-    private javax.swing.JTextField jTextFieldOutorgado;
-    private javax.swing.JTextField jTextFieldOutorgante;
-    private javax.swing.JTextField jTextFieldProfOutorgado;
-    private javax.swing.JTextField jTextFieldProfOutorgante;
+    public static javax.swing.JTextField jTextFieldOutorgado;
+    public static javax.swing.JTextField jTextFieldOutorgante;
+    public static javax.swing.JTextField jTextFieldProfOutorgado;
+    public static javax.swing.JTextField jTextFieldProfOutorgante;
     private javax.swing.JTextField jTextFieldProfRogo;
-    private javax.swing.JTextField jTextFieldRGOutorgado;
-    private javax.swing.JTextField jTextFieldRGOutorgante;
+    public static javax.swing.JTextField jTextFieldRGOutorgado;
+    public static javax.swing.JTextField jTextFieldRGOutorgante;
     private javax.swing.JTextField jTextFieldRGRogo;
     private javax.swing.JTextField jTextFieldRogo;
-    private javax.swing.JFormattedTextField jftfCNPJ;
+    public static javax.swing.JFormattedTextField jftfCNPJ;
     private javax.swing.JLabel jlBPJ;
     private javax.swing.JLabel jlCPJ;
     private javax.swing.JLabel jlNPJ;
-    private javax.swing.JTextField jtfBairroPJ;
-    private javax.swing.JTextField jtfCidadePJ;
-    private javax.swing.JTextField jtfNIRE;
-    private javax.swing.JTextField jtfNomePJ;
-    private javax.swing.JTextField jtfNumPJ;
-    private javax.swing.JTextField jtfSedePJ;
+    public static javax.swing.JTextField jtfBairroPJ;
+    public static javax.swing.JTextField jtfCidadePJ;
+    public static javax.swing.JTextField jtfNIRE;
+    public static javax.swing.JTextField jtfNomePJ;
+    public static javax.swing.JTextField jtfNumPJ;
+    public static javax.swing.JTextField jtfSedePJ;
     // End of variables declaration//GEN-END:variables
 }
