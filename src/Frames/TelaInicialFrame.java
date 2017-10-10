@@ -40,6 +40,7 @@ public class TelaInicialFrame extends javax.swing.JFrame {
         jButtonCadastrarProcolo = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jLabelBrasao = new javax.swing.JLabel();
+        jButtonCadProc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -89,23 +90,33 @@ public class TelaInicialFrame extends javax.swing.JFrame {
 
         jLabelBrasao.setIcon(new javax.swing.ImageIcon("C:\\Arquivos Gerador PDF Java\\Brasao.png")); // NOI18N
 
+        jButtonCadProc.setText("Cadastra Procurações no BD");
+        jButtonCadProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadProcActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jButtonCadastrarProcolo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonGerarProcuracao)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSair))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(188, 188, 188)
-                        .addComponent(jLabelBrasao)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                        .addComponent(jLabelBrasao)
+                        .addGap(160, 160, 160))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonCadastrarProcolo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCadProc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonGerarProcuracao)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSair)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +126,8 @@ public class TelaInicialFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGerarProcuracao)
                     .addComponent(jButtonCadastrarProcolo)
-                    .addComponent(jButtonSair))
+                    .addComponent(jButtonSair)
+                    .addComponent(jButtonCadProc))
                 .addGap(25, 25, 25))
         );
 
@@ -176,6 +188,12 @@ public class TelaInicialFrame extends javax.swing.JFrame {
         getRootPane().setDefaultButton(jButtonSair);
     }//GEN-LAST:event_jButtonSairKeyPressed
 
+    private void jButtonCadProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadProcActionPerformed
+        // TODO add your handling code here:
+        CadastroProcuracoesFrame obj_proc = new CadastroProcuracoesFrame();
+        obj_proc.setVisible(true);
+    }//GEN-LAST:event_jButtonCadProcActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,6 +230,7 @@ public class TelaInicialFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCadProc;
     private javax.swing.JButton jButtonCadastrarProcolo;
     private javax.swing.JButton jButtonGerarProcuracao;
     private javax.swing.JButton jButtonSair;

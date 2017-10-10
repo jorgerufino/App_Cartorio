@@ -49,6 +49,9 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="GeradorProcuracoesFrame_jPanel1"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -592,9 +595,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="mesmo endere&#xe7;o do outorgante"/>
-          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldOutorgadoFocusGained"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
@@ -616,6 +619,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldEndOutorgado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="mesmo endere&#xe7;o do outorgante"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>

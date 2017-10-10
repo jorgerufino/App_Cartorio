@@ -58,7 +58,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         }
         else
         {
-            jlStatus.setText("Não conectado!");
+            jlStatus.setText("Não conectado \nao banco de dados!");
         }
     }
 

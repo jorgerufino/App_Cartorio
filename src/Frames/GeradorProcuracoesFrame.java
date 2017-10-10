@@ -89,8 +89,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     public void cadastrarOutorgante()
     {
-        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo,tipopessoacli) "
-        + "values (?,?,?,?,?,?,?,?,?,?,'1');";
+        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo) "
+        + "values (?,?,?,?,?,?,?,?,?,?);";
         
         try {
             if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
@@ -141,8 +141,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     
     public void cadastrarOutorgado()
     {
-        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo,tipopessoacli) "
-        + "values (?,?,?,?,?,?,?,?,?,?,'2');";
+        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo) "
+        + "values (?,?,?,?,?,?,?,?,?,?);";
         
         try {
             if ((jTextFieldOutorgado.getText() == null || jTextFieldOutorgado.getText().trim().isEmpty()))
@@ -193,8 +193,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     
     public void cadastrarPJ()
     {
-        String sql = "insert into tbclientes(nomecli,cpfcnpjcli,logradourocli, numerocli,bairrocli,cidadecli,tipopessoacli,nire) "
-                                    + "values (?,?,?,?,?,?,'3',?);";
+        String sql = "insert into tbclientes(nomecli,cpfcnpjcli,logradourocli, numerocli,bairrocli,cidadecli,nire) "
+                                    + "values (?,?,?,?,?,?,?);";
         
         try {
             if ((jtfNomePJ.getText() == null || jtfNomePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
@@ -403,13 +403,19 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel13.setText("Cidade:");
 
-        jTextFieldOutorgado.setText("mesmo endereço do outorgante");
+        jTextFieldOutorgado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldOutorgadoFocusGained(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel14.setText("Outorgado:");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel15.setText("End. Outorgado:");
+
+        jTextFieldEndOutorgado.setText("mesmo endereço do outorgante");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel16.setText("Nº");
@@ -1521,6 +1527,11 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         cadastrarPJ();
     }//GEN-LAST:event_jButtonCadPJActionPerformed
+
+    private void jTextFieldOutorgadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldOutorgadoFocusGained
+        // TODO add your handling code here:
+        jTextFieldOutorgado.selectAll();
+    }//GEN-LAST:event_jTextFieldOutorgadoFocusGained
     
     /**
      * @param args the command line arguments
