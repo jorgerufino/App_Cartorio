@@ -342,9 +342,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jlCPJ = new javax.swing.JLabel();
         jtfCidadePJ = new javax.swing.JTextField();
         jButtonSelCliente = new javax.swing.JButton();
-        jButtonCadOutorgante = new javax.swing.JButton();
-        jButtonCadOutorgado = new javax.swing.JButton();
-        jButtonCadPJ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -678,28 +675,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonCadOutorgante.setText("Cadastrar Outorgante");
-        jButtonCadOutorgante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadOutorganteActionPerformed(evt);
-            }
-        });
-
-        jButtonCadOutorgado.setText("Cadastrar Outorgado");
-        jButtonCadOutorgado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadOutorgadoActionPerformed(evt);
-            }
-        });
-
-        jButtonCadPJ.setText("Cadastrar PJ");
-        jButtonCadPJ.setEnabled(false);
-        jButtonCadPJ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadPJActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -717,14 +692,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButtonHabJuridica)
                         .addGap(32, 32, 32)
-                        .addComponent(jButtonSelCliente)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButtonCadOutorgante)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonCadOutorgado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonCadPJ)))
-                .addContainerGap(148, Short.MAX_VALUE))
+                        .addComponent(jButtonSelCliente)))
+                .addContainerGap(314, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel8)
@@ -910,10 +879,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonHabJuridica)
-                    .addComponent(jButtonSelCliente)
-                    .addComponent(jButtonCadOutorgante)
-                    .addComponent(jButtonCadOutorgado)
-                    .addComponent(jButtonCadPJ))
+                    .addComponent(jButtonSelCliente))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1302,6 +1268,33 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         {
             obj.setExistePJ(campos_PJ_Ativo);
             obj.setExisteRogo(campos_Rogo_Ativo);
+            
+            //verifica se o cpf/cnpj já está no banco, se for false é porque cliente ainda não está cadastrado
+            if (obj_auxiliar.verificaCpfCnpj(jFormattedTextCPFOutorgante.getText()) == false)
+            {
+                //cadastra os dados do Outorgante no banco
+                obj_auxiliar.cadastrarCliente(jTextFieldOutorgante.getText(), jTextFieldRGOutorgante.getText(), jFormattedTextCPFOutorgante.getText(), 
+                jTextFieldProfOutorgante.getText(), jComboBoxEstCivilOutorgante.getSelectedItem().toString(), jTextFieldEndOutorgante.getText(), 
+                jTextFieldNumOutorgante.getText(), jTextFieldBairroOutorgante.getText(), jTextFieldCidadeOutorgante.getText(), jComboBoxSexoOutorgante.getSelectedItem().toString(),"");
+            }
+            
+            if (obj_auxiliar.verificaCpfCnpj(jFormattedTextCPFOutorgado.getText()) == false)
+            {
+                //cadastra os dados do outorgado
+                obj_auxiliar.cadastrarCliente(jTextFieldOutorgado.getText(), jTextFieldRGOutorgado.getText(), jFormattedTextCPFOutorgado.getText(), 
+                jTextFieldProfOutorgado.getText(), jComboBoxEstCivilOutorgado.getSelectedItem().toString(), jTextFieldEndOutorgado.getText(), 
+                jTextFieldNumOutorgado.getText(), jTextFieldBairroOutorgado.getText(), jTextFieldCidadeOutorgado.getText(), jComboBoxSexoOutorgado.getSelectedItem().toString(),"");
+            }
+                        
+            if(campos_PJ_Ativo){
+                //verifica se o cnpj já está cadastrado no banco
+                if (obj_auxiliar.verificaCpfCnpj(jftfCNPJ.getText()) == false){
+                    //cadastra a PJ no banco
+                    obj_auxiliar.cadastrarCliente(jtfNomePJ.getText(), "", jftfCNPJ.getText(), "", "", jtfSedePJ.getText(), 
+                    jtfNumPJ.getText(), jtfBairroPJ.getText(), jtfCidadePJ.getText(), "", jtfNIRE.getText());
+                }
+            }
+            
             obj.setGeraProcuracoes();
             System.exit(0);
         }
@@ -1394,7 +1387,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             jlBPJ.setEnabled(true);
             jlCPJ.setEnabled(true);
             campos_PJ_Ativo = true;
-            jButtonCadPJ.setEnabled(true);
         }
         else
         {
@@ -1417,7 +1409,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
            jlBPJ.setEnabled(false);
            jlCPJ.setEnabled(false);
            campos_PJ_Ativo = false;
-           jButtonCadPJ.setEnabled(false);
         }
        
     }//GEN-LAST:event_jButtonHabJuridicaActionPerformed
@@ -1513,21 +1504,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         frameCliente.setVisible(true);
     }//GEN-LAST:event_jButtonSelClienteActionPerformed
 
-    private void jButtonCadOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadOutorganteActionPerformed
-        // TODO add your handling code here:
-        cadastrarOutorgante();
-    }//GEN-LAST:event_jButtonCadOutorganteActionPerformed
-
-    private void jButtonCadOutorgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadOutorgadoActionPerformed
-        // TODO add your handling code here:
-        cadastrarOutorgado();
-    }//GEN-LAST:event_jButtonCadOutorgadoActionPerformed
-
-    private void jButtonCadPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadPJActionPerformed
-        // TODO add your handling code here:
-        cadastrarPJ();
-    }//GEN-LAST:event_jButtonCadPJActionPerformed
-
     private void jTextFieldOutorgadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldOutorgadoFocusGained
         // TODO add your handling code here:
         jTextFieldOutorgado.selectAll();
@@ -1571,9 +1547,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonCadOutorgado;
-    private javax.swing.JButton jButtonCadOutorgante;
-    private javax.swing.JButton jButtonCadPJ;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGerar;
     private javax.swing.JButton jButtonHabJuridica;

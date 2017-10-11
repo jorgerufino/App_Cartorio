@@ -71,15 +71,9 @@
                           <Component id="jButtonHabJuridica" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="jButtonSelCliente" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jButtonCadOutorgante" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButtonCadOutorgado" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButtonCadPJ" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="148" max="32767" attributes="0"/>
+                  <EmptySpace pref="314" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -284,9 +278,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonHabJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonSelCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonCadOutorgante" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonCadOutorgado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonCadPJ" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1184,31 +1175,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelClienteActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonCadOutorgante">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar Outorgante"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadOutorganteActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonCadOutorgado">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar Outorgado"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadOutorgadoActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonCadPJ">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar PJ"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadPJActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

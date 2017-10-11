@@ -11,9 +11,87 @@ import org.apache.poi.hwpf.usermodel.CharacterRun;
 import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.hwpf.usermodel.Section;
+import java.sql.*;
+import DAL.ModuloConexao;
 
 public class Metodos_Auxiliares {
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     
+    public Metodos_Auxiliares() {
+        conexao = ModuloConexao.conector();
+    }
+    
+    public boolean verificaCpfCnpj(String cpfCnpj)
+    {
+        String cpfcnpjSemFormatacao = cpfCnpj;
+        //removendo os pontos e o traço do cpf
+        cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("-", "");
+        //somente no caso do ponto é obrigatorio usar os colchetes
+        cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("[.]", "");
+        cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("/", "");
+        boolean existe = false;
+        
+        String sql = "select * from tbclientes where cpfcnpjcli=?";
+        
+        try {
+            //as linas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            //pega os valores dos campos de texto e substitue nas interrogaçoes 
+            pst.setString(1, cpfcnpjSemFormatacao);
+            //executa a query
+            rs = pst.executeQuery();
+            //se existir usuario e senha correspondentes
+            if (rs.next())
+            {
+                existe = true;
+            }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return existe;
+    }
+    public void cadastrarCliente(String nome, String rg, String cpfcnpj, String profissao, String estCivil, String end, String num,
+                                 String bairro, String cidade, String sexo, String nire)
+    {
+        String sql = "insert into tbclientes(nomecli,rgcli,cpfcnpjcli,profissao,estcivil, logradourocli, numerocli,bairrocli,cidadecli,sexo,nire) "
+        + "values (?,?,?,?,?,?,?,?,?,?,?);";
+        
+        try {
+            String cpfcnpjSemFormatacao = cpfcnpj;
+            //removendo os pontos e o traço do cpf
+            cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("-", "");
+            //somente no caso do ponto é obrigatorio usar os colchetes
+            cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("[.]", "");
+            cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("/", "");
+            
+            //as linas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome.toUpperCase());
+            pst.setString(2, rg.toUpperCase());
+            pst.setString(3, cpfcnpjSemFormatacao);
+            pst.setString(4, profissao.toLowerCase());
+            pst.setString(5, estCivil);
+            pst.setString(6, end);
+            pst.setString(7, num);
+            pst.setString(8, bairro);
+            pst.setString(9, cidade);
+            pst.setString(10, sexo);
+            pst.setString(11, nire);
+            //executa a query
+
+            int adicionado = pst.executeUpdate();
+            if (adicionado >0 ){
+                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     //este metodo recebe um cpf do tipo formatado. Ex. 111.222.333-44
     public boolean isCPF(String valor) {
         //pega o cpf e quebra em vetores de acordo com os marcadores "." e "-"
@@ -140,7 +218,7 @@ public class Metodos_Auxiliares {
         return dataPorExtenso;
     }   
     
-    public void debug(String s)
+    public void debug(Object s)
     {
         JOptionPane.showMessageDialog(null, s);
         System.exit(0);
