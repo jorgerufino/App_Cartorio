@@ -13,6 +13,7 @@ import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.hwpf.usermodel.Section;
 import java.sql.*;
 import DAL.ModuloConexao;
+import java.util.ArrayList;
 
 public class Metodos_Auxiliares {
     Connection conexao = null;
@@ -23,7 +24,36 @@ public class Metodos_Auxiliares {
         conexao = ModuloConexao.conector();
     }
     
-    public boolean verificaCpfCnpj(String cpfCnpj)
+    //Devolve um ArrayList com o ultimo Livro e Folha
+    public ArrayList getUltimoLivroFolha()
+    { 
+        ArrayList folhaLivro = new ArrayList();
+        String sql = "SELECT PC.id, C.nomecli, P.tipo,PC.tipocliente,PC.livro,PC.folha FROM tbprocuracaocliente AS PC\n" +
+                    "INNER JOIN tbclientes AS C ON (PC.idcli = C.idcli)\n" +
+                    "INNER JOIN tbprocuracao AS P ON (PC.idproc = P.id)\n" +
+                    "where PC.livro <> ''\n" +
+                    "order by PC.livro desc, PC.folha desc limit 1;";
+        
+        try {
+            //as linas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            //executa a query
+            rs = pst.executeQuery();
+            //se existir usuario e senha correspondentes
+            if (rs.next())
+            {
+                folhaLivro.add(rs.getString("livro"));
+                folhaLivro.add(rs.getString("folha"));
+            }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return folhaLivro;
+    }
+    
+    public ArrayList buscaCliente(String cpfCnpj)
     {
         String cpfcnpjSemFormatacao = cpfCnpj;
         //removendo os pontos e o traço do cpf
@@ -31,7 +61,7 @@ public class Metodos_Auxiliares {
         //somente no caso do ponto é obrigatorio usar os colchetes
         cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("[.]", "");
         cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("/", "");
-        boolean existe = false;
+        ArrayList cliente = new ArrayList();
         
         String sql = "select * from tbclientes where cpfcnpjcli=?";
         
@@ -45,15 +75,53 @@ public class Metodos_Auxiliares {
             //se existir usuario e senha correspondentes
             if (rs.next())
             {
-                existe = true;
+                cliente.add(rs.getString("idcli"));//indice 0
+                cliente.add(rs.getString("nomecli"));//1
+                cliente.add(rs.getString("cpfcnpjcli"));//2
+                cliente.add(rs.getString("profissao"));//3
+                cliente.add(rs.getString("estcivil"));//4
+                cliente.add(rs.getString("logradourocli"));//5
+                cliente.add(rs.getString("numerocli"));//6
+                cliente.add(rs.getString("bairrocli"));//7
+                cliente.add(rs.getString("cidadecli"));//8
+                cliente.add(rs.getString("sexo"));//9
+                cliente.add(rs.getString("nire"));//10
             }
             
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        return existe;
+        return cliente;
     }
+    
+    public void cadastrarOutorganteOutorgadoPj(int idcli, int idproc, String tipocliente, String livro, String folha)
+    {
+        //debug(idcli+"/"+idproc+"/"+tipocliente+"/"+livro+"/"+folha);
+        String sql = "insert into tbprocuracaocliente (idcli, idproc,tipocliente,livro,folha) \n" +
+                     "values (?,?,?,?,?);";
+        try {
+            //as linas abaixo preparam a consulta ao banco de dados
+            
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, idcli);
+            pst.setInt(2, idproc);            
+            pst.setString(3, tipocliente);
+            pst.setString(4, livro);
+            pst.setString(5, folha);
+            //executa a query
+            
+            //chama o metodo para preencher a tabela depois de adicionar outorgante
+            int adicionado = pst.executeUpdate();
+            if (adicionado >0 ){
+                JOptionPane.showMessageDialog(null, iniciaisMaisculas(tipocliente)+" cadastrado com sucesso!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     public void cadastrarCliente(String nome, String rg, String cpfcnpj, String profissao, String estCivil, String end, String num,
                                  String bairro, String cidade, String sexo, String nire)
     {

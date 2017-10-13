@@ -181,7 +181,7 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
                 GeradorProcuracoesFrame.jtfNumPJ.setText(rs.getString(8));
                 GeradorProcuracoesFrame.jtfBairroPJ.setText(rs.getString(9));
                 GeradorProcuracoesFrame.jtfCidadePJ.setText(rs.getString(10));
-                GeradorProcuracoesFrame.jtfNIRE.setText(rs.getString(13));
+                GeradorProcuracoesFrame.jtfNIRE.setText(rs.getString(12));
             }
             
         } catch (Exception e) {

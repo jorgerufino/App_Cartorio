@@ -205,6 +205,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value=" try{&#xa;    javax.swing.text.MaskFormatter apenasNumeros = new javax.swing.text.MaskFormatter(&quot;###&quot;);&#xa;&#xa;    jTextFieldProtocolo = new javax.swing.JFormattedTextField(apenasNumeros);&#xa;}catch(Exception e){&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">

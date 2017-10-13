@@ -18,6 +18,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -342,6 +343,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         jlCPJ = new javax.swing.JLabel();
         jtfCidadePJ = new javax.swing.JTextField();
         jButtonSelCliente = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
+        jComboBoxTipoProcuracao = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -541,7 +544,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonTipoProcuracao.setText("Tipo de Procuração*");
+        jButtonTipoProcuracao.setText("Modelo da Procuração*");
         jButtonTipoProcuracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTipoProcuracaoActionPerformed(evt);
@@ -675,25 +678,14 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel35.setText("Tipo de Procuração:");
+
+        jComboBoxTipoProcuracao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "generica", "previdenciaria", "juridica" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(301, 301, 301)
-                        .addComponent(jButtonGerar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonHabJuridica)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButtonSelCliente)))
-                .addContainerGap(314, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel8)
@@ -720,7 +712,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonTeste)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -741,59 +732,26 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel37)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxSexoOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldRogo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel30)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldRGRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel31)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jFormattedTextCPFRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel32)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldProfRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel33)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxEstCivilRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel26)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldRGOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel27)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jFormattedTextCPFOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel28)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldProfOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel29)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxEstCivilOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel)
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
+                                .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldRGOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFormattedTextCPFOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldProfOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxEstCivilOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -814,30 +772,6 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel34)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxSexoOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldEndRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldBairroRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel38)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxSexoRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonTipoProcuracao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -870,7 +804,90 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxEstCivilOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonHabJuridica)
+                                .addGap(32, 32, 32)
+                                .addComponent(jButtonSelCliente)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldRogo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldRGRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFormattedTextCPFRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldProfRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxEstCivilRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonTeste)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldEndRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel21)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldNumRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldBairroRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel38)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxSexoRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButtonTipoProcuracao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(64, 64, 64)))
+                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(304, 304, 304)
+                        .addComponent(jButtonGerar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxTipoProcuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -951,66 +968,67 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel16)
                                 .addComponent(jTextFieldNumOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel12)
-                                .addComponent(jTextFieldBairroOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(jButtonTeste)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel30)
-                                .addComponent(jTextFieldRGRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel31)
-                                .addComponent(jFormattedTextCPFRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel32)
-                                .addComponent(jTextFieldProfRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel33)
-                                .addComponent(jComboBoxEstCivilRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel19)
-                                .addComponent(jTextFieldRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel38)
-                                .addComponent(jComboBoxSexoRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel18)
-                                .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel20)
-                                .addComponent(jTextFieldEndRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel21)
-                                .addComponent(jTextFieldNumRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel17)
-                                .addComponent(jTextFieldBairroRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel)
-                            .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonTipoProcuracao)
-                            .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonGerar)
-                            .addComponent(jButtonCancelar)
-                            .addComponent(jButton1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jlNPJ)
-                                .addComponent(jtfNumPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlBPJ)
-                                .addComponent(jtfBairroPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jlCPJ)
-                                .addComponent(jtfCidadePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jTextFieldBairroOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlNPJ)
+                        .addComponent(jtfNumPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlBPJ)
+                        .addComponent(jtfBairroPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlCPJ)
+                        .addComponent(jtfCidadePJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonTeste)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel30)
+                        .addComponent(jTextFieldRGRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel31)
+                        .addComponent(jFormattedTextCPFRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel32)
+                        .addComponent(jTextFieldProfRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel33)
+                        .addComponent(jComboBoxEstCivilRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel19)
+                        .addComponent(jTextFieldRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel38)
+                        .addComponent(jComboBoxSexoRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel18)
+                        .addComponent(jTextFieldCidadeRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel20)
+                        .addComponent(jTextFieldEndRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)
+                        .addComponent(jTextFieldNumRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17)
+                        .addComponent(jTextFieldBairroRogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel)
+                    .addComponent(jFormattedTextSelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jFormattedTextData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBoxEscrevente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(jComboBoxTipoProcuracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonTipoProcuracao)
+                    .addComponent(jTextFieldCaminhoModeloProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGerar)
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -1023,16 +1041,221 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 13, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelClienteActionPerformed
+        // TODO add your handling code here:
+        ConsultarClienteFrame frameCliente = new ConsultarClienteFrame();
+        frameCliente.setVisible(true);
+    }//GEN-LAST:event_jButtonSelClienteActionPerformed
+
+    private void jtfSedePJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSedePJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfSedePJActionPerformed
+
+    private void jtfSedePJFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfSedePJFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfSedePJFocusGained
+
+    private void jtfNIREActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNIREActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNIREActionPerformed
+
+    private void jtfNIREFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNIREFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNIREFocusGained
+
+    private void jtfNomePJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomePJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNomePJActionPerformed
+
+    private void jtfNomePJFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNomePJFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNomePJFocusGained
+
+    private void jButtonHabJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHabJuridicaActionPerformed
+        //verifica se o valor da variavel auxiliar para habilitar ou desabilitar os campos
+        if (campos_PJ_Ativo == false)
+        {
+            //chama o foco para campo Emp. Outorngate
+            jtfNomePJ.requestFocusInWindow();
+
+            jLabelOutorgante.setText("Rep. Legal:*");
+            jtfNomePJ.setEnabled(true);
+            jftfCNPJ.setEnabled(true);
+            jtfNIRE.setEnabled(true);
+            jtfSedePJ.setEnabled(true);
+            jtfNumPJ.setEnabled(true);
+            jtfBairroPJ.setEnabled(true);
+            jtfCidadePJ.setEnabled(true);
+            jLabel1.setEnabled(true);
+            jLabel2.setEnabled(true);
+            jLabel4.setEnabled(true);
+            jLabel5.setEnabled(true);
+            jlNPJ.setEnabled(true);
+            jlBPJ.setEnabled(true);
+            jlCPJ.setEnabled(true);
+            campos_PJ_Ativo = true;
+        }
+        else
+        {
+            //chama o foco para o campo Outorgante
+            jTextFieldOutorgante.requestFocusInWindow();
+
+            jLabelOutorgante.setText("Outorgante:*");
+            jtfNomePJ.setEnabled(false);
+            jftfCNPJ.setEnabled(false);
+            jtfNIRE.setEnabled(false);
+            jtfSedePJ.setEnabled(false);
+            jtfNumPJ.setEnabled(false);
+            jtfBairroPJ.setEnabled(false);
+            jtfCidadePJ.setEnabled(false);
+            jLabel1.setEnabled(false);
+            jLabel2.setEnabled(false);
+            jLabel4.setEnabled(false);
+            jLabel5.setEnabled(false);
+            jlNPJ.setEnabled(false);
+            jlBPJ.setEnabled(false);
+            jlCPJ.setEnabled(false);
+            campos_PJ_Ativo = false;
+        }
+
+    }//GEN-LAST:event_jButtonHabJuridicaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxSexoRogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoRogoActionPerformed
+        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
+        int sexo = jComboBoxSexoRogo.getSelectedIndex();
+        int indiceComboBoxEstCivil = jComboBoxEstCivilRogo.getSelectedIndex();
+        //se sexo feminino
+        if(sexo == 1)
+        {
+            //cria um novo combobox com os valores no feminino
+            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
+            //mantem o item selecionado
+            jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+        if(sexo == 0)
+        {
+            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
+            jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+    }//GEN-LAST:event_jComboBoxSexoRogoActionPerformed
+
+    private void jComboBoxSexoOutorgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoOutorgadoActionPerformed
+        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
+        int sexo = jComboBoxSexoOutorgado.getSelectedIndex();
+        int indiceComboBoxEstCivil = jComboBoxEstCivilOutorgado.getSelectedIndex();
+        //se sexo feminino
+        if(sexo == 1)
+        {
+            //cria um novo combobox com os valores no feminino
+            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
+            //mantem o item selecionado
+            jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+        if(sexo == 0)
+        {
+            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
+            jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+    }//GEN-LAST:event_jComboBoxSexoOutorgadoActionPerformed
+
+    //vai verificar qual o sexo escolhido e mudar automaticamente o gênero do estado civil do outorgante
+    private void jComboBoxSexoOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoOutorganteActionPerformed
+        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
+        int sexoOut = jComboBoxSexoOutorgante.getSelectedIndex();
+        int indiceComboBoxEstCivil = jComboBoxEstCivilOutorgante.getSelectedIndex();
+        //se sexo feminino
+        if(sexoOut == 1)
+        {
+            //cria um novo combobox com os valores no feminino
+            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
+            //mantem o item selecionado
+            jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+        if(sexoOut == 0)
+        {
+            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
+            jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
+        }
+    }//GEN-LAST:event_jComboBoxSexoOutorganteActionPerformed
+
+    private void jButtonTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTesteActionPerformed
+        //verifica se o valor da variavel auxiliar para habilitar ou desabilitar os campos
+        if(campos_Rogo_Ativo == false)
+        {
+            jTextFieldRogo.requestFocusInWindow();
+            jTextFieldRogo.setEnabled(true);
+            jTextFieldRGRogo.setEnabled(true);
+            jTextFieldEndRogo.setEnabled(true);
+            jTextFieldNumRogo.setEnabled(true);
+            jTextFieldBairroRogo.setEnabled(true);
+            jTextFieldCidadeRogo.setEnabled(true);
+            jFormattedTextCPFRogo.setEnabled(true);
+            jTextFieldProfRogo.setEnabled(true);
+            jComboBoxEstCivilRogo.setEnabled(true);
+            jComboBoxSexoRogo.setEnabled(true);
+            campos_Rogo_Ativo = true;
+        }
+        else
+        {
+            jFormattedTextSelo.requestFocusInWindow();
+            jTextFieldRogo.setEnabled(false);
+            jTextFieldRGRogo.setEnabled(false);
+            jTextFieldEndRogo.setEnabled(false);
+            jTextFieldNumRogo.setEnabled(false);
+            jTextFieldBairroRogo.setEnabled(false);
+            jTextFieldCidadeRogo.setEnabled(false);
+            jFormattedTextCPFRogo.setEnabled(false);
+            jTextFieldProfRogo.setEnabled(false);
+            jComboBoxEstCivilRogo.setEnabled(false);
+            jComboBoxSexoRogo.setEnabled(false);
+            campos_Rogo_Ativo = false;
+        }
+
+    }//GEN-LAST:event_jButtonTesteActionPerformed
+
+    private void jTextFieldCaminhoModeloProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCaminhoModeloProcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCaminhoModeloProcActionPerformed
+
+    private void jButtonTipoProcuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoProcuracaoActionPerformed
+        //se a procuracao for de Pessoa Juridica, ele muda o caminho/pasta dos modelos de procuracao
+        if (campos_PJ_Ativo){
+            urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes\\MODELOS PJ";
+        }
+        //se a procuracao tiver a Rogo, ele muda o caminho/pasta dos modelos de procuracao
+        if (campos_Rogo_Ativo){
+            urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes\\MODELOS A ROGO";
+        }
+        JFileChooser abrir = new JFileChooser(urlModProcuracoes);
+        int retorno = abrir.showOpenDialog(null);
+        if (retorno==JFileChooser.APPROVE_OPTION)
+        jTextFieldCaminhoModeloProc.setText(abrir.getSelectedFile().getAbsolutePath());
+        obj.setModeloProc(abrir.getSelectedFile().getName());
+    }//GEN-LAST:event_jButtonTipoProcuracaoActionPerformed
+
     private void jComboBoxEscreventeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscreventeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEscreventeActionPerformed
+
+    private void jFormattedTextDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextDataActionPerformed
+
+    private void jComboBoxEstCivilOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstCivilOutorganteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEstCivilOutorganteActionPerformed
 
     private void jTextFieldRGOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRGOutorganteActionPerformed
         // TODO add your handling code here:
@@ -1042,6 +1265,11 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.jTextFieldRGOutorgante.selectAll();
     }//GEN-LAST:event_jTextFieldRGOutorganteFocusGained
+
+    private void jTextFieldOutorgadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldOutorgadoFocusGained
+        // TODO add your handling code here:
+        jTextFieldOutorgado.selectAll();
+    }//GEN-LAST:event_jTextFieldOutorgadoFocusGained
 
     private void jTextFieldOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldOutorganteActionPerformed
         // TODO add your handling code here:
@@ -1062,8 +1290,8 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarActionPerformed
-        //pega os valores dos campos do formFrame e chama o metodo para GerarPDF        
-        
+        //pega os valores dos campos do formFrame e chama o metodo para GerarPDF
+
         obj.setOutorgante(jTextFieldOutorgante.getText());
         obj.setEstCivilOutorgante(jComboBoxEstCivilOutorgante.getSelectedItem().toString());
         obj.setRgOutorgante(jTextFieldRGOutorgante.getText());
@@ -1085,12 +1313,12 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         String bairroOutorgado = jTextFieldBairroOutorgado.getText();
         String numOutorgado = jTextFieldNumOutorgado.getText();
         String cidOutorgado = jTextFieldCidadeOutorgado.getText();
-        
+
         obj.setSelo(jFormattedTextSelo.getText());
         obj.setData(jFormattedTextData.getText());
         obj.setFilePath(jTextFieldCaminhoModeloProc.getText());
         obj.setIndiceEscrevente(jComboBoxEscrevente.getSelectedIndex());
-        
+
         obj.setSexoOutorgante(jComboBoxSexoOutorgante.getSelectedIndex());
         obj.setSexoOutorgado(jComboBoxSexoOutorgado.getSelectedIndex());
         obj.setSexoRogo(jComboBoxSexoRogo.getSelectedIndex());
@@ -1160,16 +1388,16 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         if(campos_PJ_Ativo)
         {
             existePJ = true;
-            
+
             obj.setNome_PJ(jtfNomePJ.getText());
             obj.setCnpj(jftfCNPJ.getText());
             obj.setNire(jtfNIRE.getText());
-            
+
             String endPJ = jtfSedePJ.getText();
             String bairroPJ = jtfBairroPJ.getText();
             String numPJ = jtfNumPJ.getText();
             String cidPJ = jtfCidadePJ.getText();
-            
+
             if(jtfNumPJ.getText().trim().isEmpty() == false)
             {
                 numPJ = ", nº "+numPJ;
@@ -1182,38 +1410,38 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             {
                 cidPJ = ", Município de "+cidPJ;
             }
-            
+
             obj.setSede_PJ(endPJ+numPJ+bairroPJ+cidPJ);
         }
-        
+
         //Como o separador que estou querendo usar é o "." (ponto), é necessário coloca-lo entre Colchetes para não dar erro.
         //Lembrando que os Colchetes significam grupo de separadores, ou seja, podereia colocar outrso separados juntos com o ponto, como a virgula, travessao, etc.
         String valorSelo[] = jFormattedTextSelo.getText().split("[.]");
-        
+
         //Verifica se os principais campos estão preenchidos
         if ((jtfNomePJ.getText() == null || jtfNomePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o nome da Pessoa Jurídica!");            
+            JOptionPane.showMessageDialog(null, "Pheencha o nome da Pessoa Jurídica!");
             jtfNomePJ.requestFocusInWindow();
         }
         else if ((jftfCNPJ.getText().equals("  .   .   /    -  ")) && campos_PJ_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o CNPJ!");  
+            JOptionPane.showMessageDialog(null, "Pheencha o CNPJ!");
             jftfCNPJ.requestFocusInWindow();
         }
         else if ((jtfNIRE.getText() == null || jtfNIRE.getText().trim().isEmpty()) && campos_PJ_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o NIRE!");            
+            JOptionPane.showMessageDialog(null, "Pheencha o NIRE!");
             jtfNIRE.requestFocusInWindow();
         }
         else if ((jtfSedePJ.getText() == null || jtfSedePJ.getText().trim().isEmpty()) && campos_PJ_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha a sede da Pessoa Jurídica!");            
+            JOptionPane.showMessageDialog(null, "Pheencha a sede da Pessoa Jurídica!");
             jtfSedePJ.requestFocusInWindow();
         }
         else if ((jTextFieldOutorgante.getText() == null || jTextFieldOutorgante.getText().trim().isEmpty()))
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");     
+            JOptionPane.showMessageDialog(null, "Pheencha o campo Outorgante!");
             jTextFieldOutorgante.requestFocusInWindow();
         }
         else if (obj_auxiliar.isCPF(jFormattedTextCPFOutorgante.getText()) == false)
@@ -1222,12 +1450,12 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
         else if ((jTextFieldEndOutorgante.getText() == null || jTextFieldEndOutorgante.getText().trim().isEmpty()))
         {
-            JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgante!");  
+            JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgante!");
             jTextFieldEndOutorgante.requestFocusInWindow();
         }
         else if ((jTextFieldOutorgado.getText() == null || jTextFieldOutorgado.getText().trim().isEmpty()))
         {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Outorgado!"); 
+            JOptionPane.showMessageDialog(null, "Preencha o campo Outorgado!");
             jTextFieldOutorgado.requestFocusInWindow();
         }
         else if (obj_auxiliar.isCPF(jFormattedTextCPFOutorgado.getText()) == false)
@@ -1236,12 +1464,12 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
         else if ((jTextFieldEndOutorgado.getText() == null || jTextFieldEndOutorgado.getText().trim().isEmpty()))
         {
-            JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgado!");            
+            JOptionPane.showMessageDialog(null, "Preencha o endereço do Outorgado!");
             jTextFieldEndOutorgado.requestFocusInWindow();
         }
         else if ((jTextFieldRogo.getText() == null || jTextFieldRogo.getText().trim().isEmpty()) && campos_Rogo_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o nome do a Rogo!");            
+            JOptionPane.showMessageDialog(null, "Pheencha o nome do a Rogo!");
             jTextFieldRogo.requestFocusInWindow();
         }
         else if ((obj_auxiliar.isCPF(jFormattedTextCPFRogo.getText()) == false) && campos_Rogo_Ativo )
@@ -1250,18 +1478,18 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
         }
         else if ((jTextFieldEndRogo.getText() == null || jTextFieldEndRogo.getText().trim().isEmpty())&& campos_Rogo_Ativo)
         {
-            JOptionPane.showMessageDialog(null, "Pheencha o endereço do a Rogo!");            
+            JOptionPane.showMessageDialog(null, "Pheencha o endereço do a Rogo!");
             jTextFieldRogo.requestFocusInWindow();
         }
         else if ((jTextFieldCaminhoModeloProc.getText() == null || jTextFieldCaminhoModeloProc.getText().trim().isEmpty()))
         {
-            JOptionPane.showMessageDialog(null, "Escolha o modelo de procuração que será usado!");            
+            JOptionPane.showMessageDialog(null, "Escolha o modelo de procuração que será usado!");
             jTextFieldCaminhoModeloProc.requestFocusInWindow();
         }
         //como o campo selo tem uma mascara de 3 digitos, caso nao seja digitado nada, o metodo passa 3 espaços vazios, por isso esta condiçao
         else if (valorSelo[0].equals("   ") || valorSelo[1].equals("   ") || valorSelo[2].equals("   "))
         {
-            JOptionPane.showMessageDialog(null, "Preencha o campo Selo!");            
+            JOptionPane.showMessageDialog(null, "Preencha o campo Selo!");
             jFormattedTextSelo.requestFocusInWindow();
         }
         else
@@ -1270,7 +1498,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             obj.setExisteRogo(campos_Rogo_Ativo);
             
             //verifica se o cpf/cnpj já está no banco, se for false é porque cliente ainda não está cadastrado
-            if (obj_auxiliar.verificaCpfCnpj(jFormattedTextCPFOutorgante.getText()) == false)
+            if (obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgante.getText()).isEmpty())
             {
                 //cadastra os dados do Outorgante no banco
                 obj_auxiliar.cadastrarCliente(jTextFieldOutorgante.getText(), jTextFieldRGOutorgante.getText(), jFormattedTextCPFOutorgante.getText(), 
@@ -1278,7 +1506,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 jTextFieldNumOutorgante.getText(), jTextFieldBairroOutorgante.getText(), jTextFieldCidadeOutorgante.getText(), jComboBoxSexoOutorgante.getSelectedItem().toString(),"");
             }
             
-            if (obj_auxiliar.verificaCpfCnpj(jFormattedTextCPFOutorgado.getText()) == false)
+            if (obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgado.getText()).isEmpty())
             {
                 //cadastra os dados do outorgado
                 obj_auxiliar.cadastrarCliente(jTextFieldOutorgado.getText(), jTextFieldRGOutorgado.getText(), jFormattedTextCPFOutorgado.getText(), 
@@ -1288,226 +1516,50 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                         
             if(campos_PJ_Ativo){
                 //verifica se o cnpj já está cadastrado no banco
-                if (obj_auxiliar.verificaCpfCnpj(jftfCNPJ.getText()) == false){
+                if (obj_auxiliar.buscaCliente(jftfCNPJ.getText()).isEmpty()){
                     //cadastra a PJ no banco
                     obj_auxiliar.cadastrarCliente(jtfNomePJ.getText(), "", jftfCNPJ.getText(), "", "", jtfSedePJ.getText(), 
                     jtfNumPJ.getText(), jtfBairroPJ.getText(), jtfCidadePJ.getText(), "", jtfNIRE.getText());
                 }
             }
+            ArrayList outorgante = obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgante.getText());
+            ArrayList outorgado = obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgado.getText());
+            ArrayList pj = obj_auxiliar.buscaCliente(jftfCNPJ.getText());
+            ArrayList livroFolha = obj_auxiliar.getUltimoLivroFolha();
+            
+            int livroAtual = Integer.parseInt(livroFolha.get(0).toString());
+            int folhaAtual = Integer.parseInt(livroFolha.get(1).toString());
+            int proxFolha, proxLivro;
+            
+            if(folhaAtual == 300)
+            {
+                proxLivro = livroAtual+1;
+                proxFolha = 1;
+            }
+            else
+            {
+                proxLivro = livroAtual;
+                proxFolha = folhaAtual+1;
+            }
+            String livro = "";
+            String folha = "";
+            
+            int cadLivroFolha = JOptionPane.showConfirmDialog(null, "Deseja cadastar a procuraçao com livro e folha? (L:"+proxLivro+" / F:"+proxFolha+")", "Atenção!", JOptionPane.YES_NO_OPTION);
+            if (cadLivroFolha == JOptionPane.YES_OPTION){
+                livro = "" + proxLivro;
+                folha = "" + proxFolha;
+            }
+            
+            obj_auxiliar.cadastrarOutorganteOutorgadoPj(Integer.parseInt(outorgante.get(0).toString()), jComboBoxTipoProcuracao.getSelectedIndex()+1, "outorgante", livro, folha);
+            obj_auxiliar.cadastrarOutorganteOutorgadoPj(Integer.parseInt(outorgado.get(0).toString()), jComboBoxTipoProcuracao.getSelectedIndex()+1, "outorgado", livro, folha);
+            if(campos_PJ_Ativo){
+                obj_auxiliar.cadastrarOutorganteOutorgadoPj(Integer.parseInt(pj.get(0).toString()), jComboBoxTipoProcuracao.getSelectedIndex()+1, "outorgante", livro, folha);
+            }
             
             obj.setGeraProcuracoes();
             System.exit(0);
-        }
+        }    
     }//GEN-LAST:event_jButtonGerarActionPerformed
-
-    private void jButtonTipoProcuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoProcuracaoActionPerformed
-        //se a procuracao for de Pessoa Juridica, ele muda o caminho/pasta dos modelos de procuracao
-        if (campos_PJ_Ativo){
-            urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes\\MODELOS PJ";
-        }   
-        //se a procuracao tiver a Rogo, ele muda o caminho/pasta dos modelos de procuracao
-        if (campos_Rogo_Ativo){
-            urlModProcuracoes = "C:\\Arquivos Gerador PDF Java\\Modelos de Procuracoes\\MODELOS A ROGO";
-        }   
-        JFileChooser abrir = new JFileChooser(urlModProcuracoes);  
-        int retorno = abrir.showOpenDialog(null);  
-        if (retorno==JFileChooser.APPROVE_OPTION)  
-        jTextFieldCaminhoModeloProc.setText(abrir.getSelectedFile().getAbsolutePath()); 
-        obj.setModeloProc(abrir.getSelectedFile().getName());
-    }//GEN-LAST:event_jButtonTipoProcuracaoActionPerformed
-
-    private void jTextFieldCaminhoModeloProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCaminhoModeloProcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCaminhoModeloProcActionPerformed
-
-    private void jButtonTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTesteActionPerformed
-        //verifica se o valor da variavel auxiliar para habilitar ou desabilitar os campos
-        if(campos_Rogo_Ativo == false)
-        {
-            jTextFieldRogo.requestFocusInWindow();
-            jTextFieldRogo.setEnabled(true);
-            jTextFieldRGRogo.setEnabled(true);
-            jTextFieldEndRogo.setEnabled(true);
-            jTextFieldNumRogo.setEnabled(true);
-            jTextFieldBairroRogo.setEnabled(true);
-            jTextFieldCidadeRogo.setEnabled(true);
-            jFormattedTextCPFRogo.setEnabled(true);
-            jTextFieldProfRogo.setEnabled(true);
-            jComboBoxEstCivilRogo.setEnabled(true);
-            jComboBoxSexoRogo.setEnabled(true); 
-            campos_Rogo_Ativo = true;
-        }
-        else
-        {
-            jFormattedTextSelo.requestFocusInWindow();
-            jTextFieldRogo.setEnabled(false);
-            jTextFieldRGRogo.setEnabled(false);
-            jTextFieldEndRogo.setEnabled(false);
-            jTextFieldNumRogo.setEnabled(false);
-            jTextFieldBairroRogo.setEnabled(false);
-            jTextFieldCidadeRogo.setEnabled(false);
-            jFormattedTextCPFRogo.setEnabled(false);
-            jTextFieldProfRogo.setEnabled(false);
-            jComboBoxEstCivilRogo.setEnabled(false);
-            jComboBoxSexoRogo.setEnabled(false); 
-            campos_Rogo_Ativo = false; 
-        }
-        
-    }//GEN-LAST:event_jButtonTesteActionPerformed
-
-    private void jComboBoxEstCivilOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstCivilOutorganteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxEstCivilOutorganteActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButtonHabJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHabJuridicaActionPerformed
-        //verifica se o valor da variavel auxiliar para habilitar ou desabilitar os campos
-        if (campos_PJ_Ativo == false)
-        {
-            //chama o foco para campo Emp. Outorngate
-            jtfNomePJ.requestFocusInWindow();
-            
-            jLabelOutorgante.setText("Rep. Legal:*");
-            jtfNomePJ.setEnabled(true);
-            jftfCNPJ.setEnabled(true);
-            jtfNIRE.setEnabled(true);
-            jtfSedePJ.setEnabled(true);
-            jtfNumPJ.setEnabled(true);
-            jtfBairroPJ.setEnabled(true);
-            jtfCidadePJ.setEnabled(true);
-            jLabel1.setEnabled(true);
-            jLabel2.setEnabled(true);
-            jLabel4.setEnabled(true);
-            jLabel5.setEnabled(true);
-            jlNPJ.setEnabled(true);
-            jlBPJ.setEnabled(true);
-            jlCPJ.setEnabled(true);
-            campos_PJ_Ativo = true;
-        }
-        else
-        {
-            //chama o foco para o campo Outorgante
-           jTextFieldOutorgante.requestFocusInWindow();
-           
-           jLabelOutorgante.setText("Outorgante:*");
-           jtfNomePJ.setEnabled(false);
-           jftfCNPJ.setEnabled(false);
-           jtfNIRE.setEnabled(false);
-           jtfSedePJ.setEnabled(false);
-           jtfNumPJ.setEnabled(false);
-           jtfBairroPJ.setEnabled(false);
-           jtfCidadePJ.setEnabled(false);
-           jLabel1.setEnabled(false);
-           jLabel2.setEnabled(false);
-           jLabel4.setEnabled(false);
-           jLabel5.setEnabled(false);
-           jlNPJ.setEnabled(false);
-           jlBPJ.setEnabled(false);
-           jlCPJ.setEnabled(false);
-           campos_PJ_Ativo = false;
-        }
-       
-    }//GEN-LAST:event_jButtonHabJuridicaActionPerformed
-
-    private void jtfNomePJFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNomePJFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNomePJFocusGained
-
-    private void jtfNomePJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomePJActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNomePJActionPerformed
-
-    private void jtfNIREFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNIREFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNIREFocusGained
-
-    private void jtfNIREActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNIREActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNIREActionPerformed
-
-    private void jtfSedePJFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfSedePJFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfSedePJFocusGained
-
-    private void jtfSedePJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSedePJActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfSedePJActionPerformed
-
-    private void jFormattedTextDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextDataActionPerformed
-    //vai verificar qual o sexo escolhido e mudar automaticamente o gênero do estado civil do outorgante
-    private void jComboBoxSexoOutorganteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoOutorganteActionPerformed
-        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
-        int sexoOut = jComboBoxSexoOutorgante.getSelectedIndex();
-        int indiceComboBoxEstCivil = jComboBoxEstCivilOutorgante.getSelectedIndex();
-        //se sexo feminino
-        if(sexoOut == 1)
-        {
-            //cria um novo combobox com os valores no feminino
-            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
-            //mantem o item selecionado
-            jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
-        }
-        if(sexoOut == 0)
-        {
-            jComboBoxEstCivilOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
-            jComboBoxEstCivilOutorgante.setSelectedIndex(indiceComboBoxEstCivil);
-        }
-    }//GEN-LAST:event_jComboBoxSexoOutorganteActionPerformed
-
-    private void jComboBoxSexoOutorgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoOutorgadoActionPerformed
-        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
-        int sexo = jComboBoxSexoOutorgado.getSelectedIndex();
-        int indiceComboBoxEstCivil = jComboBoxEstCivilOutorgado.getSelectedIndex();
-        //se sexo feminino
-        if(sexo == 1)
-        {
-            //cria um novo combobox com os valores no feminino
-            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
-            //mantem o item selecionado
-            jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
-        }
-        if(sexo == 0)
-        {
-            jComboBoxEstCivilOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
-            jComboBoxEstCivilOutorgado.setSelectedIndex(indiceComboBoxEstCivil);
-        }
-    }//GEN-LAST:event_jComboBoxSexoOutorgadoActionPerformed
-
-    private void jComboBoxSexoRogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexoRogoActionPerformed
-        //pega o indice selecionado para saber qual o sexo (masc = 0/femin = 1)
-        int sexo = jComboBoxSexoRogo.getSelectedIndex();
-        int indiceComboBoxEstCivil = jComboBoxEstCivilRogo.getSelectedIndex();
-        //se sexo feminino
-        if(sexo == 1)
-        {
-            //cria um novo combobox com os valores no feminino
-            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteira", "casada", "divorciada", "viúva" }));
-            //mantem o item selecionado
-            jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
-        }
-        if(sexo == 0)
-        {
-            jComboBoxEstCivilRogo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "solteiro", "casado", "divorciado", "viúvo" }));
-            jComboBoxEstCivilRogo.setSelectedIndex(indiceComboBoxEstCivil);
-        }
-    }//GEN-LAST:event_jComboBoxSexoRogoActionPerformed
-
-    private void jButtonSelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelClienteActionPerformed
-        // TODO add your handling code here:
-        ConsultarClienteFrame frameCliente = new ConsultarClienteFrame();
-        frameCliente.setVisible(true);
-    }//GEN-LAST:event_jButtonSelClienteActionPerformed
-
-    private void jTextFieldOutorgadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldOutorgadoFocusGained
-        // TODO add your handling code here:
-        jTextFieldOutorgado.selectAll();
-    }//GEN-LAST:event_jTextFieldOutorgadoFocusGained
     
     /**
      * @param args the command line arguments
@@ -1560,6 +1612,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> jComboBoxSexoOutorgado;
     public static javax.swing.JComboBox<String> jComboBoxSexoOutorgante;
     private javax.swing.JComboBox<String> jComboBoxSexoRogo;
+    public static javax.swing.JComboBox<String> jComboBoxTipoProcuracao;
     public static javax.swing.JFormattedTextField jFormattedTextCPFOutorgado;
     public static javax.swing.JFormattedTextField jFormattedTextCPFOutorgante;
     private javax.swing.JFormattedTextField jFormattedTextCPFRogo;
@@ -1594,6 +1647,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;

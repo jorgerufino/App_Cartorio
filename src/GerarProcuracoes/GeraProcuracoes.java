@@ -364,19 +364,19 @@ public class GeraProcuracoes
                     doc = obj_auxiliar.replaceText(doc, "#portador3", "portadora"); 
                 }
             }
-            
-            if(existePJ)
-            {
-                doc = obj_auxiliar.replaceText(doc, "#NOME_PJ", nome_PJ);
-                doc = obj_auxiliar.replaceText(doc, "#CNPJ", cnpj);
-                doc = obj_auxiliar.replaceText(doc, "#NIRE", nire);
-                doc = obj_auxiliar.replaceText(doc, "#END_PJ", sede_PJ);
-            }
             doc = obj_auxiliar.replaceText(doc, "#SELO", selo);
             doc = obj_auxiliar.replaceText(doc, "#outorgante", obj_auxiliar.iniciaisMaisculas(outorgante.toLowerCase()));
             doc = obj_auxiliar.replaceText(doc, "#DATA", obj_auxiliar.dataPorExtenso(data));
             doc = obj_auxiliar.replaceText(doc, "#_data", data);
             
+            if(existePJ)
+            {
+                outorgante = nome_PJ;
+                doc = obj_auxiliar.replaceText(doc, "#NOME_PJ", nome_PJ);
+                doc = obj_auxiliar.replaceText(doc, "#CNPJ", cnpj);
+                doc = obj_auxiliar.replaceText(doc, "#NIRE", nire);
+                doc = obj_auxiliar.replaceText(doc, "#END_PJ", sede_PJ);
+            }
             //pega as 3 primeiras letras do modelo do arquivo para saber em qual pasta salvar a procuraçao
             String codProc = modeloProc.substring(0,3);
             //pasta default

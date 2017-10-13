@@ -1,5 +1,6 @@
 
 package Frames;
+import Classes.Metodos_Auxiliares;
 import DAL.ModuloConexao;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +22,26 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         preencherOutorgante();
         preencherOutorgado();
         preencherTabela();
+        
+        Metodos_Auxiliares obj = new Metodos_Auxiliares();
+        ArrayList livroFolha = obj.getUltimoLivroFolha();
+            
+        int livroAtual = Integer.parseInt(livroFolha.get(0).toString());
+        int folhaAtual = Integer.parseInt(livroFolha.get(1).toString());
+        int proxFolha, proxLivro;
+
+        if(folhaAtual == 300)
+        {
+            proxLivro = livroAtual+1;
+            proxFolha = 1;
+        }
+        else
+        {
+            proxLivro = livroAtual;
+            proxFolha = folhaAtual+1;
+        }
+        jTextFieldLivro.setText(""+proxLivro);
+        jTextFieldFolha.setText(""+proxFolha);
     }
     
     public void preencherTipoProcuracao()
@@ -98,7 +119,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
                      "INNER JOIN tbclientes AS C ON (PC.idcli = C.idcli )" +
                      "INNER JOIN tbprocuracao AS P ON (PC.idproc = P.id) " +
                      "WHERE C.nomecli like '%"+jTextFieldBusca.getText()+"%' or C.cpfcnpjcli like '%"+jTextFieldBusca.getText()+"%' "+
-                     "order by PC.folha desc;";
+                     "order by PC.livro desc,PC.folha desc;";
         
         try {
             //as linas abaixo preparam a consulta ao banco de dados
@@ -114,7 +135,6 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
             
             while (rs.next())
             {
-                jTextFieldLivro.setText(rs.getString("livro"));
                 dtm.addRow(new Object[]{rs.getString("nomecli"),rs.getString("tipocliente"),rs.getString("tipo"),rs.getString("livro"),rs.getString("folha")}); 
             }
             
@@ -289,7 +309,19 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Livro:");
 
+        jTextFieldLivro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldLivroFocusGained(evt);
+            }
+        });
+
         jLabel7.setText("Folha:");
+
+        jTextFieldFolha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldFolhaFocusGained(evt);
+            }
+        });
 
         jLabel8.setText("Campo de busca:");
 
@@ -378,7 +410,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
                                             .addComponent(jLabel7)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jTextFieldFolha, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,10 +445,10 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(3, 3, 3)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(846, 427));
+        setSize(new java.awt.Dimension(873, 555));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -476,6 +508,16 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         preencherTabela();
     }//GEN-LAST:event_jButtonBuscaProcActionPerformed
+
+    private void jTextFieldLivroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLivroFocusGained
+        // TODO add your handling code here:
+        jTextFieldLivro.selectAll();
+    }//GEN-LAST:event_jTextFieldLivroFocusGained
+
+    private void jTextFieldFolhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldFolhaFocusGained
+        // TODO add your handling code here:
+        jTextFieldFolha.selectAll();
+    }//GEN-LAST:event_jTextFieldFolhaFocusGained
 
     /**
      * @param args the command line arguments
