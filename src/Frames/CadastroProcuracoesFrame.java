@@ -13,6 +13,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
     ResultSet rs = null;
     ArrayList idOutorgante = new ArrayList();
     ArrayList idOutorgado = new ArrayList();
+    ArrayList idProcuracao = new ArrayList();
   
     public CadastroProcuracoesFrame() {
         initComponents();
@@ -22,6 +23,9 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         preencherOutorgante();
         preencherOutorgado();
         preencherTabela();
+        
+        jtProcuracoes.getColumnModel().getColumn(3).setPreferredWidth(10);
+        jtProcuracoes.getColumnModel().getColumn(4).setPreferredWidth(10);
         
         Metodos_Auxiliares obj = new Metodos_Auxiliares();
         ArrayList livroFolha = obj.getUltimoLivroFolha();
@@ -44,9 +48,49 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         jTextFieldFolha.setText(""+proxFolha);
     }
     
+    public void updateProcuracao(String id, String livro, String folha)
+    {
+        String sql = "update tbprocuracaocliente set livro=? , folha=? where id=?;";
+        
+        try {            
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, livro);
+            pst.setString(2, folha);
+            pst.setString(3, id);
+            
+            //chama o metodo para preencher a tabela depois de adicionar outorgante
+            int update = pst.executeUpdate();
+            if (update >0 ){
+                preencherTabela();
+                JOptionPane.showMessageDialog(null, "Livro/Folha alterado(s) com sucesso!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void deletarProcuracao(String id)
+    {
+        String sql = "delete from tbprocuracaocliente where id=?;";
+        
+        try {            
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, id);
+            
+            //chama o metodo para preencher a tabela depois de adicionar outorgante
+            int excluido = pst.executeUpdate();
+            if (excluido >0 ){
+                preencherTabela();
+                JOptionPane.showMessageDialog(null, "Procuração excluída com sucesso!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     public void preencherTipoProcuracao()
     {
-        String sql = "select * from tbprocuracao order by tipo desc;";
+        String sql = "select * from tbprocuracao;";
         
         try {            
             pst = conexao.prepareStatement(sql);
@@ -115,12 +159,13 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
     
     public void preencherTabela()
     {
-        String sql = "SELECT C.nomecli, P.tipo,PC.tipocliente,PC.livro,PC.folha FROM tbprocuracaocliente AS PC " +
-                     "INNER JOIN tbclientes AS C ON (PC.idcli = C.idcli )" +
-                     "INNER JOIN tbprocuracao AS P ON (PC.idproc = P.id) " +
-                     "WHERE C.nomecli like '%"+jTextFieldBusca.getText()+"%' or C.cpfcnpjcli like '%"+jTextFieldBusca.getText()+"%' "+
-                     "order by PC.livro desc,PC.folha desc;";
-        
+        String sql = "SELECT PC.id, C.idcli as idOutorgante, C2.idcli as idOutorgado, P.tipo, C.nomecli as outorgante, C2.nomecli as outorgado, PC.livro, PC.folha FROM tbprocuracaocliente AS PC\n" +
+                    "INNER JOIN tbclientes AS C ON (PC.idoutorgante = C.idcli)\n" +
+                    "INNER JOIN tbclientes AS C2 ON (PC.idoutorgado = C2.idcli)\n" +
+                    "INNER JOIN tbprocuracao AS P ON (PC.idproc = P.id)\n" +
+                    "WHERE C.nomecli like '%"+jTextFieldBusca.getText()+"%' or C.cpfcnpjcli like '%"+jTextFieldBusca.getText()+"%' or\n" +
+                    "C2.nomecli like '%"+jTextFieldBusca.getText()+"%' or C2.cpfcnpjcli like '%"+jTextFieldBusca.getText()+"%'\n" +
+                    "order by PC.livro desc,PC.folha desc;";
         try {
             //as linas abaixo preparam a consulta ao banco de dados
             pst = conexao.prepareStatement(sql);
@@ -133,9 +178,11 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
             DefaultTableModel dtm = (DefaultTableModel)jtProcuracoes.getModel();
             dtm.setNumRows(0);
             
+            idProcuracao.clear();
             while (rs.next())
             {
-                dtm.addRow(new Object[]{rs.getString("nomecli"),rs.getString("tipocliente"),rs.getString("tipo"),rs.getString("livro"),rs.getString("folha")}); 
+                dtm.addRow(new Object[]{rs.getString("outorgante"),rs.getString("outorgado"),rs.getString("tipo"),rs.getString("livro"),rs.getString("folha")}); 
+                idProcuracao.add(rs.getString("id"));
             }
             
         } catch (Exception e) {
@@ -143,22 +190,26 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         }
     }
     
-    public void cadastrarOutorgante()
+    public void cadastrarProcuracao()
     {
-        String sql = "insert into tbprocuracaocliente (idcli, idproc,tipocliente,livro,folha) \n" +
-                     "values (?,?,'outorgante',?,?);";
-        try {
+        String sql = "insert into tbprocuracaocliente (idoutorgante, idoutorgado, idproc,livro,folha) \n" +
+                     "values (?,?,?,?,?);";
+        if(idOutorgante.get(jComboBoxOutorgante.getSelectedIndex()-1) == idOutorgado.get(jComboBoxOutorgante.getSelectedIndex()-1)){
+            JOptionPane.showMessageDialog(null, "Outorgante e Outorgado são a mesma pessoa!");
+        }
+        else{
+           try {
             //as linas abaixo preparam a consulta ao banco de dados
             //String idcliOutorgante[] = jComboBoxOutorgante.getSelectedItem().toString().split("-");            
             String tipoProcuracao="";
             
             if(jComboBoxTipoProc.getSelectedItem().toString().equals("generica"))
             {
-                tipoProcuracao = "1";
+                tipoProcuracao = "2";
             }
             if(jComboBoxTipoProc.getSelectedItem().toString().equals("previdenciaria"))
             {
-                tipoProcuracao = "2";
+                tipoProcuracao = "1";
             }
             if(jComboBoxTipoProc.getSelectedItem().toString().equals("juridica"))
             {
@@ -167,65 +218,25 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
             
             pst = conexao.prepareStatement(sql);
             pst.setString(1, idOutorgante.get(jComboBoxOutorgante.getSelectedIndex()-1).toString());
-            pst.setString(2, tipoProcuracao);            
-            pst.setString(3, jTextFieldLivro.getText());
-            pst.setString(4, jTextFieldFolha.getText());
+            pst.setString(2, idOutorgado.get(jComboBoxOutorgante.getSelectedIndex()-1).toString());            
+            pst.setString(3, tipoProcuracao);            
+            pst.setString(4, jTextFieldLivro.getText());
+            pst.setString(5, jTextFieldFolha.getText());
             //executa a query
             
             //chama o metodo para preencher a tabela depois de adicionar outorgante
             int adicionado = pst.executeUpdate();
             if (adicionado >0 ){
-                preencherTabela();
+                JOptionPane.showMessageDialog(null, "Procuração cadastrada com sucesso!");
             }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            } 
         }
+        
     }
     
-    public void cadastrarOutorgado()
-    {
-        String sql = "insert into tbprocuracaocliente (idcli, idproc,tipocliente,livro,folha) \n" +
-                     "values (?,?,'outorgado',?,?);";
-        try {
-            //as linas abaixo preparam a consulta ao banco de dados
-            //String idcliOutorgado[] = jComboBoxOutorgado.getSelectedItem().toString().split("-");            
-            String tipoProcuracao="";
-            
-            if(jComboBoxTipoProc.getSelectedItem().toString().equals("generica"))
-            {
-                tipoProcuracao = "1";
-            }
-            if(jComboBoxTipoProc.getSelectedItem().toString().equals("previdenciaria"))
-            {
-                tipoProcuracao = "2";
-            }
-            if(jComboBoxTipoProc.getSelectedItem().toString().equals("juridica"))
-            {
-                tipoProcuracao = "3";
-            }
-            
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, idOutorgado.get(jComboBoxOutorgado.getSelectedIndex()-1).toString());
-            pst.setString(2, tipoProcuracao);            
-            pst.setString(3, jTextFieldLivro.getText());
-            pst.setString(4, jTextFieldFolha.getText());
-            //executa a query
-
-            int adicionado = pst.executeUpdate();
-            if (adicionado >0 ){
-                preencherTabela();
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -251,6 +262,8 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         jButtonLimpaFiltro = new javax.swing.JButton();
         jButtonFiltraOutorgado = new javax.swing.JButton();
         jButtonBuscaProc = new javax.swing.JButton();
+        jButtonDelProc = new javax.swing.JButton();
+        jButtonAltProc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Procurações");
@@ -270,6 +283,12 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de Procuração:");
 
+        jComboBoxTipoProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoProcActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Outorgado:");
 
         jComboBoxOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Outorgado..." }));
@@ -284,18 +303,30 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Tipo Cliente", "Tipo Procuração", "Livro", "Folha"
+                "Outorgante", "Outorgado", "Tipo de Proc.", "Livro", "Folha"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(jtProcuracoes);
+        if (jtProcuracoes.getColumnModel().getColumnCount() > 0) {
+            jtProcuracoes.getColumnModel().getColumn(2).setResizable(false);
+            jtProcuracoes.getColumnModel().getColumn(3).setResizable(false);
+            jtProcuracoes.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Lista de Procurações");
@@ -353,6 +384,20 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
             }
         });
 
+        jButtonDelProc.setText("Deletar Procuração");
+        jButtonDelProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDelProcActionPerformed(evt);
+            }
+        });
+
+        jButtonAltProc.setText("Alterar Livro/Folha");
+        jButtonAltProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAltProcActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -361,56 +406,61 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(122, 122, 122)
-                            .addComponent(jLabel1)
-                            .addGap(6, 6, 6))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButtonFiltrarOutorgante)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonFiltraOutorgado)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButtonLimpaFiltro))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxTipoProc, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jButtonCadProc)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButtonBuscaProc))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBoxOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGap(12, 12, 12)
-                                            .addComponent(jComboBoxOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextFieldLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextFieldFolha, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(182, Short.MAX_VALUE))
+                        .addGap(122, 122, 122)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxTipoProc, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonFiltrarOutorgante)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonFiltraOutorgado))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jComboBoxOutorgante, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(12, 12, 12)
+                                                .addComponent(jComboBoxOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldFolha, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(134, 134, 134)
+                                        .addComponent(jButtonBuscaProc)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonCadProc)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonAltProc)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonDelProc)
+                                    .addComponent(jButtonLimpaFiltro)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(jLabel5)))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,19 +486,23 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
                     .addComponent(jComboBoxOutorgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jTextFieldFolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBoxTipoProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTipoProc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBuscaProc)
+                    .addComponent(jButtonDelProc)
                     .addComponent(jButtonCadProc)
-                    .addComponent(jButtonBuscaProc))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButtonAltProc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGap(3, 3, 3)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(873, 555));
+        setSize(new java.awt.Dimension(873, 580));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -458,6 +512,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
 
     private void jButtonCadProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadProcActionPerformed
         // TODO add your handling code here:
+        
         if(jComboBoxOutorgante.getSelectedIndex() ==0)
         {
             JOptionPane.showMessageDialog(null, "Selecione o Outorgante!");
@@ -468,10 +523,9 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         }             
         else{
             try {
-             cadastrarOutorgante();
-             cadastrarOutorgado();
+             cadastrarProcuracao();
+             jTextFieldBusca.setText(null);
              preencherTabela();
-             JOptionPane.showMessageDialog(null, "Procuração cadastrada com sucesso!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -519,6 +573,25 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
         jTextFieldFolha.selectAll();
     }//GEN-LAST:event_jTextFieldFolhaFocusGained
 
+    private void jButtonDelProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelProcActionPerformed
+        // TODO add your handling code here:
+        deletarProcuracao(idProcuracao.get(jtProcuracoes.getSelectedRow()).toString());
+    }//GEN-LAST:event_jButtonDelProcActionPerformed
+
+    private void jButtonAltProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltProcActionPerformed
+        // TODO add your handling code here:
+        try {
+            updateProcuracao(idProcuracao.get(jtProcuracoes.getSelectedRow()).toString(), jtProcuracoes.getValueAt(jtProcuracoes.getSelectedRow(), 3).toString(), jtProcuracoes.getValueAt(jtProcuracoes.getSelectedRow(), 4).toString());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+    }//GEN-LAST:event_jButtonAltProcActionPerformed
+
+    private void jComboBoxTipoProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoProcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoProcActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -555,8 +628,10 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAltProc;
     private javax.swing.JButton jButtonBuscaProc;
     private javax.swing.JButton jButtonCadProc;
+    private javax.swing.JButton jButtonDelProc;
     private javax.swing.JButton jButtonFiltraOutorgado;
     private javax.swing.JButton jButtonFiltrarOutorgante;
     private javax.swing.JButton jButtonLimpaFiltro;

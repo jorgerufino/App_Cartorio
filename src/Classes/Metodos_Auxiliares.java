@@ -28,8 +28,9 @@ public class Metodos_Auxiliares {
     public ArrayList getUltimoLivroFolha()
     { 
         ArrayList folhaLivro = new ArrayList();
-        String sql = "SELECT PC.id, C.nomecli, P.tipo,PC.tipocliente,PC.livro,PC.folha FROM tbprocuracaocliente AS PC\n" +
-                    "INNER JOIN tbclientes AS C ON (PC.idcli = C.idcli)\n" +
+        String sql = "SELECT PC.id, C.idcli as idOutorgante, C2.idcli as idOutorgado, P.tipo, C.nomecli as outorgante, C2.nomecli as outorgado, PC.livro, PC.folha FROM tbprocuracaocliente AS PC\n" +
+                    "INNER JOIN tbclientes AS C ON (PC.idoutorgante = C.idcli)\n" +
+                    "INNER JOIN tbclientes AS C2 ON (PC.idoutorgado = C2.idcli)\n" +
                     "INNER JOIN tbprocuracao AS P ON (PC.idproc = P.id)\n" +
                     "where PC.livro <> ''\n" +
                     "order by PC.livro desc, PC.folha desc limit 1;";
@@ -95,18 +96,18 @@ public class Metodos_Auxiliares {
         return cliente;
     }
     
-    public void cadastrarOutorganteOutorgadoPj(int idcli, int idproc, String tipocliente, String livro, String folha)
+    public void cadastrarOutorganteOutorgadoPj(int idOutorgante, int idOutorgado, int idproc, String livro, String folha)
     {
         //debug(idcli+"/"+idproc+"/"+tipocliente+"/"+livro+"/"+folha);
-        String sql = "insert into tbprocuracaocliente (idcli, idproc,tipocliente,livro,folha) \n" +
+        String sql = "insert into tbprocuracaocliente (idoutorgante, idoutorgado, idproc,livro,folha) \n" +
                      "values (?,?,?,?,?);";
         try {
             //as linas abaixo preparam a consulta ao banco de dados
             
             pst = conexao.prepareStatement(sql);
-            pst.setInt(1, idcli);
-            pst.setInt(2, idproc);            
-            pst.setString(3, tipocliente);
+            pst.setInt(1, idOutorgante);
+            pst.setInt(2, idOutorgado);            
+            pst.setInt(3, idproc);            
             pst.setString(4, livro);
             pst.setString(5, folha);
             //executa a query
@@ -114,7 +115,7 @@ public class Metodos_Auxiliares {
             //chama o metodo para preencher a tabela depois de adicionar outorgante
             int adicionado = pst.executeUpdate();
             if (adicionado >0 ){
-                JOptionPane.showMessageDialog(null, iniciaisMaisculas(tipocliente)+" cadastrado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Procuração cadastrada com sucesso!");
             }
             
         } catch (Exception e) {
@@ -286,7 +287,7 @@ public class Metodos_Auxiliares {
         return dataPorExtenso;
     }   
     
-    public void debug(Object s)
+    public static void debug(Object s)
     {
         JOptionPane.showMessageDialog(null, s);
         System.exit(0);
