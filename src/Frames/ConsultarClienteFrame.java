@@ -52,21 +52,6 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
             sql = sql + condicao;
             existe_condicao = true;
         }
-        
-       if(jComboBoxTipoPessoa.getSelectedIndex() == 1 || jComboBoxTipoPessoa.getSelectedIndex() == 2 || jComboBoxTipoPessoa.getSelectedIndex() == 3)
-       {
-           tipoPessoa = ""+ jComboBoxTipoPessoa.getSelectedIndex();
-           if (existe_condicao){
-                condicao = " and tipopessoacli like '%"+tipoPessoa+"%'";
-            }
-            else
-            {
-                condicao = " where tipopessoacli like '%"+tipoPessoa+"%'";
-            }
-            sql = sql + condicao;
-            existe_condicao = true;
-           
-       }
        if(jTextFieldRG.getText().trim().isEmpty() == false)
         {
             rg = jTextFieldRG.getText();
@@ -208,8 +193,6 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jButtonLimparCampos = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBoxTipoPessoa = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldRG = new javax.swing.JTextField();
         jTextFieldCpjCnpj = new javax.swing.JTextField();
@@ -290,10 +273,6 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Tipo de Cliente:");
-
-        jComboBoxTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Outorgante", "Outorgado", "Pessoa Jurídica" }));
-
         jLabel5.setText("RG:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -318,26 +297,23 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonLimparCampos))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldCpjCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 199, Short.MAX_VALUE))
+                        .addGap(325, 325, 325)
+                        .addComponent(jLabel1)))
+                .addGap(0, 311, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(243, 243, 243)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldCpjCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,8 +323,6 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBoxTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
@@ -414,7 +388,6 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
         jTextFieldNome.setText("");
         jTextFieldCpjCnpj.setText("");
         jTextFieldRG.setText("");
-        jComboBoxTipoPessoa.setSelectedIndex(0);
     }//GEN-LAST:event_jButtonLimparCamposActionPerformed
 
     /**
@@ -458,11 +431,9 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSubOutorgado;
     private javax.swing.JButton jButtonSubOutorgante;
     private javax.swing.JButton jButtonSubPJ;
-    private javax.swing.JComboBox<String> jComboBoxTipoPessoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldCpjCnpj;
