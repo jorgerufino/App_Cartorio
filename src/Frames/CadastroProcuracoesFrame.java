@@ -546,6 +546,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JFrame {
 
     private void jButtonLimpaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpaFiltroActionPerformed
         // TODO add your handling code here:
+        jTextFieldBusca.setText("");
         jComboBoxOutorgante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Outorgante..." }));
         preencherOutorgante();
         jComboBoxOutorgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Outorgado..." }));

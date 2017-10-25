@@ -54,7 +54,7 @@ public class Metodos_Auxiliares {
         return folhaLivro;
     }
     
-    public ArrayList buscaCliente(String cpfCnpj)
+    public ArrayList buscaClienteCpfCnpj(String cpfCnpj)
     {
         String cpfcnpjSemFormatacao = cpfCnpj;
         //removendo os pontos e o traço do cpf
@@ -78,15 +78,16 @@ public class Metodos_Auxiliares {
             {
                 cliente.add(rs.getString("idcli"));//indice 0
                 cliente.add(rs.getString("nomecli"));//1
-                cliente.add(rs.getString("cpfcnpjcli"));//2
-                cliente.add(rs.getString("profissao"));//3
-                cliente.add(rs.getString("estcivil"));//4
-                cliente.add(rs.getString("logradourocli"));//5
-                cliente.add(rs.getString("numerocli"));//6
-                cliente.add(rs.getString("bairrocli"));//7
-                cliente.add(rs.getString("cidadecli"));//8
-                cliente.add(rs.getString("sexo"));//9
-                cliente.add(rs.getString("nire"));//10
+                cliente.add(rs.getString("rgcli"));//2
+                cliente.add(rs.getString("cpfcnpjcli"));//3
+                cliente.add(rs.getString("profissao"));//4
+                cliente.add(rs.getString("estcivil"));//5
+                cliente.add(rs.getString("logradourocli"));//6
+                cliente.add(rs.getString("numerocli"));//7
+                cliente.add(rs.getString("bairrocli"));//8
+                cliente.add(rs.getString("cidadecli"));//9
+                cliente.add(rs.getString("sexo"));//10
+                cliente.add(rs.getString("nire"));//11
             }
             
             
@@ -94,6 +95,64 @@ public class Metodos_Auxiliares {
             JOptionPane.showMessageDialog(null, e);
         }
         return cliente;
+    }
+    
+    public void alterarCliente(String id, String nome,String rg,  String cpfcnpj, String profissao, String estCivil, String end,
+                               String num, String bairro, String cidade, String sexo, String nire)
+    {
+        //debug(idcli+"/"+idproc+"/"+tipocliente+"/"+livro+"/"+folha);
+        String sql = "update tbclientes set nomecli =?,rgcli=?, cpfcnpjcli=?, profissao=?,estcivil=?,logradourocli=?,\n" +
+                     "numerocli=?, bairrocli=?,cidadecli=?, sexo=?, nire=? where idcli = ?;";
+        
+        try {
+            //as linas abaixo preparam a consulta ao banco de dados
+            
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome);
+            pst.setString(2, rg);            
+            pst.setString(3, cpfcnpj);            
+            pst.setString(4, profissao);
+            pst.setString(5, estCivil);
+            pst.setString(6, end);
+            pst.setString(7, num);
+            pst.setString(8, bairro);
+            pst.setString(9, cidade);
+            pst.setString(10, sexo);
+            pst.setString(11, nire);
+            pst.setString(12, id);
+            
+            //executa a query
+            
+            //chama o metodo para preencher a tabela depois de adicionar outorgante
+            int alterado = pst.executeUpdate();
+            if (alterado >0 ){
+                JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void deletarCliente(String id)
+    {
+        String sql = "delete from tbclientes where idcli=?;";
+        
+        try {
+            //as linas abaixo preparam a consulta ao banco de dados
+            
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, id);
+            
+            //chama o metodo para preencher a tabela depois de adicionar outorgante
+            int alterado = pst.executeUpdate();
+            if (alterado >0 ){
+                JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void cadastrarOutorganteOutorgadoPj(int idOutorgante, int idOutorgado, int idproc, String livro, String folha)

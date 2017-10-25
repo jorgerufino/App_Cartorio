@@ -1511,7 +1511,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
             obj.setExisteRogo(campos_Rogo_Ativo);
             
             //verifica se o cpf/cnpj já está no banco, se for false é porque cliente ainda não está cadastrado
-            if (obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgante.getText()).isEmpty())
+            if (obj_auxiliar.buscaClienteCpfCnpj(jFormattedTextCPFOutorgante.getText()).isEmpty())
             {
                 //cadastra os dados do Outorgante no banco
                 obj_auxiliar.cadastrarCliente(jTextFieldOutorgante.getText(), jTextFieldRGOutorgante.getText(), jFormattedTextCPFOutorgante.getText(), 
@@ -1519,7 +1519,7 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                 jTextFieldNumOutorgante.getText(), jTextFieldBairroOutorgante.getText(), jTextFieldCidadeOutorgante.getText(), jComboBoxSexoOutorgante.getSelectedItem().toString(),"");
             }
             
-            if (obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgado.getText()).isEmpty())
+            if (obj_auxiliar.buscaClienteCpfCnpj(jFormattedTextCPFOutorgado.getText()).isEmpty())
             {
                 String end= jTextFieldEndOutorgado.getText(), num = jTextFieldNumOutorgado.getText(), 
                 bairro = jTextFieldBairroOutorgado.getText(), cidade = jTextFieldCidadeOutorgado.getText();
@@ -1539,15 +1539,15 @@ public class GeradorProcuracoesFrame extends javax.swing.JFrame {
                         
             if(campos_PJ_Ativo){
                 //verifica se o cnpj já está cadastrado no banco
-                if (obj_auxiliar.buscaCliente(jftfCNPJ.getText()).isEmpty()){
+                if (obj_auxiliar.buscaClienteCpfCnpj(jftfCNPJ.getText()).isEmpty()){
                     //cadastra a PJ no banco
                     obj_auxiliar.cadastrarCliente(jtfNomePJ.getText(), "", jftfCNPJ.getText(), "", "", jtfSedePJ.getText(), 
                     jtfNumPJ.getText(), jtfBairroPJ.getText(), jtfCidadePJ.getText(), "", jtfNIRE.getText());
                 }
             }
-            ArrayList outorgante = obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgante.getText());
-            ArrayList outorgado = obj_auxiliar.buscaCliente(jFormattedTextCPFOutorgado.getText());
-            ArrayList pj = obj_auxiliar.buscaCliente(jftfCNPJ.getText());
+            ArrayList outorgante = obj_auxiliar.buscaClienteCpfCnpj(jFormattedTextCPFOutorgante.getText());
+            ArrayList outorgado = obj_auxiliar.buscaClienteCpfCnpj(jFormattedTextCPFOutorgado.getText());
+            ArrayList pj = obj_auxiliar.buscaClienteCpfCnpj(jftfCNPJ.getText());
             ArrayList livroFolha = obj_auxiliar.getUltimoLivroFolha();
             
             int livroAtual = Integer.parseInt(livroFolha.get(0).toString());

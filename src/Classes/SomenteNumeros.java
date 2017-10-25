@@ -14,11 +14,17 @@ super(maxlen);
 @Override
 public void insertString(int offset, String str, AttributeSet attr)
 throws BadLocationException {
+    
 if (str == null)
 return;
 
 try {
-Integer.parseInt(str);
+    str = str.replaceAll("-", "");
+    //somente no caso do ponto é obrigatorio usar os colchetes
+    str = str.replaceAll("[.]", "");
+    str = str.replaceAll("/", "");
+    Long.parseLong(str);
+    //Integer.parseInt(str);
 } catch (Exception e) {
 return;
 }
