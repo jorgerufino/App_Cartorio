@@ -24,7 +24,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
             //se existir usuario e senha correspondentes
             if (rs.next())
             {
-                TelaInicialFrame principal = new TelaInicialFrame();
+                TelaInicial principal = new TelaInicial();
                 principal.setVisible(true);
                 //fecha a Tela de Login
                 this.dispose();

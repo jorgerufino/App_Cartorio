@@ -197,9 +197,6 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
         jTextFieldRG = new javax.swing.JTextField();
         jTextFieldCpjCnpj = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Lista de Clientes Cadastrados");
 
