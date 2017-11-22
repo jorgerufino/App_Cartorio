@@ -263,6 +263,12 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Nome:");
 
+        jTextFieldNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldNomeFocusGained(evt);
+            }
+        });
+
         jButtonLimparCampos.setText("Limpar campos");
         jButtonLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +277,18 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
         });
 
         jLabel5.setText("RG:");
+
+        jTextFieldRG.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldRGFocusGained(evt);
+            }
+        });
+
+        jTextFieldCpjCnpj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldCpjCnpjFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -386,6 +404,21 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
         jTextFieldCpjCnpj.setText("");
         jTextFieldRG.setText("");
     }//GEN-LAST:event_jButtonLimparCamposActionPerformed
+
+    private void jTextFieldNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNomeFocusGained
+        // TODO add your handling code here:
+        jTextFieldNome.selectAll();
+    }//GEN-LAST:event_jTextFieldNomeFocusGained
+
+    private void jTextFieldRGFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldRGFocusGained
+        // TODO add your handling code here:
+        jTextFieldRG.selectAll();
+    }//GEN-LAST:event_jTextFieldRGFocusGained
+
+    private void jTextFieldCpjCnpjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCpjCnpjFocusGained
+        // TODO add your handling code here:
+        jTextFieldCpjCnpj.selectAll();
+    }//GEN-LAST:event_jTextFieldCpjCnpjFocusGained
 
     /**
      * @param args the command line arguments

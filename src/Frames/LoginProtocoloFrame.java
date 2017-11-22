@@ -1,5 +1,6 @@
 package Frames;
 
+import Classes.Metodos_Auxiliares;
 import DAL.ModuloConexao;
 import javax.swing.JOptionPane;
 import java.sql.*;
@@ -11,7 +12,7 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
     
     public void logar ()
     {
-        String sql = "select * from tbusuarios where login=? and senha=?";
+        String sql = "select * from tbusuarios where binary login=? and binary senha=? and ativo ='S'";
         
         try {
             //as linas abaixo preparam a consulta ao banco de dados
@@ -25,6 +26,14 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
             if (rs.next())
             {
                 TelaInicial principal = new TelaInicial();
+                
+                //verifica se o perfil é de admin para ativar o cadastro de Usuários
+                if(rs.getString("perfil").equals("administrador")){
+                    //ativa o o Menu para Cadastrar Usuários
+                    TelaInicial.menProcCadUsuarios.setEnabled(true);
+                    principal.setTitle("Cartório do Único Ofício de Benevides - Gerenciador de Procurações - (Administrador)");
+                }
+                
                 principal.setVisible(true);
                 //fecha a Tela de Login
                 this.dispose();
@@ -102,6 +111,11 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldLoginFocusGained(evt);
+            }
+        });
+        jTextFieldLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLoginActionPerformed(evt);
             }
         });
 
@@ -210,6 +224,10 @@ public class LoginProtocoloFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.jPasswordFieldSenha.selectAll();
     }//GEN-LAST:event_jPasswordFieldSenhaFocusGained
+
+    private void jTextFieldLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldLoginActionPerformed
 
     /**
      * @param args the command line arguments

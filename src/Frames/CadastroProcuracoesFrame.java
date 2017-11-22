@@ -33,6 +33,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
         int livroAtual = Integer.parseInt(livroFolha.get(0).toString());
         int folhaAtual = Integer.parseInt(livroFolha.get(1).toString());
         int proxFolha, proxLivro;
+        String proximaFolha="";
 
         if(folhaAtual == 300)
         {
@@ -44,8 +45,16 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
             proxLivro = livroAtual;
             proxFolha = folhaAtual+1;
         }
+        
+        if(proxFolha <= 9)
+            proximaFolha = "00"+proxFolha;
+        if(proxFolha > 9 && proxFolha <= 99)
+            proximaFolha = "0"+proxFolha;
+        if(proxFolha >= 100)
+            proximaFolha = ""+proxFolha;
+        
         jTextFieldLivro.setText(""+proxLivro);
-        jTextFieldFolha.setText(""+proxFolha);
+        jTextFieldFolha.setText(proximaFolha);
     }
     
     public void updateProcuracao(String id, String livro, String folha)
@@ -169,7 +178,7 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
         try {
             //as linas abaixo preparam a consulta ao banco de dados
             pst = conexao.prepareStatement(sql);
-           
+            
             //executa a query
             rs = pst.executeQuery();
             
@@ -352,6 +361,11 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
         jTextFieldFolha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextFieldFolhaFocusGained(evt);
+            }
+        });
+        jTextFieldFolha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFolhaActionPerformed(evt);
             }
         });
 
@@ -592,6 +606,10 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
     private void jComboBoxTipoProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoProcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoProcActionPerformed
+
+    private void jTextFieldFolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFolhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFolhaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -209,6 +209,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNome">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldNomeFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonLimparCampos">
       <Properties>
@@ -224,8 +227,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldRG">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldRGFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCpjCnpj">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldCpjCnpjFocusGained"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

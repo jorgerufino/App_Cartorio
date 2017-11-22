@@ -24,6 +24,94 @@ public class Metodos_Auxiliares {
         conexao = ModuloConexao.conector();
     }
     
+    public ArrayList buscaUsuario(String login)
+    {
+        ArrayList usuario = new ArrayList();
+        
+        String sql = "select * from tbusuarios where login=?";
+        
+        try {
+            //as linhas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            //pega os valores dos campos de texto e substitue nas interrogaçoes 
+            pst.setString(1, login);
+            //executa a query
+            rs = pst.executeQuery();
+            //se existir usuario e senha correspondentes
+            if (rs.next())
+            {
+                usuario.add(rs.getString("iduser"));//indice 0
+                usuario.add(rs.getString("usuario"));//1
+                usuario.add(rs.getString("fone"));//2
+                usuario.add(rs.getString("login"));//3
+                usuario.add(rs.getString("perfil"));//4
+                usuario.add(rs.getString("ativo"));//5
+            }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return usuario;
+    }
+    
+    public void alterarUsuario(String nome, String telefone, String login, String senha, String perfil, String id)
+    {
+        String sql = "update tbusuarios set usuario =?,fone=?,login=?,senha=?,perfil=? where iduser=?";
+        
+        try {
+            //remove os excessos de espaços em branco antes de salvar no banco
+            nome = nome.replaceAll("\\s+", " ");
+            login = login.replaceAll("\\s+", " ");
+            
+            //as linas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome.toUpperCase());
+            pst.setString(2, telefone);
+            pst.setString(3, login);
+            pst.setString(4, senha);
+            pst.setString(5, perfil);
+            pst.setString(6, id);
+            
+            //executa a query
+            int adicionado = pst.executeUpdate();
+            if (adicionado >0 ){
+                JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void cadastrarUsuario(String nome, String telefone, String login, String senha, String perfil, String ativo)
+    {
+        String sql = "insert into tbusuarios(usuario,fone,login,senha,ativo,perfil)"
+                                            + "values (?,?,?,?,?,?);";
+        
+        try {
+            nome = nome.replaceAll("\\s+", " ");
+            login = login.replaceAll("\\s+", " ");
+            //as linas abaixo preparam a consulta ao banco de dados
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome.toUpperCase().trim());
+            pst.setString(2, telefone);
+            pst.setString(3, login);
+            pst.setString(4, senha);
+            pst.setString(5, ativo);
+            pst.setString(6, perfil);
+            
+            //executa a query
+            int adicionado = pst.executeUpdate();
+            if (adicionado >0 ){
+                JOptionPane.showMessageDialog(null, "Uusário cadastrado com sucesso!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    } 
+    
     //Devolve um ArrayList com o ultimo Livro e Folha
     public ArrayList getUltimoLivroFolha()
     { 
@@ -197,6 +285,11 @@ public class Metodos_Auxiliares {
             cpfcnpjSemFormatacao = cpfcnpjSemFormatacao.replaceAll("/", "");
             
             //as linas abaixo preparam a consulta ao banco de dados
+            
+            nome = nome.replaceAll("\\s+", " ");
+            end = end.replaceAll("\\s+", " ");
+            cidade = cidade.replaceAll("\\s+", " ");
+            
             pst = conexao.prepareStatement(sql);
             pst.setString(1, nome.toUpperCase());
             pst.setString(2, rg.toUpperCase());
@@ -614,7 +707,7 @@ public class Metodos_Auxiliares {
     }
     
     //Transforma as iniciais em maisculas
-    public String iniciaisMaisculas(String frase)
+    public static String iniciaisMaisculas(String frase)
     {
        String posicao="";
        String mais="";
@@ -626,12 +719,14 @@ public class Metodos_Auxiliares {
         
         for(int i=1;i<frase.length();i++){  //coloca o for de acordo com o tamanho
             mais=mais+frase.charAt(i); //acrescenta as letras
-       if( frase.charAt(i) == ' '){  //se houver um espaço a próxima vai ser transformada em maisucula.
-           String maiuscula=""+frase.charAt(i+1);//pega a próxima apos o espaço  
-           maiuscula2=maiuscula.toUpperCase();       //transforma em maiuscula.
-           mais=mais+maiuscula2;//acrescenta a maiuscula a palavra completa, que se chama mais
-           i=i+1; //soma um, pois uma letra minuscula foi substituida e ja foi acrescentada                                 
-       } } tudo=pos+mais;        
+            if( frase.charAt(i) == ' '){  //se houver um espaço a próxima vai ser transformada em maisucula.
+                String maiuscula=""+frase.charAt(i+1);//pega a próxima apos o espaço  
+                maiuscula2=maiuscula.toUpperCase();       //transforma em maiuscula.
+                mais=mais+maiuscula2;//acrescenta a maiuscula a palavra completa, que se chama mais
+                i=i+1; //soma um, pois uma letra minuscula foi substituida e ja foi acrescentada                                 
+            } 
+        }
+        tudo=pos+mais;        
       return tudo; 
     }
     

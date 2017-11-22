@@ -38,6 +38,7 @@ public class TelaInicial extends javax.swing.JFrame {
         menProcCadProcuracao = new javax.swing.JMenuItem();
         menProcCadClientes = new javax.swing.JMenuItem();
         menProcCadUsuarios = new javax.swing.JMenuItem();
+        menProt = new javax.swing.JMenu();
         menCivil = new javax.swing.JMenu();
         menImoveis = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
@@ -60,7 +61,7 @@ public class TelaInicial extends javax.swing.JFrame {
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 679, Short.MAX_VALUE)
+            .addGap(0, 681, Short.MAX_VALUE)
         );
 
         menuProc.setText("Procuração");
@@ -103,9 +104,18 @@ public class TelaInicial extends javax.swing.JFrame {
 
         menProcCadUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menProcCadUsuarios.setText("Cadastrar/Consultar Usuários");
+        menProcCadUsuarios.setEnabled(false);
+        menProcCadUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menProcCadUsuariosActionPerformed(evt);
+            }
+        });
         menuProc.add(menProcCadUsuarios);
 
         jMenuBar1.add(menuProc);
+
+        menProt.setText("Protesto");
+        jMenuBar1.add(menProt);
 
         menCivil.setText("Registro Civil");
         jMenuBar1.add(menCivil);
@@ -120,7 +130,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        menSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
+        menSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         menSair.setText("Fechar Programa");
         menSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +239,23 @@ public class TelaInicial extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_menProcCadClientesActionPerformed
 
+    private void menProcCadUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProcCadUsuariosActionPerformed
+        //Cria a tela de Protocolo
+        CadastroUsuariosFrame obj = new CadastroUsuariosFrame();
+        //Adiciona a janela no Desktop
+        Desktop.add(obj);
+        
+//        //abre a janela maximizada (precisa estar dentro de um try...cath)
+//        try {
+//	    obj.setMaximum(true);
+//	} catch (Exception e) {
+//		// TODO: handle exception
+//	}
+//        
+        //dexia ela visivel
+        obj.setVisible(true);
+    }//GEN-LAST:event_menProcCadUsuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,8 +303,9 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu menImoveis;
     private javax.swing.JMenuItem menProcCadClientes;
     private javax.swing.JMenuItem menProcCadProcuracao;
-    private javax.swing.JMenuItem menProcCadUsuarios;
+    public static javax.swing.JMenuItem menProcCadUsuarios;
     private javax.swing.JMenuItem menProcGerarProcuracao;
+    private javax.swing.JMenu menProt;
     private javax.swing.JMenuItem menSair;
     private javax.swing.JMenu menuProc;
     // End of variables declaration//GEN-END:variables

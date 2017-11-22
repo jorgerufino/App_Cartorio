@@ -1,6 +1,7 @@
 package Frames;
 
 import Classes.GeneratorPDF;
+import Classes.SomenteNumeros;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,6 +44,9 @@ public class ProtocoloFrame extends javax.swing.JInternalFrame {
         
         //ao teclar Enter chama o botão de Confirmar
         getRootPane().setDefaultButton(jButtonCadastrar);
+        
+        jTextFieldAutenticacoes.setDocument(new SomenteNumeros(3));
+        jTextFieldAutenticacoes.setText("1");        
     }
 
     /**

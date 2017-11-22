@@ -14,11 +14,17 @@ public class GeraProcuracoes
 {
     String outorgante, endOutorgante, outorgado, endOutorgado, aRogo, endRogo, selo,filePath, filePath2, modeloProc,rgOutorgante, rgOutorgado,rgRogo,
     cpfOutorgante, cpfOutorgado, cpfRogo, profOutorgante, profOutorgado, profRogo,estCivilOutorgante,estCivilOutorgado,estCivilRogo,data,escrevente, cargo;
-    String nome_PJ, cnpj, nire, sede_PJ;
+    String nome_PJ, cnpj, nire, sede_PJ, caminhoSalvar;
     int indiceEscrevente, sexoOutorgante, sexoOutorgado, sexoRogo;
     boolean existeRogo, existePJ;
     Metodos_Auxiliares obj_auxiliar = new Metodos_Auxiliares();
-    
+
+    public String getCaminhoSalvar() {
+        return caminhoSalvar;
+    }
+    public void setCaminhoSalvar(String caminhoSalvar) {
+        this.caminhoSalvar = caminhoSalvar;
+    }
     public void setNome_PJ(String nome_PJ) {
         this.nome_PJ = nome_PJ.toUpperCase();
     }
@@ -110,7 +116,7 @@ public class GeraProcuracoes
     }
 
     public void setProfOutorgado(String profOutorgado) {
-        this.profOutorgado = profOutorgado;
+        this.profOutorgado = profOutorgado.toLowerCase();
     }
 
     public String getProfRogo() {
@@ -118,7 +124,7 @@ public class GeraProcuracoes
     }
 
     public void setProfRogo(String profRogo) {
-        this.profRogo = profRogo;
+        this.profRogo = profRogo.toLowerCase();
     }
     
     public String getEstCivilOutorgante() {
@@ -150,7 +156,7 @@ public class GeraProcuracoes
     }
 
     public void setOutorgante(String outorgante) {
-        this.outorgante = outorgante.toUpperCase();
+        this.outorgante = outorgante.toUpperCase().trim();
     }
 
     public String getEndOutorgante() {
@@ -158,7 +164,7 @@ public class GeraProcuracoes
     }
 
     public void setEndOutorgante(String endOutorgante) {
-        this.endOutorgante = endOutorgante;
+        this.endOutorgante = endOutorgante.trim();
     }
 
     public String getOutorgado() {
@@ -166,7 +172,7 @@ public class GeraProcuracoes
     }
 
     public void setOutorgado(String outorgado) {
-        this.outorgado = outorgado.toUpperCase();
+        this.outorgado = outorgado.toUpperCase().trim();
     }
 
     public String getEndOutorgado() {
@@ -174,7 +180,7 @@ public class GeraProcuracoes
     }
 
     public void setEndOutorgado(String endOutorgado) {
-        this.endOutorgado = endOutorgado;
+        this.endOutorgado = endOutorgado.trim();
     }
 
     public String getaRogo() {
@@ -182,7 +188,7 @@ public class GeraProcuracoes
     }
 
     public void setaRogo(String aRogo) {
-        this.aRogo = aRogo;
+        this.aRogo = aRogo.trim();
     }
 
     public String getEndRogo() {
@@ -254,15 +260,14 @@ public class GeraProcuracoes
     }
 
     public void setProfOutorgante(String profOutorgante) {
-        this.profOutorgante = profOutorgante;
+        this.profOutorgante = profOutorgante.toLowerCase();
     }
 
     public GeraProcuracoes(){}
     
     //metodo que gera as procuraçoes baseado nos modelos utilizados no cartorio
     public void setGeraProcuracoes()
-    {    
-        //obj_auxiliar.debug(modeloProc);
+    {   
         //verifica quem é o Escrevente/Tabelião
         switch (indiceEscrevente) 
         {
@@ -310,12 +315,20 @@ public class GeraProcuracoes
                 doc = obj_auxiliar.replaceText(doc, "#a_o1", "o");  
                 doc = obj_auxiliar.replaceText(doc, "#portador1", "portador");  
                 doc = obj_auxiliar.replaceText(doc, "#ao", "ao");  
+                
+                if (endOutorgado.equals(endOutorgante)){
+                    endOutorgado = "no mesmo endereço do outorgante";
+                }
             }
             else
             {
                 doc = obj_auxiliar.replaceText(doc, "#a_o1", "a");  
                 doc = obj_auxiliar.replaceText(doc, "#portador1", "portadora");  
                 doc = obj_auxiliar.replaceText(doc, "#ao", "a");
+                
+                if (endOutorgado.equals(endOutorgante)){
+                    endOutorgado = "no mesmo endereço da outorgante";
+                }
             }
              
             //substitue os campos do Outorgado
@@ -377,25 +390,9 @@ public class GeraProcuracoes
                 doc = obj_auxiliar.replaceText(doc, "#NIRE", nire);
                 doc = obj_auxiliar.replaceText(doc, "#END_PJ", sede_PJ);
             }
-            //pega as 3 primeiras letras do modelo do arquivo para saber em qual pasta salvar a procuraçao
-            String codProc = modeloProc.substring(0,3);
-            //pasta default
-            String pastaProc = "PROCURAÇOES GERADAS NO DIA";
-            //verifica qual o código (as 3 primeiras letras) e muda a pasta default
-            if(codProc.equals("PRV"))
-            {
-                pastaProc = "PROCURACAO PARA FINS PREVIDENCIARIOS";
-            }
-            if(codProc.equals("GEN"))
-            {
-                pastaProc = "PROCURACAO GENERICA";
-            }
-            if(codProc.equals("JUR"))
-            {
-                pastaProc = "PROCURACAO JURIDICA COM CONTEUDO FINANCEIRO";
-            }
             
-            filePath2 = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\"+ pastaProc +"\\" + outorgante + " para " + outorgado + "."+modeloProc;
+            //filePath2 = caminhoSalvar+"\\"+ outorgante+" para " + outorgado+".doc";
+            filePath2 = caminhoSalvar;
             obj_auxiliar.saveWord(filePath2, doc);
             //abre o novo arquivo gerado anteriormente
             Desktop.getDesktop().open(new File(filePath2));
