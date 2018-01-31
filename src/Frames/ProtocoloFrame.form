@@ -207,6 +207,9 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProtocoloActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value=" try{&#xa;    javax.swing.text.MaskFormatter apenasNumeros = new javax.swing.text.MaskFormatter(&quot;###&quot;);&#xa;&#xa;    jTextFieldProtocolo = new javax.swing.JFormattedTextField(apenasNumeros);&#xa;}catch(Exception e){&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

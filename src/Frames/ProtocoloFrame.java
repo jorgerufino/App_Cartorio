@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 
 public class ProtocoloFrame extends javax.swing.JInternalFrame {
     //Lista todos os documentos da pasta protocolo e pega os 3 primeiros Strings(no caso são o numero do protocolo
-    String pastaProtocolo ="D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROTOCOLO";
+    String pastaProtocolo ="D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2018\\PROTOCOLO";
     File file = new File(pastaProtocolo);
-    File[] arquivos = file.listFiles();
+    File[] arquivos = file.listFiles();    
     boolean protocoloExistente;
     
     public ProtocoloFrame() {
@@ -32,13 +32,26 @@ public class ProtocoloFrame extends javax.swing.JInternalFrame {
         String data_atual=""+formato.format(data);
         jFormattedTextDataEntrega.setText(data_atual);
         
-        //Pega o nome do ultimo arquivo da pasta
-        String teste = ""+arquivos[arquivos.length-1].getName();
-        //transforma as 3 primeiras letras do nome do arquivo (numeros) em inteiro e soma mais 1 (proximo protocolo a ser usado)
-        int indiceProtocolo = Integer.parseInt(teste.substring(0, 3)) + 1;
-        //transforma em String para poder adicionar no TextField (jTextField so aceita String)
-        jTextFieldProtocolo.setText(String.valueOf(indiceProtocolo));
-
+        if (arquivos.length == 0){
+            jTextFieldProtocolo.setText("001");
+        }
+        else{
+            //Pega o nome do ultimo arquivo da pasta
+            String teste = ""+arquivos[arquivos.length-1].getName();
+            //transforma as 3 primeiras letras do nome do arquivo (numeros) em inteiro e soma mais 1 (proximo protocolo a ser usado)
+            int indiceProtocolo = Integer.parseInt(teste.substring(0, 3)) + 1;
+            
+            //transforma em String para poder adicionar no TextField (jTextField so aceita String)
+            String indiceProtocoloTexto = String.valueOf(indiceProtocolo);
+            
+            //Acrescenta os zeros a esquerda
+            if(indiceProtocoloTexto.length() == 1)
+                indiceProtocoloTexto = "00"+indiceProtocoloTexto;
+            if(indiceProtocoloTexto.length() == 2)
+                indiceProtocoloTexto = "0"+indiceProtocoloTexto;
+            
+            jTextFieldProtocolo.setText(String.valueOf(indiceProtocoloTexto));
+        }
         //Chama o foco para o campo Requerente
         jTextFieldRequerente.requestFocusInWindow();
         
@@ -97,6 +110,11 @@ public class ProtocoloFrame extends javax.swing.JInternalFrame {
         jLabel1.setText("Nº Protocolo:");
 
         jTextFieldProtocolo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldProtocolo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProtocoloActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Requerente:");
@@ -421,6 +439,10 @@ public class ProtocoloFrame extends javax.swing.JInternalFrame {
     private void jComboBoxEscreventeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscreventeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEscreventeActionPerformed
+
+    private void jTextFieldProtocoloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProtocoloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldProtocoloActionPerformed
 
     /**
      * @param args the command line arguments

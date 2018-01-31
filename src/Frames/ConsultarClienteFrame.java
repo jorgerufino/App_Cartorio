@@ -8,6 +8,7 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    int contador = 0;
     
     public ConsultarClienteFrame() {
         initComponents();
@@ -28,8 +29,9 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
     
     public void consultar()
     {
+        contador = 0;
         String sql = "select * from tbclientes";
-        String condicao = "", nome = "", tipoPessoa="", rg="";
+        String condicao = "", nome = "", rg="";
         boolean existe_condicao = false;
         
         if(jTextFieldCpjCnpj.getText().trim().isEmpty() == false)
@@ -79,9 +81,15 @@ public class ConsultarClienteFrame extends javax.swing.JFrame {
             
             while (rs.next())
             {
+                contador++;
                 String endereço = rs.getString(7)+","+rs.getString(8)+","+rs.getString(9)+","+rs.getString(10); 
                 dtm.addRow(new Object[]{rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),endereço}); 
             }
+            if(contador == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

@@ -194,6 +194,10 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
                 idProcuracao.add(rs.getString("id"));
             }
             
+            if(idProcuracao.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Procuração não encontrada!");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -370,6 +374,12 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setText("Campo de busca:");
+
+        jTextFieldBusca.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldBuscaFocusGained(evt);
+            }
+        });
 
         jButtonFiltrarOutorgante.setText("Filtrar Outorgante");
         jButtonFiltrarOutorgante.addActionListener(new java.awt.event.ActionListener() {
@@ -610,6 +620,11 @@ public class CadastroProcuracoesFrame extends javax.swing.JInternalFrame {
     private void jTextFieldFolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFolhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFolhaActionPerformed
+
+    private void jTextFieldBuscaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldBuscaFocusGained
+        // TODO add your handling code here:
+        jTextFieldBusca.selectAll();
+    }//GEN-LAST:event_jTextFieldBuscaFocusGained
 
     /**
      * @param args the command line arguments

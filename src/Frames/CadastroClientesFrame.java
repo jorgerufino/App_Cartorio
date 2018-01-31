@@ -103,6 +103,7 @@ public class CadastroClientesFrame extends javax.swing.JInternalFrame {
 
     public void consultarCliente()
     {
+        int contador = 0;
         String sql = "select * from tbclientes";
         String condicao = "";
         boolean existe_condicao = false;
@@ -211,8 +212,13 @@ public class CadastroClientesFrame extends javax.swing.JInternalFrame {
             
             while (rs.next())
             {
+                contador++;
                 String endereço = rs.getString("logradourocli")+","+rs.getString("numerocli")+","+rs.getString("bairrocli")+","+rs.getString("cidadecli"); 
                 dtm.addRow(new Object[]{rs.getString("nomecli"),rs.getString("rgcli"),rs.getString("cpfcnpjcli"),rs.getString("nire"),rs.getString("profissao"),rs.getString("estcivil"),endereço});  
+            }
+            if(contador == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

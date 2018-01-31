@@ -81,22 +81,22 @@ public class GeneratorPDF
                 case 0:
                     servico = "PROCURAÇÃO PREVIDENCIÁRIA";
                     servicoTabela = "Procuração Previdenciária";
-                    valorProcuracao = 45.65;
-                    valorAutenticacoes = qteAutenticacao * 5.85;
+                    valorProcuracao = 46.45;
+                    valorAutenticacoes = qteAutenticacao * 6.00;
                     valorServico = valorAutenticacoes +  valorProcuracao + valorDiligencia;
                     break;
                 case 1:
                     servico = "PROCURAÇÃO GENÉRICA";
                     servicoTabela = "Procuração Genérica";
-                    valorProcuracao = 109.95;
-                    valorAutenticacoes = qteAutenticacao * 5.85;
+                    valorProcuracao = 111.95;
+                    valorAutenticacoes = qteAutenticacao * 6.00;
                     valorServico = valorAutenticacoes +  valorProcuracao + valorDiligencia;
                     break;
                 case 2:
                     servico = "PROCURAÇÃO JURÍDICA COM CONTEÚDO FINANCEIRO";
                     servicoTabela = "Procuração Jur. Financeira";
-                    valorProcuracao = 199.85;
-                    valorAutenticacoes = qteAutenticacao * 5.85;
+                    valorProcuracao = 203.65;
+                    valorAutenticacoes = qteAutenticacao * 6.00;
                     valorServico = valorAutenticacoes +  valorProcuracao + valorDiligencia;
                     
                     break;
@@ -108,7 +108,7 @@ public class GeneratorPDF
             EscreverPorExtensoValor obj = new EscreverPorExtensoValor(); 
             String valorServicoExtenso = obj.write(new BigDecimal(valorServico));
             
-            String endereco_PDF = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2017\\PROTOCOLO\\" + num_protocolo + "." + ano_atual + "." + nome_requerente + ".pdf";
+            String endereco_PDF = "D:\\Michele Andrade\\Desktop\\PROCURAÇÃO PÚBLICA\\PROCURACAO PUBLICA 2018\\PROTOCOLO\\" + num_protocolo + "." + ano_atual + "." + nome_requerente + ".pdf";
             //String endereco_PDF = "C:\\Arquivos Gerador PDF Java\\" + num_protocolo + "." + ano_atual + "." + nome_requerente + ".pdf";
          
             PdfWriter.getInstance(document, new FileOutputStream(endereco_PDF));
@@ -211,7 +211,7 @@ public class GeneratorPDF
             PdfPCell cValorTotalProc = new PdfPCell(new Paragraph(""+arredondar.format(valorProcuracao), sem_negrito10));
             
             PdfPCell cServico1 = new PdfPCell(new Paragraph("Autenticações", sem_negrito10));
-            PdfPCell cValorProc1 = new PdfPCell(new Paragraph("R$ 5,85", sem_negrito10));
+            PdfPCell cValorProc1 = new PdfPCell(new Paragraph("R$ 6,00", sem_negrito10));
             PdfPCell cQuantidade1 = new PdfPCell(new Paragraph(""+qteAutenticacao, sem_negrito10));
             PdfPCell cValorTotalProc1 = new PdfPCell(new Paragraph(""+arredondar.format(valorAutenticacoes), sem_negrito10));
             
